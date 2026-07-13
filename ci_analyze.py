@@ -57,6 +57,8 @@ def extract_ops_from_ir(ir_text: str) -> list[str]:
         "arith.constant", "arith.index_cast", "arith.index_castui",
         # linalg.fill은 DCE 대상, linalg.generic은 내부 op(arith.*, math.*)으로 분해됨
         "linalg.fill", "linalg.generic",
+        # arith.truncf는 f64→f32 상수 캐스팅 (eps 등) — 런타임 데이터 변환 아님
+        "arith.truncf",
     }
     return sorted(set(found) - exclude)
 
