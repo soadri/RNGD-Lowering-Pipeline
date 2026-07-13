@@ -324,6 +324,8 @@ EVIDENCE = [
     ("cos",          "runtime", "vector_fp_unary(Cos) 정합성 검증 통과",                   "cargo furiosa-opt test: test_log_cos.txt — PASS"),
     ("gemv",         "static",  "gemv_kernel.rs 존재 — Contraction Engine 패턴 확인",         "rngd-tcp-kernel-dev/src/kernel/gemv_kernel.rs"),
     ("gemv",         "runtime", "linalg.matvec → rngd.gemv 정합성 검증 통과 (I=256, J=2048)", "cargo furiosa-opt test: test_log_gemv.txt — PASS"),
+    ("transpose",    "static",  "Transpose Engine API 확인 — transpose.rs",                       "furiosa-opt-std-0.3.0/src/engine/transpose.rs"),
+    ("transpose",    "runtime", "verify_transpose f32 패턴(M=2,N=8) 정합성 검증 통과",           "cargo furiosa-opt test: pilot_e2e_transpose — PASS"),
     ("pow2",        "static",  "FpBinaryOp::MulF 존재 (Pow는 없음, MulF(x,x)로 조합)", "furiosa-opt-std-0.3.0/src/engine/vector/op/mod.rs:384"),
     ("pow2",        "runtime", "지수 값(2.0)을 IR의 arith.constant에서 FloatAttr로 직접 읽어 검증", "본 채팅 기록 — RMSNorm IR 조사"),
     ("batch_gemm",  "runtime", "linalg.batch_matmul ← torch.bmm 실측 확인",   "inspect 스크립트 실행 결과 (본 채팅 기록)"),
@@ -364,6 +366,20 @@ OP_CONSTRAINT_LINKS = [
 ]
 
 ROADMAP = [
+    {
+        "op_name": "transpose",
+        "family": "transpose",
+        "source_op": "linalg.generic(identity)",
+        "target_op": "rngd.transpose",
+        "dtype": "f32",
+        "tolerance": "max(2%, 1e-4)",
+        "experimental": 1,
+        "status": "done",
+        "compares": "PyTorch x.t() — [M=2, N=8] f32",
+        "meaning_pass": "Transpose Engine 직접 사용. Slice=1 고정, Time=M, Packet=N으로 처리. PASS",
+        "meaning_fail": "오차 초과 또는 shape 불일치.",
+        "detail": "verify_transpose::<f32, B, C#8, C, B#8> 패턴 (M=B=2, N=C=8). commit 후 DmTensor[N,M] → to_hbm.",
+    },
     ("rngd.reduce (mean)",  "설계중",
      "구조적 제약 발견: A가 8의 배수이면 m![A%8]=m![0]이 no-op이 되어 IntraSliceReduce 파이프라인 구성 불가. "
      "InterFirst(VectorInitTensor→vector_inter_slice_reduce) 경로는 Way8 유지로 commit까지 가능하나 Slice 내 원소를 모두 합산하지 못함(각 Packet lane 독립 합산). "
@@ -375,7 +391,7 @@ ROADMAP = [
      "2D×scalar, 2D×1D 브로드캐스트 모두 llama_rmsnorm에서 실제 동작 확인."),
     ("gemv (행렬-벡터)",    "미착수",
      "rngd-tcp-kernel-dev에 이미 검증된 base 템플릿(gemv_kernel.rs) 존재 — 재사용 가능성 높음."),
-    ("rngd.transpose",      "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나."),
+    ("rngd.transpose",      "완료",   "Transpose Engine 사용. Slice=1, Time=M, Packet=N 패턴. M=2,N=8 f32 PASS."),
     ("rngd.fill",           "미착수", "지금은 DCE로 지워버리는 대상 — 별도 op으로 다룰 필요가 있는지 재검토 필요."),
     ("rngd.conv2d",         "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나. 아직 손도 안 댐."),
     ("rngd.elementwise (silu)", "완료",
