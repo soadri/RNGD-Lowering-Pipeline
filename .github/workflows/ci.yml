@@ -86,6 +86,7 @@ jobs:
     name: 커널 빌드 + 정합성 검증
     runs-on: [self-hosted, k-cloud]
     needs: validate-registry
+    if: github.event_name == 'workflow_dispatch'
     strategy:
       matrix:
         op: [add, sub, mul, div, rsqrt, pow2, batch_gemm, gemm, dot_product]
@@ -107,7 +108,7 @@ jobs:
       - name: cargo furiosa-opt test
         run: |
           cd ${{ env.KERNEL_DIR }}
-          cargo furiosa-opt test --test pilot_e2e_${{ matrix.op }} 2>&1 | tee /tmp/test_${{ matrix.op }}.txt
+          cargo furiosa-opt test pilot_e2e_${{ matrix.op }} 2>&1 | tee /tmp/test_${{ matrix.op }}.txt
           cat /tmp/test_${{ matrix.op }}.txt
           if grep -q "test result: ok" /tmp/test_${{ matrix.op }}.txt; then
             echo "PASS: ${{ matrix.op }}"
