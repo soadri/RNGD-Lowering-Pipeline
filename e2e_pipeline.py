@@ -104,6 +104,7 @@ RNGD_OP_TO_FP_VARIANT = {
 MATH_UNARY_OPS = {
     "math.rsqrt": "rsqrt",
     "math.sqrt":  "sqrt",
+    "math.exp":   "exp",
 }
 
 # =====================================================================
@@ -473,6 +474,7 @@ def _gen_reference_elementwise(a, b, expected, axis_size):
 UNARY_OP_CHAIN = {
     "rsqrt": ".vector_fp_unary(FpUnaryOp::Sqrt)\n        .vector_fp_div_with_mode(BinaryArgMode::Mode10, 1.0_f32)",
     "sqrt":  ".vector_fp_unary(FpUnaryOp::Sqrt)",
+    "exp":   ".vector_fp_unary(FpUnaryOp::Exp)",
 }
 
 
@@ -968,6 +970,8 @@ if __name__ == "__main__":
                 return torch.rsqrt(x)
             if self.op_name == "sqrt":
                 return torch.sqrt(x)
+            if self.op_name == "exp":
+                return torch.exp(x)
             if self.op_name == "pow2":
                 return torch.pow(x, 2.0)
 
@@ -1037,7 +1041,7 @@ if __name__ == "__main__":
         print(f"생성 완료: {prefix}_*.rs, {prefix}_ir_before.mlir, {prefix}_ir_after.mlir, {prefix}_ir_diff.txt")
 
     # --- Family A (단항/unary) ---
-    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "pow2") if requested_ops is None or op in requested_ops]
+    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "pow2") if requested_ops is None or op in requested_ops]
     for op_name in unary_elementwise_ops:
         print(f"\n{'='*70}\n [Family A-unary] op_name = {op_name}\n{'='*70}")
 
