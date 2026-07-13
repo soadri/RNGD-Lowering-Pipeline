@@ -1,0 +1,184 @@
+name: RNGD Lowering CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'e2e_pipeline.py'
+      - 'init_registry.py'
+      - 'registry.py'
+      - 'models/**'
+      - '.github/workflows/ci.yml'
+  pull_request:
+    paths:
+      - 'e2e_pipeline.py'
+      - 'init_registry.py'
+      - 'registry.py'
+      - 'models/**'
+  workflow_dispatch:
+
+jobs:
+  validate-registry:
+    name: 변환 규칙 레지스트리 검증
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: 의존성 설치
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install torch-mlir --find-links https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels
+          pip install fastapi uvicorn pydantic
+      - name: DB 초기화
+        run: python init_registry.py
+      - name: 레지스트리 무결성 검증
+        run: |
+          python - <<'EOF'
+          import sqlite3, sys
+          con = sqlite3.connect("rngd_registry.db")
+          con.row_factory = sqlite3.Row
+          ops = con.execute("SELECT op_name FROM ops WHERE status='done'").fetchall()
+          for row in ops:
+              cnt = con.execute("SELECT COUNT(*) FROM evidence WHERE op_name=?", (row["op_name"],)).fetchone()[0]
+              if cnt == 0:
+                  print(f"[FAIL] {row['op_name']}: evidence 없음", file=sys.stderr)
+                  sys.exit(1)
+          counts = {t: con.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in ("ops","evidence","hardware_constraints","roadmap")}
+          con.close()
+          print("=== 레지스트리 검증 통과 ===")
+          for k, v in counts.items(): print(f"  {k}: {v}행")
+          EOF
+      - name: 스냅샷 저장
+        run: |
+          mkdir -p ci_out
+          python - <<'EOF'
+          import sqlite3, json
+          con = sqlite3.connect("rngd_registry.db")
+          con.row_factory = sqlite3.Row
+          ops = [dict(r) for r in con.execute("SELECT * FROM ops ORDER BY family, op_name")]
+          con.close()
+          with open("ci_out/registry_snapshot.json", "w") as f:
+              json.dump(ops, f, ensure_ascii=False, indent=2)
+          print(f"스냅샷: {len(ops)}개 연산")
+          EOF
+      - uses: actions/upload-artifact@v4
+        with:
+          name: registry-snapshot
+          path: ci_out/registry_snapshot.json
+
+  coverage-analysis:
+    name: 모델 커버리지 분석
+    runs-on: ubuntu-latest
+    needs: validate-registry
+    strategy:
+      matrix:
+        model: [models/example_linear.py, models/example_rmsnorm.py]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: 의존성 설치
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install torch-mlir --find-links https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels
+      - name: DB 초기화
+        run: python init_registry.py
+      - name: 커버리지 분석
+        run: |
+          MODEL="${{ matrix.model }}"
+          MODEL_NAME=$(basename $MODEL .py)
+          python ci_analyze.py --model "$MODEL" --out-dir "ci_out/$MODEL_NAME"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ strategy.job-index }}
+          path: ci_out/
+
+  build-report:
+    name: Pages 리포트 빌드
+    runs-on: ubuntu-latest
+    needs: coverage-analysis
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: all_artifacts
+      - name: commit SHA 저장
+        run: echo "${{ github.sha }}" > COMMIT_SHA
+      - name: HTML 리포트 빌드
+        run: python build_pages.py all_artifacts
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages_out
+      - uses: actions/deploy-pages@v4
+
+  pr-comment:
+    name: PR 코멘트
+    runs-on: ubuntu-latest
+    needs: coverage-analysis
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: all_artifacts
+      - name: 코멘트 생성
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const artifactsDir = 'all_artifacts';
+            const coverages = [];
+            for (const dir of fs.readdirSync(artifactsDir)) {
+              const covPath = path.join(artifactsDir, dir, 'coverage.json');
+              if (fs.existsSync(covPath)) {
+                coverages.push(JSON.parse(fs.readFileSync(covPath, 'utf8')));
+              }
+            }
+            if (coverages.length === 0) { console.log('커버리지 결과 없음'); return; }
+            let body = '## 🔍 RNGD Lowering 커버리지 분석\n\n';
+            body += '| 모델 | 커버리지 | 지원 | 미지원 |\n|---|---|---|---|\n';
+            for (const cov of coverages) {
+              const pct = cov.coverage_pct;
+              const emoji = pct >= 80 ? '🟢' : pct >= 50 ? '🟡' : '🔴';
+              const name = path.basename(cov.model, '.py');
+              body += `| \`${name}\` | ${emoji} **${pct}%** | ${cov.supported_count}개 | ${cov.unsupported_count}개 |\n`;
+            }
+            const allUnsup = new Set();
+            for (const cov of coverages)
+              for (const op of cov.ops)
+                if (!op.supported) allUnsup.add(op.op);
+            if (allUnsup.size > 0) {
+              body += `\n<details><summary>미지원 op (${allUnsup.size}개)</summary>\n\n`;
+              for (const op of [...allUnsup].sort()) body += `- \`${op}\`\n`;
+              body += '\n</details>\n';
+            }
+            const marker = '<!-- rngd-ci-coverage -->';
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number
+            });
+            const existing = comments.find(c => c.body.includes(marker));
+            const fullBody = marker + '\n' + body;
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                comment_id: existing.id, body: fullBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.issue.number, body: fullBody
+              });
+            }
