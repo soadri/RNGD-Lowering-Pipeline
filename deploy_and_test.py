@@ -109,13 +109,18 @@ def deploy_and_test(op_name: str, run_test: bool = True):
 
 
 if __name__ == "__main__":
-    op_names = sys.argv[1:] if len(sys.argv) > 1 else ["add", "sub"]
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("ops", nargs="*", default=["add", "sub"])
+    parser.add_argument("--no-test", action="store_true",
+                        help="배치만 하고 cargo furiosa-opt test는 실행하지 않음")
+    args = parser.parse_args()
 
     summary = {}
-    for op in op_names:
+    for op in args.ops:
         print(f"\n{'#'*70}\n# {op}\n{'#'*70}")
         try:
-            passed = deploy_and_test(op)
+            passed = deploy_and_test(op, run_test=not args.no_test)
             summary[op] = "PASS" if passed else "FAIL"
         except Exception as e:
             summary[op] = f"ERROR: {e}"

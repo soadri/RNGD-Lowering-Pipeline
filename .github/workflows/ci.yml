@@ -22,6 +22,7 @@ on:
 env:
   VENV: /home/ubuntu/rngd-mlir-pipeline/.venv
   PIPELINE_DIR: /home/ubuntu/rngd-mlir-pipeline
+  KERNEL_DIR: /home/ubuntu/rngd-tcp-kernel-dev
   DB_PATH: ${{ github.workspace }}/rngd_registry.db
 
 jobs:
@@ -81,6 +82,59 @@ jobs:
           name: registry-snapshot
           path: ci_out/registry_snapshot.json
 
+  kernel-test:
+    name: 커널 빌드 + 정합성 검증
+    runs-on: [self-hosted, k-cloud]
+    needs: validate-registry
+    strategy:
+      matrix:
+        op: [add, sub, mul, div, rsqrt, pow2, batch_gemm, gemm, dot_product]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: DB 초기화
+        run: |
+          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py \
+            --reset --db ${{ env.DB_PATH }}
+
+      - name: 커널 코드 생성
+        run: |
+          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/e2e_pipeline.py ${{ matrix.op }}
+
+      - name: 커널 배치
+        run: |
+          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/deploy_and_test.py \
+            ${{ matrix.op }} --no-test
+
+      - name: cargo furiosa-opt test
+        run: |
+          cd ${{ env.KERNEL_DIR }}
+          cargo furiosa-opt test --test pilot_e2e_${{ matrix.op }} 2>&1 | tee /tmp/test_${{ matrix.op }}.txt
+          if grep -q "test result: ok" /tmp/test_${{ matrix.op }}.txt; then
+            echo "PASS: ${{ matrix.op }}"
+          else
+            echo "FAIL: ${{ matrix.op }}"
+            exit 1
+          fi
+
+      - name: 테스트 결과 저장
+        if: always()
+        run: |
+          mkdir -p ci_out
+          RESULT="FAIL"
+          if grep -q "test result: ok" /tmp/test_${{ matrix.op }}.txt 2>/dev/null; then
+            RESULT="PASS"
+          fi
+          echo "{\"op\": \"${{ matrix.op }}\", \"result\": \"$RESULT\"}" > ci_out/kernel_${{ matrix.op }}.json
+          cat /tmp/test_${{ matrix.op }}.txt >> ci_out/kernel_${{ matrix.op }}.log 2>/dev/null || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kernel-test-${{ matrix.op }}
+          path: ci_out/
+
   coverage-analysis:
     name: 모델 커버리지 분석
     runs-on: [self-hosted, k-cloud]
@@ -118,7 +172,7 @@ jobs:
   build-report:
     name: Pages 리포트 빌드
     runs-on: [self-hosted, k-cloud]
-    needs: coverage-analysis
+    needs: [coverage-analysis, kernel-test]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
       pages: write
@@ -146,7 +200,7 @@ jobs:
   pr-comment:
     name: PR 코멘트
     runs-on: [self-hosted, k-cloud]
-    needs: coverage-analysis
+    needs: [coverage-analysis, kernel-test]
     if: github.event_name == 'pull_request'
     permissions:
       pull-requests: write
@@ -162,6 +216,8 @@ jobs:
             const fs = require('fs');
             const path = require('path');
             const artifactsDir = 'all_artifacts';
+
+            // 커버리지 결과 수집
             const coverages = [];
             for (const dir of fs.readdirSync(artifactsDir)) {
               const covPath = path.join(artifactsDir, dir, 'coverage.json');
@@ -169,24 +225,55 @@ jobs:
                 coverages.push(JSON.parse(fs.readFileSync(covPath, 'utf8')));
               }
             }
-            if (coverages.length === 0) { console.log('커버리지 결과 없음'); return; }
-            let body = '## 🔍 RNGD Lowering 커버리지 분석\n\n';
-            body += '| 모델 | 커버리지 | 지원 | 미지원 |\n|---|---|---|---|\n';
-            for (const cov of coverages) {
-              const pct = cov.coverage_pct;
-              const emoji = pct >= 80 ? '🟢' : pct >= 50 ? '🟡' : '🔴';
-              const name = path.basename(cov.model, '.py');
-              body += `| \`${name}\` | ${emoji} **${pct}%** | ${cov.supported_count}개 | ${cov.unsupported_count}개 |\n`;
+
+            // 커널 테스트 결과 수집
+            const kernelResults = [];
+            for (const dir of fs.readdirSync(artifactsDir)) {
+              for (const file of fs.readdirSync(path.join(artifactsDir, dir))) {
+                if (file.startsWith('kernel_') && file.endsWith('.json')) {
+                  kernelResults.push(JSON.parse(
+                    fs.readFileSync(path.join(artifactsDir, dir, file), 'utf8')
+                  ));
+                }
+              }
             }
-            const allUnsup = new Set();
-            for (const cov of coverages)
-              for (const op of cov.ops)
-                if (!op.supported) allUnsup.add(op.op);
-            if (allUnsup.size > 0) {
-              body += `\n<details><summary>미지원 op (${allUnsup.size}개)</summary>\n\n`;
-              for (const op of [...allUnsup].sort()) body += `- \`${op}\`\n`;
-              body += '\n</details>\n';
+
+            let body = '## 🔍 RNGD Lowering CI 결과\n\n';
+
+            // 커널 테스트 결과
+            if (kernelResults.length > 0) {
+              const passed = kernelResults.filter(r => r.result === 'PASS');
+              const failed = kernelResults.filter(r => r.result === 'FAIL');
+              body += `### 커널 정합성 검증 (${passed.length}/${kernelResults.length} PASS)\n\n`;
+              body += '| 연산 | 결과 |\n|---|---|\n';
+              for (const r of kernelResults.sort((a,b) => a.op.localeCompare(b.op))) {
+                const icon = r.result === 'PASS' ? '✅' : '❌';
+                body += `| \`${r.op}\` | ${icon} ${r.result} |\n`;
+              }
+              body += '\n';
             }
+
+            // 커버리지 결과
+            if (coverages.length > 0) {
+              body += '### 모델 커버리지\n\n';
+              body += '| 모델 | 커버리지 | 지원 | 미지원 |\n|---|---|---|---|\n';
+              for (const cov of coverages) {
+                const pct = cov.coverage_pct;
+                const emoji = pct >= 80 ? '🟢' : pct >= 50 ? '🟡' : '🔴';
+                const name = path.basename(cov.model, '.py');
+                body += `| \`${name}\` | ${emoji} **${pct}%** | ${cov.supported_count}개 | ${cov.unsupported_count}개 |\n`;
+              }
+              const allUnsup = new Set();
+              for (const cov of coverages)
+                for (const op of cov.ops)
+                  if (!op.supported) allUnsup.add(op.op);
+              if (allUnsup.size > 0) {
+                body += `\n<details><summary>미지원 op (${allUnsup.size}개)</summary>\n\n`;
+                for (const op of [...allUnsup].sort()) body += `- \`${op}\`\n`;
+                body += '\n</details>\n';
+              }
+            }
+
             const marker = '<!-- rngd-ci-coverage -->';
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner, repo: context.repo.repo,
