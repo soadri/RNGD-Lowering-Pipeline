@@ -103,6 +103,7 @@ RNGD_OP_TO_FP_VARIANT = {
 # Sqrt(FpUnaryOp) 다음 1.0/x(vector_fp_div 스칼라 상수)로 조합해서 구현한다.
 MATH_UNARY_OPS = {
     "math.rsqrt": "rsqrt",
+    "math.sqrt":  "sqrt",
 }
 
 # =====================================================================
@@ -471,6 +472,7 @@ def _gen_reference_elementwise(a, b, expected, axis_size):
 # rsqrt = 1.0 / sqrt(x): Sqrt(단항) 다음 스칼라 상수 1.0으로 나누기.
 UNARY_OP_CHAIN = {
     "rsqrt": ".vector_fp_unary(FpUnaryOp::Sqrt)\n        .vector_fp_div_with_mode(BinaryArgMode::Mode10, 1.0_f32)",
+    "sqrt":  ".vector_fp_unary(FpUnaryOp::Sqrt)",
 }
 
 
@@ -964,6 +966,8 @@ if __name__ == "__main__":
         def forward(self, x):
             if self.op_name == "rsqrt":
                 return torch.rsqrt(x)
+            if self.op_name == "sqrt":
+                return torch.sqrt(x)
             if self.op_name == "pow2":
                 return torch.pow(x, 2.0)
 
@@ -1033,14 +1037,14 @@ if __name__ == "__main__":
         print(f"생성 완료: {prefix}_*.rs, {prefix}_ir_before.mlir, {prefix}_ir_after.mlir, {prefix}_ir_diff.txt")
 
     # --- Family A (단항/unary) ---
-    unary_elementwise_ops = [op for op in ("rsqrt", "pow2") if requested_ops is None or op in requested_ops]
+    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "pow2") if requested_ops is None or op in requested_ops]
     for op_name in unary_elementwise_ops:
         print(f"\n{'='*70}\n [Family A-unary] op_name = {op_name}\n{'='*70}")
 
         torch.manual_seed(123)
         model = UnaryElementwise(op_name)
-        if op_name == "rsqrt":
-            x = torch.rand(4, 4) + 0.5  # rsqrt 정의역(양수) 보장
+        if op_name in ("rsqrt", "sqrt"):
+            x = torch.rand(4, 4) + 0.5  # rsqrt/sqrt 정의역(양수) 보장
         else:
             x = torch.randn(4, 4)  # pow2는 정의역 제한 없음
         with torch.no_grad():
