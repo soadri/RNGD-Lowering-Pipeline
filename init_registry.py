@@ -269,12 +269,10 @@ OP_CONSTRAINT_LINKS = [
 
 ROADMAP = [
     ("rngd.reduce (mean)",  "설계중",
-     "IntraSliceReduce → FpDiv 파이프라인 확인됐으나 실제 구현에서 4가지 하드웨어 제약 발견. "
-     "① OutPacket은 반드시 m![4]여야 함(m![1] 불가). "
-     "② IntraSliceReduce 이후 widen_concat/widen_pad 모두 FMapping 런타임 에러. "
-     "③ FpDiv 이후 f32 스칼라 operand 불가(SMapping 공개 API 없음). "
-     "④ IntraSliceReduce 이후 vector_final() 직접 호출 불가(Way4 타입 제약). "
-     "sum(x) 출력 자체가 불가한 상태. FuriosaAI에 IntraSliceReduce 출력 패턴 문의 필요."),
+     "구조적 제약 발견: A가 8의 배수이면 m![A%8]=m![0]이 no-op이 되어 IntraSliceReduce 파이프라인 구성 불가. "
+     "InterFirst(VectorInitTensor→vector_inter_slice_reduce) 경로는 Way8 유지로 commit까지 가능하나 Slice 내 원소를 모두 합산하지 못함(각 Packet lane 독립 합산). "
+     "InterFirst 이후 IntraSliceReduce 추가 불가(Way8에서 vector_intra_slice_reduce 없음). "
+     "결론: A가 8의 배수인 경우 완전한 reduce 구현 방법을 API로 찾지 못함. FuriosaAI에 문의 필요 — 핵심 질문: 8의 배수 크기 텐서에서 전체 원소를 scalar로 reduce하는 올바른 파이프라인 패턴은?"),
     ("브로드캐스트 곱셈",   "미착수",
      "RMSNorm의 weight*x, rsqrt_val*x처럼 shape이 다른 두 텐서의 곱. 지금 커널은 두 입력이 같은 길이라고 가정."),
     ("gemv (행렬-벡터)",    "미착수",
