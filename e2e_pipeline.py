@@ -118,6 +118,7 @@ MATH_UNARY_OPS = {
 NAMED_CONTRACTION_OPS = {
     "linalg.batch_matmul": "batch_gemm",   # confirmed: torch.bmm 실측
     "linalg.matmul": "gemm",                # confirmed: torch.matmul(2D) 실측
+    "linalg.matvec": "gemv",                # confirmed: torch.mv 실측
     "linalg.dot": "dot_product",            # confirmed: torch.matmul(1D,1D) 실측 (torch.dot 자체는 미지원)
 }
 
@@ -469,7 +470,7 @@ mod tests {{
 
         println!("=== PyTorch 실제 출력 vs RNGD 시뮬레이터 출력 ===");
         for i in 0..CHECK_N {{
-            println!("  [{{i}}]: {{}} | {{}}", expected[i], actual[i]);
+            println!("  [{{i}}]: {{}} | {{}}", f32::from(expected[i]), f32::from(actual[i]));
         }}
         for i in 0..CHECK_N {{
             assert!(
@@ -589,7 +590,7 @@ mod tests {{
 
         println!("=== PyTorch 실제 출력 vs RNGD 시뮬레이터 출력 ===");
         for i in 0..CHECK_N {{
-            println!("  [{{i}}]: {{}} | {{}}", expected[i], actual[i]);
+            println!("  [{{i}}]: {{}} | {{}}", f32::from(expected[i]), f32::from(actual[i]));
         }}
         for i in 0..CHECK_N {{
             let diff = (expected[i] - actual[i]).abs();
@@ -848,6 +849,138 @@ def _gen_reference_batch_gemm(a_bf16, b_bf16, expected_bf16):
 
 
 # =====================================================================
+# 코드 생성 — gemv (gemv_kernel.rs 구조 그대로 반영)
+# =====================================================================
+
+def _gen_kernel_gemv(i: int, j: int):
+    kernel_rs = f"""\
+use furiosa_opt_std::prelude::*;
+
+// AUTO-GENERATED from rngd.gemv — 검증된 gemv_kernel.rs 구조 그대로 사용.
+axes![I = {i}, J = {j}];
+
+pub type Chip = m![1];
+pub type Cluster = m![1 # 2];
+pub type Slice = m![I];
+pub type Time = m![J / 32];
+pub type Packet = m![J % 32];
+pub type Lane = m![1];
+
+#[device(chip = 1)]
+pub fn pilot_e2e_gemv_kernel(
+    ctx: &mut Context,
+    matrix: &HbmTensor<bf16, Chip, m![I, J]>,
+    vector: &HbmTensor<bf16, Chip, m![J]>,
+) -> HbmTensor<bf16, Chip, m![I]> {{
+    let matrix: DmTensor<bf16, Chip, Cluster, Slice, m![J]> = matrix.to_dm(&mut ctx.tdma, 0);
+    let vector: DmTensor<bf16, Chip, Cluster, Slice, m![J]> = vector.to_dm(&mut ctx.tdma, 1 << 12);
+
+    let vector_trf: TrfTensor<bf16, Chip, Cluster, Slice, Lane, m![J]> = ctx
+        .sub
+        .begin(vector.view())
+        .fetch::<m![1], m![J]>()
+        .collect::<m![J / 16], m![J % 16]>()
+        .to_trf(TrfAddress::Full);
+
+    let result: DmTensor<bf16, Chip, Cluster, Slice, m![1 # 4]> = ctx
+        .main
+        .begin(matrix.view())
+        .fetch::<m![J / 16], m![J % 16]>()
+        .collect::<m![J / 16], m![J % 16]>()
+        .contract_outer::<Time, Packet, _, _>(&vector_trf)
+        .contract_packet::<m![1]>()
+        .contract_time::<m![1]>()
+        .contract_lane::<m![1], m![1 # 8]>(LaneMode::Interleaved)
+        .cast::<bf16, m![1 # 16]>()
+        .commit_trim::<m![1 # 4]>()
+        .commit(0);
+
+    result.to_hbm(&mut ctx.tdma, 2 << 28)
+}}
+"""
+    return kernel_rs
+
+
+def _gen_pilot_gemv(i: int, j: int):
+    pilot_rs = f"""\
+use furiosa_opt_std::prelude::*;
+use rngd_tcp_kernel_dev::kernel::pilot_e2e_gemv_kernel::{{pilot_e2e_gemv_kernel, I, J}};
+
+mod reference_data_e2e_gemv;
+use reference_data_e2e_gemv::{{CHECK_N, reference_matrix, reference_vector, reference_expected}};
+
+#[tokio::main]
+async fn main() {{
+    let mut ctx = Context::acquire();
+    let matrix = HostTensor::<bf16, m![I, J]>::from_buf(reference_matrix());
+    let vector = HostTensor::<bf16, m![J]>::from_buf(reference_vector());
+    let matrix_hbm = matrix.to_hbm(&mut ctx.pdma, 0 << 28).await;
+    let vector_hbm = vector.to_hbm(&mut ctx.pdma, 1 << 28).await;
+    let _out_hbm = launch(pilot_e2e_gemv_kernel, (&mut ctx, &matrix_hbm, &vector_hbm)).await;
+    println!("Pilot E2E gemv: kernel ran");
+}}
+
+#[cfg(test)]
+mod tests {{
+    use super::*;
+
+    #[tokio::test]
+    async fn matches_actual_pytorch_output() {{
+        let mut ctx = Context::acquire();
+        let matrix = HostTensor::<bf16, m![I, J]>::from_buf(reference_matrix());
+        let vector = HostTensor::<bf16, m![J]>::from_buf(reference_vector());
+        let matrix_hbm = matrix.to_hbm(&mut ctx.pdma, 0 << 28).await;
+        let vector_hbm = vector.to_hbm(&mut ctx.pdma, 1 << 28).await;
+
+        let out_hbm = launch(pilot_e2e_gemv_kernel, (&mut ctx, &matrix_hbm, &vector_hbm)).await;
+        let actual: Vec<bf16> = out_hbm.to_host::<m![I]>(&mut ctx.pdma).await.to_buf();
+        let expected = reference_expected();
+
+        println!("=== PyTorch 실제 출력 vs RNGD 시뮬레이터 출력 ===");
+        for i in 0..CHECK_N {{
+            println!("  [{{i}}]: {{}} | {{}}", f32::from(expected[i]), f32::from(actual[i]));
+        }}
+        for i in 0..CHECK_N {{
+            let e = f32::from(expected[i]);
+            let a = f32::from(actual[i]);
+            let tol = (e.abs() * 0.02_f32).max(0.5_f32);
+            assert!(
+                (e - a).abs() < tol,
+                "mismatch at i={{i}}: pytorch={{}}  rngd_sim={{}}", e, a
+            );
+        }}
+    }}
+}}
+"""
+    return pilot_rs
+
+
+def _gen_reference_gemv(matrix_bf16, vector_bf16, expected_bf16):
+    def fmt_f32(t):
+        return ", ".join(f"{v:.8f}_f32" for v in t.to(torch.float32).flatten().tolist())
+
+    mat_f32  = fmt_f32(matrix_bf16)
+    vec_f32  = fmt_f32(vector_bf16)
+    exp_f32  = fmt_f32(expected_bf16)
+    check_n  = expected_bf16.numel()
+
+    ref_rs = f"""\
+// AUTO-GENERATED — expected는 실제 PyTorch 입력을 bf16 양자화 후 계산한 값
+use furiosa_opt_std::prelude::*;
+
+pub const CHECK_N: usize = {check_n};
+
+const MAT_F32: &[f32] = &[{mat_f32}];
+const VEC_F32: &[f32] = &[{vec_f32}];
+const EXP_F32: &[f32] = &[{exp_f32}];
+
+pub fn reference_matrix() -> Vec<bf16> {{ MAT_F32.iter().map(|&v| bf16::from_f32(v)).collect() }}
+pub fn reference_vector() -> Vec<bf16> {{ VEC_F32.iter().map(|&v| bf16::from_f32(v)).collect() }}
+pub fn reference_expected() -> Vec<bf16> {{ EXP_F32.iter().map(|&v| bf16::from_f32(v)).collect() }}
+"""
+    return ref_rs
+
+
 # 코드 생성 — dot_product (batch_gemm과 별도 구조 — 검증된 dot_product_kernel.rs 그대로 반영)
 # =====================================================================
 
@@ -1039,6 +1172,10 @@ if __name__ == "__main__":
         def forward(self, x, y):
             return torch.matmul(x, y)
 
+    class Gemv(torch.nn.Module):
+        def forward(self, A, x):
+            return torch.mv(A, x)
+
     # --- Family A ---
     elementwise_ops = [op for op in ("add", "sub", "mul", "div") if requested_ops is None or op in requested_ops]
     for op_name in elementwise_ops:
@@ -1150,6 +1287,7 @@ if __name__ == "__main__":
         ("batch_gemm", BatchMatmul(), 42, (32, 32, 32), (32, 32, 8)),
         ("gemm", Matmul2D(), 43, (32, 32), (32, 8)),
         ("dot_product", DotProduct(), 44, (32,), (32,)),
+        ("gemv", Gemv(), 45, (256, 2048), (2048,)),
     ]
     contraction_cases = [
         c for c in contraction_cases_all if requested_ops is None or c[0] in requested_ops
@@ -1199,6 +1337,20 @@ if __name__ == "__main__":
                 expected_bf16.to(torch.float32).item(),
                 AXIS_SIZE,
             )
+
+        elif op_name == "gemv":
+            # gemv_kernel.rs 구조 재사용
+            I_SIZE = x_shape[0]  # 256
+            J_SIZE = x_shape[1]  # 2048
+            kernel_rs = _gen_kernel_gemv(I_SIZE, J_SIZE)
+            host_test_rs = _gen_pilot_gemv(I_SIZE, J_SIZE)
+            mat_bf16 = x.to(torch.bfloat16)
+            vec_bf16 = y.to(torch.bfloat16)
+            expected_gemv = torch.mv(
+                mat_bf16.to(torch.float32),
+                vec_bf16.to(torch.float32)
+            ).to(torch.bfloat16)
+            reference_rs = _gen_reference_gemv(mat_bf16, vec_bf16, expected_gemv)
 
         prefix = f"e2e_{op_name}"
         with open(OUT_DIR / f"{prefix}_kernel.rs", "w") as f:
