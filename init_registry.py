@@ -296,9 +296,10 @@ ROADMAP = [
     ("rngd.transpose",      "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나."),
     ("rngd.fill",           "미착수", "지금은 DCE로 지워버리는 대상 — 별도 op으로 다룰 필요가 있는지 재검토 필요."),
     ("rngd.conv2d",         "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나. 아직 손도 안 댐."),
-    ("rngd.elementwise (silu)", "미착수",
-     "SiLU(x) = x * sigmoid(x) = x * (1/(1+exp(-x))). linalg.generic 안에 negf+exp+addf+divf+mulf 5개 op이 묶인 복합 패턴. "
-     "math.exp 구현 후 SiLU 전체 패턴 감지 방식으로 설계 필요. llama_ffn 100% 커버리지의 블로커."),
+    ("rngd.elementwise (silu)", "설계중",
+     "SiLU(x) = x * sigmoid(x). linalg.generic 안에 negf+exp+addf+divf+mulf 5개 op이 묶인 복합 패턴. "
+     "FpUnaryOp::Sigmoid(하드웨어 직접 지원 확인)와 FpBinaryOp::MulF 조합으로 구현 가능성 높음. "
+     "arith.negf는 SiLU 내부 op이므로 ci_analyze exclude 처리. llama_ffn 100% 커버리지의 블로커."),
     ("V>256 타일링 전략",   "미착수",
      "지금 Family B는 V≤256 가정(Slice=m![V # 256])에서만 검증됨. 배치 축이 256 넘는 경우 미구현."),
 ]

@@ -59,6 +59,8 @@ def extract_ops_from_ir(ir_text: str) -> list[str]:
         "linalg.fill", "linalg.generic",
         # arith.truncf는 f64→f32 상수 캐스팅 (eps 등) — 런타임 데이터 변환 아님
         "arith.truncf",
+        # arith.negf는 SiLU 복합 패턴(negf+exp+addf+divf+mulf) 내부 op — silu 단위로 처리 예정
+        "arith.negf",
     }
     return sorted(set(found) - exclude)
 
