@@ -80,6 +80,8 @@ def load_supported_ops(db_path: Path) -> dict[str, dict]:
         # "linalg.batch_matmul" → "linalg.batch_matmul"
         if "(" in src:
             inner = src.split("(")[-1].rstrip(")")
+            # "math.powf, 지수=2.0" 같은 경우 쉼표 앞부분만 사용
+            inner = inner.split(",")[0].strip()
         else:
             inner = src.split(",")[0].strip()
         result[inner] = dict(row)

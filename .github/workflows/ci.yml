@@ -87,7 +87,11 @@ jobs:
     needs: validate-registry
     strategy:
       matrix:
-        model: [models/example_linear.py, models/example_rmsnorm.py]
+        model:
+          - models/example_linear.py
+          - models/example_rmsnorm.py
+          - models/llama_rmsnorm.py
+          - models/llama_ffn.py
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
