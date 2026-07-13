@@ -312,10 +312,10 @@ ROADMAP = [
     ("rngd.transpose",      "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나."),
     ("rngd.fill",           "미착수", "지금은 DCE로 지워버리는 대상 — 별도 op으로 다룰 필요가 있는지 재검토 필요."),
     ("rngd.conv2d",         "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나. 아직 손도 안 댐."),
-    ("rngd.elementwise (silu)", "구현가능",
-     "SiLU(x) = x * sigmoid(x). linalg.generic 안에 negf+exp+addf+divf+mulf 5개 op이 묶인 복합 패턴. "
-     "FpUnaryOp::Sigmoid(하드웨어 직접 지원 확인)와 FpBinaryOp::MulF 조합으로 구현 가능성 높음. "
-     "arith.negf는 SiLU 내부 op이므로 ci_analyze exclude 처리. llama_ffn 100% 커버리지의 블로커."),
+    ("rngd.elementwise (silu)", "완료",
+     "SiLU(x) = x * sigmoid(x). sigmoid 블록(negf+exp+addf+divf)을 rngd.elementwise(sigmoid)로, "
+     "mulf 블록을 rngd.elementwise(mul)로 각각 재작성. 두 단계 조합으로 완전 지원. "
+     "e2e_pipeline.py에서 sigmoid 복합 패턴 감지 로직 추가 완료."),
     ("V>256 타일링 전략",   "미착수",
      "지금 Family B는 V≤256 가정(Slice=m![V # 256])에서만 검증됨. 배치 축이 256 넘는 경우 미구현."),
 ]
