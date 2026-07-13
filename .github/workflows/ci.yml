@@ -22,6 +22,7 @@ on:
 env:
   VENV: /home/ubuntu/rngd-mlir-pipeline/.venv
   PIPELINE_DIR: /home/ubuntu/rngd-mlir-pipeline
+  DB_PATH: ${{ github.workspace }}/rngd_registry.db
 
 jobs:
   validate-registry:
@@ -31,13 +32,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: DB 초기화
-        run: ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py --reset
+        run: |
+          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py \
+            --reset --db ${{ env.DB_PATH }}
 
       - name: 레지스트리 무결성 검증
         run: |
           ${{ env.VENV }}/bin/python - <<'PYEOF'
-          import sqlite3, sys
-          con = sqlite3.connect("rngd_registry.db")
+          import sqlite3, sys, os
+          db = os.environ["DB_PATH"]
+          con = sqlite3.connect(db)
           con.row_factory = sqlite3.Row
           ops = con.execute("SELECT op_name FROM ops WHERE status='done'").fetchall()
           for row in ops:
@@ -61,8 +65,9 @@ jobs:
         run: |
           mkdir -p ci_out
           ${{ env.VENV }}/bin/python - <<'PYEOF'
-          import sqlite3, json
-          con = sqlite3.connect("rngd_registry.db")
+          import sqlite3, json, os
+          db = os.environ["DB_PATH"]
+          con = sqlite3.connect(db)
           con.row_factory = sqlite3.Row
           ops = [dict(r) for r in con.execute("SELECT * FROM ops ORDER BY family, op_name")]
           con.close()
@@ -88,7 +93,9 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: DB 초기화
-        run: ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py --reset
+        run: |
+          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py \
+            --reset --db ${{ env.DB_PATH }}
 
       - name: 커버리지 분석
         run: |
@@ -97,7 +104,7 @@ jobs:
           ${{ env.VENV }}/bin/python ci_analyze.py \
             --model "$MODEL" \
             --out-dir "ci_out/$MODEL_NAME" \
-            --db rngd_registry.db
+            --db ${{ env.DB_PATH }}
 
       - uses: actions/upload-artifact@v4
         with:

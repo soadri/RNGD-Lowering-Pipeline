@@ -352,9 +352,10 @@ def verify(db_path: Path) -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--reset", action="store_true", help="DB를 삭제하고 처음부터 다시 생성")
+    parser.add_argument("--db", default=str(DB_PATH), help="DB 파일 경로")
     args = parser.parse_args()
 
-    init(DB_PATH, reset=args.reset)
+    init(Path(args.db), reset=args.reset)
     print("\n=== 검증 ===")
     verify(DB_PATH)
     
