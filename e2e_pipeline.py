@@ -109,6 +109,7 @@ MATH_UNARY_OPS = {
     "math.tanh":  "tanh",
     "math.sin":   "sin",
     "math.cos":   "cos",
+    "math.erf":   "erf",
 }
 
 # =====================================================================
@@ -516,6 +517,7 @@ UNARY_OP_CHAIN = {
     "tanh":    ".vector_fp_unary(FpUnaryOp::Tanh)",
     "sin":     ".vector_fp_unary(FpUnaryOp::Sin)",
     "cos":     ".vector_fp_unary(FpUnaryOp::Cos)",
+    "erf":     ".vector_fp_unary(FpUnaryOp::Erf)",
 }
 
 
@@ -1155,6 +1157,8 @@ if __name__ == "__main__":
                 return torch.sin(x)
             if self.op_name == "cos":
                 return torch.cos(x)
+            if self.op_name == "erf":
+                return torch.erf(x)
             if self.op_name == "pow2":
                 return torch.pow(x, 2.0)
 
@@ -1228,7 +1232,7 @@ if __name__ == "__main__":
         print(f"생성 완료: {prefix}_*.rs, {prefix}_ir_before.mlir, {prefix}_ir_after.mlir, {prefix}_ir_diff.txt")
 
     # --- Family A (단항/unary) ---
-    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "sigmoid", "log", "tanh", "sin", "cos", "pow2") if requested_ops is None or op in requested_ops]
+    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "sigmoid", "log", "tanh", "sin", "cos", "erf", "pow2") if requested_ops is None or op in requested_ops]
     for op_name in unary_elementwise_ops:
         print(f"\n{'='*70}\n [Family A-unary] op_name = {op_name}\n{'='*70}")
 

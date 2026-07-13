@@ -382,6 +382,8 @@ ROADMAP = [
      "SiLU(x) = x * sigmoid(x). sigmoid 블록(negf+exp+addf+divf)을 rngd.elementwise(sigmoid)로, "
      "mulf 블록을 rngd.elementwise(mul)로 각각 재작성. 두 단계 조합으로 완전 지원. "
      "e2e_pipeline.py에서 sigmoid 복합 패턴 감지 로직 추가 완료."),
+    ("rngd.elementwise (erf)", "설계중",
+     "FpUnaryOp::Erf는 존재하나 시뮬레이터에서 미구현(not yet implemented: Erf not implemented). FuriosaAI 확인 필요."),
     ("rngd.elementwise (log)", "설계중",
      "FpUnaryOp::Log는 존재하나 시뮬레이터 검증 실패. PyTorch ln(x)와 출력 불일치 및 NaN 발생. "
      "시뮬레이터의 Log 구현이 자연로그가 아닐 가능성 — FuriosaAI 확인 필요."),
