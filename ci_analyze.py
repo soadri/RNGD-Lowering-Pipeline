@@ -61,6 +61,9 @@ def extract_ops_from_ir(ir_text: str) -> list[str]:
         "arith.truncf",
         # arith.negf는 SiLU 복합 패턴(negf+exp+addf+divf+mulf) 내부 op — silu 단위로 처리 예정
         "arith.negf",
+        # tensor shape 변환 — 데이터 이동 없는 메타데이터 연산, 컴파일러 레벨 처리
+        "tensor.collapse_shape",
+        "tensor.expand_shape",
     }
     return sorted(set(found) - exclude)
 
