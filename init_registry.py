@@ -305,8 +305,10 @@ ROADMAP = [
      "InterFirst(VectorInitTensor→vector_inter_slice_reduce) 경로는 Way8 유지로 commit까지 가능하나 Slice 내 원소를 모두 합산하지 못함(각 Packet lane 독립 합산). "
      "InterFirst 이후 IntraSliceReduce 추가 불가(Way8에서 vector_intra_slice_reduce 없음). "
      "결론: A가 8의 배수인 경우 완전한 reduce 구현 방법을 API로 찾지 못함. FuriosaAI에 문의 필요 — 핵심 질문: 8의 배수 크기 텐서에서 전체 원소를 scalar로 reduce하는 올바른 파이프라인 패턴은?"),
-    ("브로드캐스트 곱셈",   "미착수",
-     "RMSNorm의 weight*x, rsqrt_val*x처럼 shape이 다른 두 텐서의 곱. 지금 커널은 두 입력이 같은 길이라고 가정."),
+    ("브로드캐스트 곱셈",   "완료",
+     "RMSNorm의 weight*x, rsqrt_val*x처럼 shape이 다른 두 텐서의 곱. "
+     "check_elementwise에서 indexing_maps를 검사하지 않아 arith.mulf가 있으면 무조건 rngd.elementwise(mul)로 처리됨. "
+     "2D×scalar, 2D×1D 브로드캐스트 모두 llama_rmsnorm에서 실제 동작 확인."),
     ("gemv (행렬-벡터)",    "미착수",
      "rngd-tcp-kernel-dev에 이미 검증된 base 템플릿(gemv_kernel.rs) 존재 — 재사용 가능성 높음."),
     ("rngd.transpose",      "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나."),
