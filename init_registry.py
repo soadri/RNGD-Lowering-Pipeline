@@ -298,6 +298,20 @@ OPS = [
         "meaning_fail": "오차 초과. gemv 커널 로직 확인 필요.",
         "detail": "I=256, J=2048. dot_product와 동일한 Contraction Engine 패턴. linalg.matvec → rngd.gemv.",
     },
+    {
+        "op_name": "transpose",
+        "family": "transpose",
+        "source_op": "linalg.generic(identity)",
+        "target_op": "rngd.transpose",
+        "dtype": "f32",
+        "tolerance": "max(2%, 1e-4)",
+        "experimental": 1,
+        "status": "done",
+        "compares": "PyTorch x.t() — [M=2, N=8] f32",
+        "meaning_pass": "Transpose Engine 직접 사용. Slice=1 고정, Time=M, Packet=N으로 처리. PASS",
+        "meaning_fail": "오차 초과 또는 shape 불일치.",
+        "detail": "verify_transpose::<f32, B, C#8, C, B#8> 패턴 (M=B=2, N=C=8). commit 후 DmTensor[N,M] → to_hbm.",
+    },
 ]
 
 # evidence_type: 'static'  = 소스 코드 grep으로 확인 (실행 안 함)
@@ -366,20 +380,6 @@ OP_CONSTRAINT_LINKS = [
 ]
 
 ROADMAP = [
-    {
-        "op_name": "transpose",
-        "family": "transpose",
-        "source_op": "linalg.generic(identity)",
-        "target_op": "rngd.transpose",
-        "dtype": "f32",
-        "tolerance": "max(2%, 1e-4)",
-        "experimental": 1,
-        "status": "done",
-        "compares": "PyTorch x.t() — [M=2, N=8] f32",
-        "meaning_pass": "Transpose Engine 직접 사용. Slice=1 고정, Time=M, Packet=N으로 처리. PASS",
-        "meaning_fail": "오차 초과 또는 shape 불일치.",
-        "detail": "verify_transpose::<f32, B, C#8, C, B#8> 패턴 (M=B=2, N=C=8). commit 후 DmTensor[N,M] → to_hbm.",
-    },
     ("rngd.reduce (mean)",  "설계중",
      "구조적 제약 발견: A가 8의 배수이면 m![A%8]=m![0]이 no-op이 되어 IntraSliceReduce 파이프라인 구성 불가. "
      "InterFirst(VectorInitTensor→vector_inter_slice_reduce) 경로는 Way8 유지로 commit까지 가능하나 Slice 내 원소를 모두 합산하지 못함(각 Packet lane 독립 합산). "
