@@ -55,6 +55,8 @@ def extract_ops_from_ir(ir_text: str) -> list[str]:
         "func.func", "func.return",
         "tensor.empty", "linalg.yield",
         "arith.constant", "arith.index_cast", "arith.index_castui",
+        # linalg.fill은 DCE 대상, linalg.generic은 내부 op(arith.*, math.*)으로 분해됨
+        "linalg.fill", "linalg.generic",
     }
     return sorted(set(found) - exclude)
 
