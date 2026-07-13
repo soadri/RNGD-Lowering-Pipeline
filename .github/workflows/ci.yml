@@ -98,14 +98,11 @@ jobs:
           ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py \
             --reset --db ${{ env.DB_PATH }}
 
-      - name: 커널 코드 생성
+      - name: 커널 코드 생성 + 배치
         run: |
-          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/e2e_pipeline.py ${{ matrix.op }}
-
-      - name: 커널 배치
-        run: |
-          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/deploy_and_test.py \
-            ${{ matrix.op }} --no-test
+          cd ${{ env.PIPELINE_DIR }}
+          ${{ env.VENV }}/bin/python e2e_pipeline.py ${{ matrix.op }}
+          ${{ env.VENV }}/bin/python deploy_and_test.py ${{ matrix.op }} --no-test
 
       - name: cargo furiosa-opt test
         run: |
