@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>RNGD Lowering 파이프라인 테스트 대시보드</title>
+  <style>
+    body {
+      font-family: -apple-system, "Segoe UI", "Noto Sans KR", sans-serif;
+      background: #fafaf9; color: #1c1c1a; max-width: 780px; margin: 40px auto; padding: 0 20px;
+    }
+    h1 { font-size: 20px; margin-bottom: 4px; }
+    .sub { color: #666; font-size: 13px; margin-bottom: 24px; }
+    .ops { margin-bottom: 16px; }
+    .op-group-label {
+      font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.05em;
+      margin: 10px 0 6px;
+    }
+    .op-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+    button.op-btn {
+      padding: 10px 18px; border: 1px solid #ddd; border-radius: 8px;
+      background: #fff; cursor: pointer; font-size: 14px;
+    }
+    button.op-btn.selected { background: #2f5d50; color: #fff; border-color: #2f5d50; }
+    .exp-badge {
+      font-size: 9px; background: #faeeda; color: #9a5b13; padding: 1px 5px;
+      border-radius: 8px; margin-left: 5px; vertical-align: middle; font-weight: bold;
+    }
+    button.op-btn.selected .exp-badge { background: #fff; color: #9a5b13; }
+
+    button.run-all-btn {
+      padding: 10px 20px; border: 1px solid #2f5d50; border-radius: 8px; background: #fff;
+      color: #2f5d50; font-size: 14px; cursor: pointer; margin-bottom: 16px; margin-left: 8px;
+    }
+    button.run-all-btn:disabled { border-color: #999; color: #999; cursor: wait; }
+    .all-results-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px; margin: 4px 0 20px;
+    }
+    .all-result-cell {
+      padding: 10px 8px; border-radius: 8px; border: 1px solid #ddd; font-size: 12px;
+      text-align: center; background: #fff; color: #666; transition: all 0.2s;
+    }
+    .all-result-cell.running {
+      background: #eef2f0; border-color: #2f5d50; color: #2f5d50;
+      animation: cellPulse 1s ease-in-out infinite;
+    }
+    .all-result-cell.pass { background: #e2f0e9; border-color: #1e5c3f; color: #1e5c3f; font-weight: bold; }
+    .all-result-cell.fail { background: #f8ece9; border-color: #a3342a; color: #a3342a; font-weight: bold; }
+    @keyframes cellPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    .caveats {
+      background: #faeeda; border: 1px solid #eec98a; padding: 14px 18px;
+      font-size: 12.5px; line-height: 1.8; margin-bottom: 20px; border-radius: 8px; color: #633806;
+    }
+    .caveats .title {
+      font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;
+      margin-bottom: 8px; color: #412402;
+    }
+    .caveats ul { margin: 0; padding-left: 18px; }
+    .caveats li { margin-bottom: 4px; }
+
+    .method-note {
+      background: #eef2f0; border-left: 3px solid #2f5d50; padding: 12px 16px;
+      font-size: 13px; line-height: 1.6; margin-bottom: 12px; border-radius: 0 8px 8px 0;
+    }
+    .family-note {
+      background: #f7f6f2; border: 1px solid #ddd; padding: 12px 16px;
+      font-size: 12.5px; line-height: 1.7; margin-bottom: 16px; border-radius: 8px;
+      white-space: pre-line; color: #555;
+    }
+    .lowering-note {
+      background: #fff; border: 1px solid #ddd; padding: 14px 16px;
+      font-size: 13px; line-height: 1.7; margin-bottom: 16px; border-radius: 8px;
+      white-space: pre-line; color: #444;
+    }
+    .lowering-note b { color: #1c1c1a; }
+
+    .ir-diff {
+      background: #eee8fb; border-left: 3px solid #5a3d9e; padding: 12px 16px;
+      font-size: 13px; line-height: 1.7; margin-bottom: 12px; border-radius: 0 8px 8px 0;
+      white-space: pre-line; color: #3c3489; display: none;
+    }
+
+    .artifacts { margin: 16px 0 20px; display: none; }
+    .artifacts details {
+      border: 1px solid #ddd; border-radius: 8px; margin-bottom: 8px; overflow: hidden;
+    }
+    .artifacts summary {
+      padding: 10px 14px; cursor: pointer; font-size: 13.5px; background: #f4f3ef;
+      list-style: none; display: flex; justify-content: space-between; align-items: center;
+    }
+    .artifacts summary::-webkit-details-marker { display: none; }
+    .artifacts summary::after { content: "▸"; color: #999; }
+    .artifacts details[open] summary::after { content: "▾"; }
+    .artifacts pre {
+      margin: 0; padding: 14px 16px; background: #22221f; color: #d8d6cc;
+      font-size: 11.5px; overflow-x: auto; white-space: pre-wrap; max-height: 400px; overflow-y: auto;
+    }
+    .artifacts pre .hl-line {
+      background: rgba(154, 130, 224, 0.28); display: inline-block; width: 100%;
+      margin: 0 -16px; padding: 0 16px; box-sizing: border-box;
+    }
+    .artifacts pre .hl-label {
+      color: #b9a4f0; font-style: italic;
+    }
+
+    .meta-panel {
+      background: #fff; border: 1px solid #ddd; border-radius: 10px;
+      padding: 22px 24px; margin-bottom: 20px; font-size: 14px; line-height: 1.9;
+    }
+    .meta-panel .row { margin-bottom: 14px; }
+    .meta-panel .row:last-child { margin-bottom: 0; }
+    .meta-panel .label {
+      display: block; color: #888; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 3px;
+    }
+    .meta-panel .value { display: block; }
+
+    button.run-btn {
+      padding: 12px 24px; border: none; border-radius: 8px; background: #2f5d50; color: #fff;
+      font-size: 15px; cursor: pointer; margin-bottom: 20px;
+    }
+    button.run-btn:disabled { background: #999; cursor: wait; }
+
+    .progress-wrap { margin-bottom: 20px; display: none; }
+    .progress-steps { display: flex; gap: 8px; margin-bottom: 10px; }
+    .progress-step {
+      flex: 1; height: 6px; border-radius: 3px; background: #e2e0d8; position: relative; overflow: hidden;
+    }
+    .progress-step.active {
+      background: linear-gradient(90deg, #2f5d50 0%, #2f5d50 50%, #cfe2da 50%, #cfe2da 100%);
+      background-size: 200% 100%;
+      animation: pulse 1.2s linear infinite;
+    }
+    .progress-step.done { background: #2f5d50; }
+    @keyframes pulse { 0% { background-position: 0% 0; } 100% { background-position: -200% 0; } }
+    .progress-label { font-size: 13px; color: #444; margin-bottom: 8px; }
+    .live-log {
+      background: #22221f; color: #9c9a92; padding: 10px 14px; border-radius: 8px;
+      font-size: 11.5px; max-height: 120px; overflow-y: auto; white-space: pre-wrap; font-family: monospace;
+    }
+
+    .status { padding: 10px 14px; border-radius: 8px; font-size: 14px; margin-bottom: 8px; display: none; }
+    .status.pass { background: #e2f0e9; color: #1e5c3f; display: block; }
+    .status.fail { background: #f8ece9; color: #a3342a; display: block; }
+    .interpret {
+      font-size: 13.5px; line-height: 1.7; margin-bottom: 4px; padding: 12px 14px;
+      background: #f4f3ef; border-radius: 8px; display: none; color: #333;
+    }
+    .interpret-detail {
+      font-size: 12px; color: #999; margin-bottom: 16px; padding: 0 4px; display: none;
+    }
+    pre.result-log {
+      background: #22221f; color: #e8e6df; padding: 16px; border-radius: 8px;
+      font-size: 12.5px; overflow-x: auto; white-space: pre-wrap;
+    }
+    .section-title { font-size: 13px; color: #666; margin: 16px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .roadmap {
+      background: #fff; border: 1px solid #ddd; border-radius: 10px;
+      padding: 16px 20px; margin-bottom: 20px; font-size: 13px;
+    }
+    .roadmap .box-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 8px; }
+    .roadmap-item { padding: 8px 0; border-bottom: 1px solid #eee; }
+    .roadmap-item:last-child { border-bottom: none; }
+    .roadmap-item .name { font-weight: 600; margin-right: 8px; }
+    .roadmap-item .note { color: #888; font-size: 12px; display: block; margin-top: 3px; line-height: 1.5; }
+    .status-badge { font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: bold; }
+    .status-badge.미착수 { background: #eee; color: #777; }
+    .status-badge.설계중 { background: #e6f1fb; color: #185fa5; }
+    .status-badge.막힘 { background: #f8ece9; color: #a3342a; }
+
+    .evidence-box { margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; }
+    .evidence-box .ev-title { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .evidence-item { font-size: 12.5px; margin-bottom: 8px; line-height: 1.5; }
+    .evidence-item:last-child { margin-bottom: 0; }
+    .evidence-item .claim { color: #444; display: block; }
+    .evidence-item .source { display: block; color: #999; font-family: "SF Mono", monospace; font-size: 11px; margin-top: 2px; }
+
+    .sparkline-row { display: flex; align-items: center; gap: 8px; }
+
+    .history-box {
+      background: #fff; border: 1px solid #ddd; border-radius: 10px;
+      padding: 16px 20px; margin: 20px 0; font-size: 13px; display: none;
+    }
+    .history-box .box-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 8px; }
+    .history-entry { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #eee; font-size: 12.5px; }
+    .history-entry:last-child { border-bottom: none; }
+    .history-entry .op-name { font-weight: 600; }
+    .history-entry .time { color: #999; font-size: 11px; margin-left: 6px; }
+    .history-badge { font-size: 10px; padding: 1px 7px; border-radius: 6px; font-weight: bold; }
+    .history-badge.pass { background: #e2f0e9; color: #1e5c3f; }
+    .history-badge.fail { background: #f8ece9; color: #a3342a; }
+
+    /* ── 탭 네비게이션 ── */
+    .tab-nav {
+      display: flex; gap: 0; border-bottom: 2px solid #e0ddd6; margin-bottom: 24px;
+    }
+    .tab-btn {
+      padding: 10px 20px; font-size: 14px; border: none; background: none;
+      cursor: pointer; color: #888; border-bottom: 2px solid transparent;
+      margin-bottom: -2px; font-family: inherit;
+    }
+    .tab-btn.active { color: #2f5d50; border-bottom-color: #2f5d50; font-weight: 600; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── 레지스트리 뷰어 ── */
+    .reg-toolbar {
+      display: flex; gap: 8px; align-items: center; margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .reg-search {
+      flex: 1; min-width: 180px; padding: 9px 12px; border: 1px solid #ddd;
+      border-radius: 8px; font-size: 14px; font-family: inherit; background: #fff;
+    }
+    .reg-search:focus { outline: none; border-color: #2f5d50; }
+    .reg-filter {
+      padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px;
+      font-size: 13px; background: #fff; cursor: pointer; font-family: inherit;
+    }
+    .reg-count { font-size: 12px; color: #999; }
+
+    .reg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .reg-table th {
+      text-align: left; padding: 8px 10px; font-size: 11px; color: #888;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      border-bottom: 2px solid #e0ddd6; font-weight: 600; cursor: pointer;
+    }
+    .reg-table th:hover { color: #2f5d50; }
+    .reg-table th .sort-icon { margin-left: 4px; opacity: 0.4; }
+    .reg-table th.sorted .sort-icon { opacity: 1; color: #2f5d50; }
+    .reg-table td { padding: 9px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+    .reg-table tr:last-child td { border-bottom: none; }
+    .reg-table tr:hover td { background: #f7f6f2; }
+    .reg-table tr.detail-row td { background: #f7f6f2; padding: 0; }
+
+    .op-link { color: #2f5d50; cursor: pointer; font-weight: 600; text-decoration: none; }
+    .op-link:hover { text-decoration: underline; }
+    .tag-family { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 8px; font-weight: bold; }
+    .tag-family.elementwise { background: #e2f0e9; color: #1e5c3f; }
+    .tag-family.contraction { background: #eee8fb; color: #5a3d9e; }
+    .tag-dtype { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 6px; background: #f0ede6; color: #555; }
+    .tag-exp { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 8px; background: #faeeda; color: #9a5b13; font-weight: bold; margin-left: 4px; }
+    .tag-evtype { display: inline-block; font-size: 9px; padding: 1px 5px; border-radius: 6px; font-weight: bold; }
+    .tag-evtype.static  { background: #e6f1fb; color: #185fa5; }
+    .tag-evtype.runtime { background: #e2f0e9; color: #1e5c3f; }
+
+    .detail-pane {
+      padding: 14px 16px; border-top: 1px solid #e0ddd6;
+      animation: fadeSlide 0.15s ease;
+    }
+    @keyframes fadeSlide { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+    .detail-pane .dp-label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.04em; margin: 10px 0 4px; }
+    .detail-pane .dp-label:first-child { margin-top: 0; }
+    .detail-pane .dp-val { font-size: 13px; color: #333; line-height: 1.6; }
+    .detail-pane .dp-mono { font-family: "SF Mono", monospace; font-size: 12px; color: #444; }
+    .detail-pane .ev-list { list-style: none; padding: 0; margin: 0; }
+    .detail-pane .ev-list li { padding: 6px 0; border-bottom: 1px solid #eee; }
+    .detail-pane .ev-list li:last-child { border-bottom: none; }
+    .detail-pane .c-list { list-style: none; padding: 0; margin: 0; }
+    .detail-pane .c-list li { padding: 6px 0; border-bottom: 1px solid #eee; font-size: 12.5px; color: #555; }
+    .detail-pane .c-list li:last-child { border-bottom: none; }
+    .highlight { background: #fff3c4; border-radius: 2px; }
+
+    .constraints-panel {
+      background: #fff; border: 1px solid #ddd; border-radius: 10px;
+      padding: 16px 20px; margin-top: 24px; font-size: 13px;
+    }
+    .constraints-panel .box-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: #666; margin-bottom: 10px; }
+    .constraint-item { padding: 10px 0; border-bottom: 1px solid #eee; }
+    .constraint-item:last-child { border-bottom: none; }
+    .constraint-item .c-desc { font-weight: 600; margin-bottom: 4px; }
+    .constraint-item .c-src { font-family: "SF Mono", monospace; font-size: 11px; color: #999; }
+    .constraint-item .c-ops { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .c-op-tag { font-size: 11px; padding: 2px 8px; border-radius: 6px; background: #f0ede6; color: #555; cursor: pointer; }
+    .c-op-tag:hover { background: #2f5d50; color: #fff; }
+  </style>
+</head>
+<body>
+<h1>RNGD Lowering 파이프라인</h1>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('run', this)">실행</button>
+  <button class="tab-btn" onclick="switchTab('registry', this)">변환 규칙 레지스트리</button>
+</nav>
+
+<!-- ── 실행 탭 ── -->
+<div class="tab-panel active" id="tab-run">
+  <div class="caveats" id="caveats"></div>
+
+  <div class="method-note" id="methodNote"></div>
+  <div class="family-note" id="familyNote"></div>
+
+  <div class="roadmap" id="roadmapBox" style="display:none">
+    <div class="box-title">다음 후보 (로드맵)</div>
+    <div id="roadmapList"></div>
+  </div>
+
+  <div class="ops" id="ops"></div>
+  <div class="meta-panel" id="metaPanel" style="display:none"></div>
+  <div class="lowering-note" id="loweringNote" style="display:none"></div>
+  <button class="run-btn" id="runBtn" onclick="runPipeline()">실행</button>
+  <button class="run-all-btn" id="runAllBtn" onclick="runAllPipeline()">전체 실행</button>
+  <div class="all-results-grid" id="allResultsGrid" style="display:none"></div>
+
+  <div class="history-box" id="historyBox">
+    <div class="box-title">실행 히스토리 (최근)</div>
+    <div id="historyList"></div>
+  </div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-steps">
+      <div class="progress-step" id="step1"></div>
+      <div class="progress-step" id="step2"></div>
+      <div class="progress-step" id="step3"></div>
+    </div>
+    <div class="progress-label" id="progressLabel"></div>
+    <div class="live-log" id="liveLog"></div>
+  </div>
+
+  <div class="ir-diff" id="irDiff"></div>
+
+  <div class="artifacts" id="artifacts">
+    <details>
+      <summary>변환 전 linalg IR</summary>
+      <pre id="irBefore"></pre>
+    </details>
+    <details>
+      <summary>변환 후 RNGD IR</summary>
+      <pre id="irAfter"></pre>
+    </details>
+    <details>
+      <summary>생성된 Rust 커널 (vISA)</summary>
+      <pre id="kernelRs"></pre>
+    </details>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div class="interpret" id="interpret"></div>
+  <div class="interpret-detail" id="interpretDetail"></div>
+  <div class="section-title" id="previewTitle" style="display:none">값 비교 미리보기</div>
+  <pre class="result-log" id="preview" style="display:none"></pre>
+
+</div><!-- /tab-run -->
+
+<!-- ── 레지스트리 탭 ── -->
+<div class="tab-panel" id="tab-registry">
+  <div class="reg-toolbar">
+    <input class="reg-search" id="regSearch" type="search" placeholder="검색 — op 이름, linalg op, Mode10, bf16 ..." oninput="onRegSearch(this.value)">
+    <select class="reg-filter" id="regFamily" onchange="onRegFilter()">
+      <option value="">전체 Family</option>
+      <option value="elementwise">Elementwise (A)</option>
+      <option value="contraction">Contraction (B)</option>
+    </select>
+    <select class="reg-filter" id="regDtype" onchange="onRegFilter()">
+      <option value="">전체 dtype</option>
+      <option value="f32">f32</option>
+      <option value="bf16">bf16</option>
+    </select>
+    <span class="reg-count" id="regCount"></span>
+  </div>
+
+  <table class="reg-table" id="regTable">
+    <thead>
+    <tr>
+      <th onclick="sortReg('op_name')" data-col="op_name">연산 <span class="sort-icon">↕</span></th>
+      <th onclick="sortReg('family')" data-col="family">Family <span class="sort-icon">↕</span></th>
+      <th>linalg → RNGD</th>
+      <th onclick="sortReg('dtype')" data-col="dtype">dtype <span class="sort-icon">↕</span></th>
+      <th>허용 오차</th>
+      <th>근거</th>
+    </tr>
+    </thead>
+    <tbody id="regTbody"></tbody>
+  </table>
+
+  <div class="constraints-panel" id="constraintsPanel">
+    <div class="box-title">하드웨어 제약 — 영향받는 연산</div>
+    <div id="constraintsList"></div>
+  </div>
+</div><!-- /tab-registry -->
+
+<script>
+  let selectedOp = null;
+  let opMeta = {};
+  let loweringNote = {};
+  let opGroups = {};
+  let allOpsList = [];
+  let runHistory = {};
+
+  const FAMILY_KEY = {
+    add: "elementwise", sub: "elementwise", mul: "elementwise", div: "elementwise", rsqrt: "elementwise", pow2: "elementwise",
+    batch_gemm: "contraction", gemm: "contraction", dot_product: "contraction",
+  };
+
+  const HL_MARK = "@@HL@@";
+  const HL_SEP = "@@SEP@@";
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // 백엔드가 붙인 HL_MARK<라벨>HL_SEP<원본줄> 형태를 파싱해서
+  // 하이라이트 + 우측 라벨 텍스트로 렌더링한다.
+  function renderMarkedIR(text) {
+    if (!text) return '(없음)';
+    return text.split('\n').map(line => {
+      if (line.startsWith(HL_MARK)) {
+        const rest = line.slice(HL_MARK.length);
+        const sepIdx = rest.indexOf(HL_SEP);
+        if (sepIdx === -1) return escapeHtml(rest);
+        const label = rest.slice(0, sepIdx);
+        const code = rest.slice(sepIdx + HL_SEP.length);
+        return `<span class="hl-line">${escapeHtml(code)}<span class="hl-label"> // ${escapeHtml(label)}</span></span>`;
+      }
+      return escapeHtml(line);
+    }).join('\n');
+  }
+
+  function renderLowering(op) {
+    const note = loweringNote[FAMILY_KEY[op]];
+    const el = document.getElementById('loweringNote');
+    if (!note) { el.style.display = 'none'; return; }
+    el.innerHTML = '<b>Lowering</b>\n' + note;
+    el.style.display = 'block';
+  }
+
+  function renderSparkline(durations) {
+    if (!durations || durations.length < 2) return '<span style="color:#bbb;font-size:11px">기록 부족</span>';
+    const w = 90, h = 22, pad = 3;
+    const max = Math.max(...durations);
+    const min = Math.min(...durations);
+    const range = Math.max(max - min, 0.001);
+    const stepX = (w - pad * 2) / (durations.length - 1);
+    const points = durations.map((d, i) => {
+      const x = pad + i * stepX;
+      const y = h - pad - ((d - min) / range) * (h - pad * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    const last = durations[durations.length - 1];
+    return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="vertical-align:middle">` +
+            `<polyline points="${points}" fill="none" stroke="#2f5d50" stroke-width="1.5"/></svg>` +
+            `<span style="font-size:11px;color:#888;margin-left:4px">최근 ${last.toFixed(2)}s</span>`;
+  }
+
+  function renderMeta(op) {
+    const m = opMeta[op];
+    const panel = document.getElementById('metaPanel');
+    if (!m) { panel.style.display = 'none'; return; }
+
+    const durations = (runHistory[op] || []).map(e => e.duration).filter(d => d != null);
+
+    const evidenceHtml = (m.evidence && m.evidence.length)
+            ? `<div class="evidence-box">
+             <div class="ev-title">근거 소스</div>
+             ${m.evidence.map(ev => `
+               <div class="evidence-item">
+                 <span class="claim">${ev.claim}</span>
+                 <span class="source">${ev.source}</span>
+               </div>`).join('')}
+           </div>`
+            : '';
+
+    panel.innerHTML = `
+        <div class="row"><span class="label">분류</span><span class="value">${m.family}</span></div>
+        <div class="row"><span class="label">변환</span><span class="value">${m.source_op}</span></div>
+        <div class="row"><span class="label">데이터 타입</span><span class="value">${m.dtype}</span></div>
+        <div class="row"><span class="label">비교 대상</span><span class="value">${m.compares}</span></div>
+        <div class="row"><span class="label">허용 오차</span><span class="value">${m.tolerance}</span></div>
+        <div class="row"><span class="label">최근 빌드 시간</span><span class="value sparkline-row">${renderSparkline(durations)}</span></div>
+        ${evidenceHtml}
+      `;
+    panel.style.display = 'block';
+  }
+
+  function renderRoadmap(roadmap) {
+    const box = document.getElementById('roadmapBox');
+    const list = document.getElementById('roadmapList');
+    if (!roadmap || !roadmap.length) { box.style.display = 'none'; return; }
+    list.innerHTML = roadmap.map(item => `
+        <div class="roadmap-item">
+          <span class="name">${item.name}</span>
+          <span class="status-badge ${item.status}">${item.status}</span>
+          <span class="note">${item.note}</span>
+        </div>
+      `).join('');
+    box.style.display = 'block';
+  }
+
+  async function loadHistory() {
+    try {
+      const res = await fetch('/api/history');
+      runHistory = await res.json();
+    } catch (e) {
+      runHistory = {};
+    }
+    renderHistoryTimeline();
+  }
+
+  function renderHistoryTimeline() {
+    const box = document.getElementById('historyBox');
+    const list = document.getElementById('historyList');
+    const entries = [];
+    Object.keys(runHistory).forEach(op => {
+      (runHistory[op] || []).forEach(e => entries.push({ op, ...e }));
+    });
+    entries.sort((a, b) => new Date(b.ts) - new Date(a.ts));
+    const recent = entries.slice(0, 15);
+    if (!recent.length) { box.style.display = 'none'; return; }
+
+    list.innerHTML = recent.map(e => {
+      const t = new Date(e.ts);
+      const timeStr = t.toLocaleString('ko-KR', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const durStr = e.duration != null ? `${e.duration.toFixed(2)}s` : '-';
+      return `<div class="history-entry">
+          <span><span class="op-name">${e.op}</span><span class="time">${timeStr} · ${durStr}</span></span>
+          <span class="history-badge ${e.ok ? 'pass' : 'fail'}">${e.ok ? 'PASS' : 'FAIL'}</span>
+        </div>`;
+    }).join('');
+    box.style.display = 'block';
+  }
+
+  async function loadOps() {
+    const res = await fetch('/api/ops');
+    const data = await res.json();
+    opMeta = data.meta || {};
+    loweringNote = data.lowering_note || {};
+    opGroups = data.groups || {};
+    allOpsList = data.ops || [];
+    document.getElementById('methodNote').textContent = data.method_note || '';
+    document.getElementById('familyNote').textContent = data.family_note || '';
+
+    const caveatsEl = document.getElementById('caveats');
+    const caveatsList = data.caveats || [];
+    if (caveatsList.length) {
+      caveatsEl.innerHTML = '<div class="title">주의사항 / 유의사항</div><ul>' +
+              caveatsList.map(c => `<li>${c}</li>`).join('') + '</ul>';
+    }
+    renderOpButtons(data.ops);
+    renderRoadmap(data.roadmap);
+  }
+
+  function renderOpButtons(ops) {
+    const container = document.getElementById('ops');
+    container.innerHTML = '';
+    const groupOrder = ['elementwise', 'contraction'];
+    const groupLabels = { elementwise: 'Elementwise (Family A)', contraction: 'Contraction (Family B)' };
+    let firstBtnPicked = false;
+
+    groupOrder.forEach(g => {
+      const opsInGroup = ops.filter(op => opGroups[op] === g);
+      if (!opsInGroup.length) return;
+
+      const label = document.createElement('div');
+      label.className = 'op-group-label';
+      label.textContent = groupLabels[g] || g;
+      container.appendChild(label);
+
+      const row = document.createElement('div');
+      row.className = 'op-row';
+      opsInGroup.forEach(op => {
+        const btn = document.createElement('button');
+        btn.className = 'op-btn';
+        const isExp = opMeta[op] && opMeta[op].experimental;
+        btn.innerHTML = op + (isExp ? '<span class="exp-badge">EXP</span>' : '');
+        btn.onclick = () => selectOp(op, btn);
+        row.appendChild(btn);
+        if (!firstBtnPicked) {
+          selectOp(op, btn);
+          firstBtnPicked = true;
+        }
+      });
+      container.appendChild(row);
+    });
+  }
+
+  function selectOp(op, btn) {
+    selectedOp = op;
+    document.querySelectorAll('.op-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    renderMeta(op);
+    renderLowering(op);
+    resetResultUI();
+  }
+
+  function resetResultUI() {
+    document.getElementById('status').style.display = 'none';
+    document.getElementById('interpret').style.display = 'none';
+    document.getElementById('interpretDetail').style.display = 'none';
+    document.getElementById('previewTitle').style.display = 'none';
+    document.getElementById('preview').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('artifacts').style.display = 'none';
+    document.getElementById('irDiff').style.display = 'none';
+    document.getElementById('irDiff').textContent = '';
+    document.getElementById('irBefore').textContent = '';
+    document.getElementById('irAfter').textContent = '';
+    document.getElementById('kernelRs').textContent = '';
+    ['step1', 'step2', 'step3'].forEach(id => {
+      document.getElementById(id).className = 'progress-step';
+    });
+    document.getElementById('liveLog').textContent = '';
+  }
+
+  function setStep(step) {
+    for (let i = 1; i <= 3; i++) {
+      const el = document.getElementById('step' + i);
+      if (i < step) el.className = 'progress-step done';
+      else if (i === step) el.className = 'progress-step active';
+      else el.className = 'progress-step';
+    }
+  }
+
+  function appendLog(text) {
+    const logEl = document.getElementById('liveLog');
+    logEl.textContent += text + '\n';
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function runPipeline() {
+    if (!selectedOp) return;
+    const runBtn = document.getElementById('runBtn');
+    const statusEl = document.getElementById('status');
+    const interpretEl = document.getElementById('interpret');
+    const previewEl = document.getElementById('preview');
+    const previewTitle = document.getElementById('previewTitle');
+    const progressWrap = document.getElementById('progressWrap');
+    const progressLabel = document.getElementById('progressLabel');
+
+    runBtn.disabled = true;
+    resetResultUI();
+    progressWrap.style.display = 'block';
+    progressLabel.textContent = '시작 중...';
+
+    try {
+      const res = await fetch('/api/run_stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ op: selectedOp }),
+      });
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let idx;
+        while ((idx = buffer.indexOf('\n\n')) !== -1) {
+          const chunk = buffer.slice(0, idx);
+          buffer = buffer.slice(idx + 2);
+          if (!chunk.startsWith('data: ')) continue;
+          const msg = JSON.parse(chunk.slice(6));
+
+          if (msg.type === 'stage') {
+            setStep(msg.step);
+            progressLabel.textContent = `${msg.step}/${msg.total} ${msg.text}`;
+          } else if (msg.type === 'log') {
+            appendLog(msg.text);
+          } else if (msg.type === 'artifacts') {
+            document.getElementById('irBefore').innerHTML = renderMarkedIR(msg.ir_before);
+            document.getElementById('irAfter').innerHTML = renderMarkedIR(msg.ir_after);
+            document.getElementById('kernelRs').textContent = msg.kernel_rs || '(없음)';
+            document.getElementById('artifacts').style.display = 'block';
+            if (msg.ir_diff) {
+              document.getElementById('irDiff').textContent = msg.ir_diff;
+              document.getElementById('irDiff').style.display = 'block';
+            }
+          } else if (msg.type === 'done') {
+            setStep(4); // 전부 done 처리
+            progressLabel.textContent = '완료';
+
+            if (msg.history_entry) {
+              if (!runHistory[msg.op]) runHistory[msg.op] = [];
+              runHistory[msg.op].push(msg.history_entry);
+              renderHistoryTimeline();
+            }
+
+            if (msg.error) {
+              statusEl.className = 'status fail';
+              statusEl.textContent = '오류: ' + msg.error;
+            } else {
+              statusEl.className = 'status ' + (msg.ok ? 'pass' : 'fail');
+              statusEl.textContent = (msg.ok ? '통과 (PASS): ' : '실패 (FAIL): ') + msg.op;
+
+              if (msg.meta) {
+                interpretEl.textContent = msg.ok ? msg.meta.meaning_pass : msg.meta.meaning_fail;
+                interpretEl.style.display = 'block';
+                const detailEl = document.getElementById('interpretDetail');
+                if (msg.meta.detail) {
+                  detailEl.textContent = msg.meta.detail;
+                  detailEl.style.display = 'block';
+                }
+              }
+              previewTitle.style.display = 'block';
+              previewEl.style.display = 'block';
+              previewEl.textContent = (msg.preview || []).join('\n');
+            }
+          }
+        }
+      }
+    } catch (e) {
+      statusEl.className = 'status fail';
+      statusEl.textContent = '요청 실패: ' + e.message;
+    } finally {
+      runBtn.disabled = false;
+    }
+  }
+
+  async function runAllPipeline() {
+    const btn = document.getElementById('runAllBtn');
+    const grid = document.getElementById('allResultsGrid');
+
+    btn.disabled = true;
+    grid.style.display = 'grid';
+    grid.innerHTML = '';
+
+    const cells = {};
+    allOpsList.forEach(op => {
+      const cell = document.createElement('div');
+      cell.className = 'all-result-cell';
+      cell.textContent = op;
+      grid.appendChild(cell);
+      cells[op] = cell;
+    });
+
+    try {
+      const res = await fetch('/api/run_all_stream', { method: 'POST' });
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        let idx;
+        while ((idx = buffer.indexOf('\n\n')) !== -1) {
+          const chunk = buffer.slice(0, idx);
+          buffer = buffer.slice(idx + 2);
+          if (!chunk.startsWith('data: ')) continue;
+          const msg = JSON.parse(chunk.slice(6));
+
+          if (msg.type === 'op_start') {
+            const c = cells[msg.op];
+            if (c) { c.className = 'all-result-cell running'; c.textContent = msg.op + ' ...'; }
+          } else if (msg.type === 'op_done') {
+            const c = cells[msg.op];
+            if (c) {
+              c.className = 'all-result-cell ' + (msg.ok ? 'pass' : 'fail');
+              c.textContent = msg.op + (msg.ok ? ' PASS' : ' FAIL');
+            }
+            if (msg.history_entry) {
+              if (!runHistory[msg.op]) runHistory[msg.op] = [];
+              runHistory[msg.op].push(msg.history_entry);
+              renderHistoryTimeline();
+            }
+          }
+          // all_stage / log / all_done 은 그리드 업데이트에 필요 없어 무시
+        }
+      }
+    } catch (e) {
+      console.error('전체 실행 실패:', e);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function init() {
+    await loadHistory();
+    await loadOps();
+  }
+  init();
+
+  // ────────────────────────────────────────────────
+  // 탭 전환
+  // ────────────────────────────────────────────────
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+    if (name === 'registry' && !regLoaded) initRegistry();
+  }
+
+  // ────────────────────────────────────────────────
+  // 레지스트리 뷰어
+  // ────────────────────────────────────────────────
+  let regLoaded = false;
+  let regAllOps = [];      // 서버에서 받은 전체 목록
+  let regFiltered = [];    // 필터/검색 적용 후
+  let regSortCol = 'op_name';
+  let regSortAsc = true;
+  let regOpenRow = null;   // 현재 열린 상세 행의 op_name
+
+  async function initRegistry() {
+    regLoaded = true;
+    await Promise.all([loadRegOps(), loadConstraints()]);
+  }
+
+  async function loadRegOps() {
+    const res = await fetch('/api/registry');
+    const data = await res.json();
+    regAllOps = data.ops;
+    applyRegFilter();
+  }
+
+  async function loadConstraints() {
+    const res = await fetch('/api/constraints');
+    const data = await res.json();
+    const el = document.getElementById('constraintsList');
+    el.innerHTML = data.constraints.map(c => `
+        <div class="constraint-item">
+          <div class="c-desc">${c.description}</div>
+          <div class="c-src">${c.discovery_source}</div>
+          <div class="c-ops">${c.affected_ops.map(op =>
+            `<span class="c-op-tag" onclick="jumpToOp('${op}')">${op}</span>`
+    ).join('')}</div>
+        </div>
+      `).join('');
+  }
+
+  function onRegSearch(q) {
+    // 검색어가 있으면 서버 검색 API 사용, 없으면 로컬 필터
+    if (q.trim().length >= 1) {
+      searchRegistry(q.trim());
+    } else {
+      applyRegFilter();
+    }
+  }
+
+  let searchTimer = null;
+  function searchRegistry(q) {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(async () => {
+      const res = await fetch('/api/registry/search?q=' + encodeURIComponent(q));
+      const data = await res.json();
+      regFiltered = data.ops;
+      renderRegTable(q);
+    }, 250);
+  }
+
+  function onRegFilter() {
+    const q = document.getElementById('regSearch').value.trim();
+    if (q.length >= 1) searchRegistry(q);
+    else applyRegFilter();
+  }
+
+  function applyRegFilter() {
+    const family = document.getElementById('regFamily').value;
+    const dtype  = document.getElementById('regDtype').value;
+    regFiltered = regAllOps.filter(op =>
+            (!family || op.family === family) &&
+            (!dtype  || op.dtype  === dtype)
+    );
+    renderRegTable('');
+  }
+
+  function sortReg(col) {
+    if (regSortCol === col) regSortAsc = !regSortAsc;
+    else { regSortCol = col; regSortAsc = true; }
+    // 헤더 표시 갱신
+    document.querySelectorAll('.reg-table th[data-col]').forEach(th => {
+      const isSorted = th.dataset.col === col;
+      th.classList.toggle('sorted', isSorted);
+      const icon = th.querySelector('.sort-icon');
+      if (icon) icon.textContent = isSorted ? (regSortAsc ? '↑' : '↓') : '↕';
+    });
+    renderRegTable(document.getElementById('regSearch').value.trim());
+  }
+
+  function renderRegTable(query) {
+    const sorted = [...regFiltered].sort((a, b) => {
+      const va = (a[regSortCol] || '').toString();
+      const vb = (b[regSortCol] || '').toString();
+      return regSortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    });
+
+    document.getElementById('regCount').textContent = `${sorted.length}개`;
+
+    const hl = (text) => {
+      if (!query) return text;
+      const re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      return text.replace(re, '<span class="highlight">$1</span>');
+    };
+
+    const tbody = document.getElementById('regTbody');
+    tbody.innerHTML = sorted.map(op => {
+      const familyTag = `<span class="tag-family ${op.family}">${op.family === 'elementwise' ? 'A' : 'B'}</span>`;
+      const expTag = op.experimental ? '<span class="tag-exp">EXP</span>' : '';
+      const evidenceCount = (op.evidence || []).length;
+      const evBadge = evidenceCount
+              ? `<span style="font-size:11px;color:#2f5d50;cursor:pointer" onclick="toggleDetail('${op.op_name}')">근거 ${evidenceCount}건</span>`
+              : '';
+      const arrow = op.source_op + ' → ' + op.target_op;
+      return `<tr id="row-${op.op_name}" onclick="toggleDetail('${op.op_name}')">
+          <td><span class="op-link">${hl(op.op_name)}</span>${expTag}</td>
+          <td>${familyTag}</td>
+          <td style="font-size:12px;font-family:'SF Mono',monospace">${hl(arrow)}</td>
+          <td><span class="tag-dtype">${op.dtype}</span></td>
+          <td style="font-size:12px">${op.tolerance}</td>
+          <td>${evBadge}</td>
+        </tr>
+        <tr class="detail-row" id="detail-${op.op_name}" style="display:none">
+          <td colspan="6"></td>
+        </tr>`;
+    }).join('');
+  }
+
+  function toggleDetail(opName) {
+    const detailRow = document.getElementById('detail-' + opName);
+    const isOpen = detailRow.style.display !== 'none';
+    // 기존 열린 것 닫기
+    if (regOpenRow && regOpenRow !== opName) {
+      document.getElementById('detail-' + regOpenRow).style.display = 'none';
+    }
+    if (isOpen) {
+      detailRow.style.display = 'none';
+      regOpenRow = null;
+    } else {
+      loadAndRenderDetail(opName, detailRow);
+      regOpenRow = opName;
+    }
+  }
+
+  async function loadAndRenderDetail(opName, detailRow) {
+    const res = await fetch('/api/registry/' + opName);
+    const d = await res.json();
+
+    const evHtml = (d.evidence || []).map(ev => `
+        <li>
+          <span class="tag-evtype ${ev.evidence_type}">${ev.evidence_type === 'static' ? '소스' : '런타임'}</span>
+          <span style="margin-left:6px;font-size:12.5px">${ev.claim}</span>
+          <span style="display:block;font-family:'SF Mono',monospace;font-size:11px;color:#999;margin-top:2px">${ev.source}</span>
+        </li>
+      `).join('');
+
+    const cHtml = (d.constraints || []).length
+            ? (d.constraints || []).map(c => `<li>${c.description}</li>`).join('')
+            : '<li style="color:#bbb">없음</li>';
+
+    detailRow.querySelector('td').innerHTML = `
+        <div class="detail-pane">
+          <div class="dp-label">비교 대상</div>
+          <div class="dp-val">${d.compares || '-'}</div>
+          <div class="dp-label">PASS 의미</div>
+          <div class="dp-val">${d.meaning_pass || '-'}</div>
+          <div class="dp-label">FAIL 의미</div>
+          <div class="dp-val">${d.meaning_fail || '-'}</div>
+          <div class="dp-label">커널 상세</div>
+          <div class="dp-val dp-mono">${d.detail || '-'}</div>
+          ${evHtml ? `<div class="dp-label">근거 소스</div><ul class="ev-list">${evHtml}</ul>` : ''}
+          <div class="dp-label">연결된 하드웨어 제약</div>
+          <ul class="c-list">${cHtml}</ul>
+        </div>
+      `;
+    detailRow.style.display = 'table-row';
+  }
+
+  function jumpToOp(opName) {
+    // 레지스트리 탭으로 전환하고 해당 op 검색
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn')[1].classList.add('active');
+    document.getElementById('tab-registry').classList.add('active');
+    if (!regLoaded) initRegistry().then(() => filterToOp(opName));
+    else filterToOp(opName);
+  }
+
+  function filterToOp(opName) {
+    const searchEl = document.getElementById('regSearch');
+    searchEl.value = opName;
+    onRegSearch(opName);
+  }
+</script>
+</body>
+</html>

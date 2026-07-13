@@ -1,0 +1,3 @@
+op 개수: 8개 → 6개
+제거된 op: linalg.generic, math.powf, linalg.yield
+추가된 op: rngd.elementwise
