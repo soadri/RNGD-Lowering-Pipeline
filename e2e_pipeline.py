@@ -105,6 +105,10 @@ MATH_UNARY_OPS = {
     "math.rsqrt": "rsqrt",
     "math.sqrt":  "sqrt",
     "math.exp":   "exp",
+    "math.log":   "log",
+    "math.tanh":  "tanh",
+    "math.sin":   "sin",
+    "math.cos":   "cos",
 }
 
 # =====================================================================
@@ -507,6 +511,10 @@ UNARY_OP_CHAIN = {
     "sqrt":  ".vector_fp_unary(FpUnaryOp::Sqrt)",
     "exp":   ".vector_fp_unary(FpUnaryOp::Exp)",
     "sigmoid": ".vector_fp_unary(FpUnaryOp::Sigmoid)",
+    "log":     ".vector_fp_unary(FpUnaryOp::Log)",
+    "tanh":    ".vector_fp_unary(FpUnaryOp::Tanh)",
+    "sin":     ".vector_fp_unary(FpUnaryOp::Sin)",
+    "cos":     ".vector_fp_unary(FpUnaryOp::Cos)",
 }
 
 
@@ -1006,6 +1014,14 @@ if __name__ == "__main__":
                 return torch.exp(x)
             if self.op_name == "sigmoid":
                 return torch.sigmoid(x)
+            if self.op_name == "log":
+                return torch.log(x.abs() + 0.1)  # 정의역 보장
+            if self.op_name == "tanh":
+                return torch.tanh(x)
+            if self.op_name == "sin":
+                return torch.sin(x)
+            if self.op_name == "cos":
+                return torch.cos(x)
             if self.op_name == "pow2":
                 return torch.pow(x, 2.0)
 
@@ -1075,7 +1091,7 @@ if __name__ == "__main__":
         print(f"생성 완료: {prefix}_*.rs, {prefix}_ir_before.mlir, {prefix}_ir_after.mlir, {prefix}_ir_diff.txt")
 
     # --- Family A (단항/unary) ---
-    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "sigmoid", "pow2") if requested_ops is None or op in requested_ops]
+    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "sigmoid", "log", "tanh", "sin", "cos", "pow2") if requested_ops is None or op in requested_ops]
     for op_name in unary_elementwise_ops:
         print(f"\n{'='*70}\n [Family A-unary] op_name = {op_name}\n{'='*70}")
 
