@@ -7,6 +7,7 @@ on:
       - 'e2e_pipeline.py'
       - 'init_registry.py'
       - 'registry.py'
+      - 'ci_analyze.py'
       - 'models/**'
       - '.github/workflows/ci.yml'
   pull_request:
@@ -14,46 +15,52 @@ on:
       - 'e2e_pipeline.py'
       - 'init_registry.py'
       - 'registry.py'
+      - 'ci_analyze.py'
       - 'models/**'
   workflow_dispatch:
+
+env:
+  VENV: /home/ubuntu/rngd-mlir-pipeline/.venv
+  PIPELINE_DIR: /home/ubuntu/rngd-mlir-pipeline
 
 jobs:
   validate-registry:
     name: 변환 규칙 레지스트리 검증
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, k-cloud]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: 의존성 설치
-        run: |
-          pip install torch==2.3.0.dev20240122+cpu --index-url https://download.pytorch.org/whl/nightly/cpu
-          pip install torch-mlir==20240127.1096 -f https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels --pre
-          pip install fastapi uvicorn pydantic
+
       - name: DB 초기화
-        run: python init_registry.py
+        run: ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py
+
       - name: 레지스트리 무결성 검증
         run: |
-          python - <<'EOF'
+          ${{ env.VENV }}/bin/python - <<'PYEOF'
           import sqlite3, sys
           con = sqlite3.connect("rngd_registry.db")
           con.row_factory = sqlite3.Row
           ops = con.execute("SELECT op_name FROM ops WHERE status='done'").fetchall()
           for row in ops:
-              cnt = con.execute("SELECT COUNT(*) FROM evidence WHERE op_name=?", (row["op_name"],)).fetchone()[0]
+              cnt = con.execute(
+                  "SELECT COUNT(*) FROM evidence WHERE op_name=?", (row["op_name"],)
+              ).fetchone()[0]
               if cnt == 0:
                   print(f"[FAIL] {row['op_name']}: evidence 없음", file=sys.stderr)
                   sys.exit(1)
-          counts = {t: con.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in ("ops","evidence","hardware_constraints","roadmap")}
+          counts = {
+              t: con.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
+              for t in ("ops", "evidence", "hardware_constraints", "roadmap")
+          }
           con.close()
           print("=== 레지스트리 검증 통과 ===")
-          for k, v in counts.items(): print(f"  {k}: {v}행")
-          EOF
+          for k, v in counts.items():
+              print(f"  {k}: {v}행")
+          PYEOF
+
       - name: 스냅샷 저장
         run: |
           mkdir -p ci_out
-          python - <<'EOF'
+          ${{ env.VENV }}/bin/python - <<'PYEOF'
           import sqlite3, json
           con = sqlite3.connect("rngd_registry.db")
           con.row_factory = sqlite3.Row
@@ -62,7 +69,8 @@ jobs:
           with open("ci_out/registry_snapshot.json", "w") as f:
               json.dump(ops, f, ensure_ascii=False, indent=2)
           print(f"스냅샷: {len(ops)}개 연산")
-          EOF
+          PYEOF
+
       - uses: actions/upload-artifact@v4
         with:
           name: registry-snapshot
@@ -70,7 +78,7 @@ jobs:
 
   coverage-analysis:
     name: 모델 커버리지 분석
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, k-cloud]
     needs: validate-registry
     strategy:
       matrix:
@@ -78,20 +86,19 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: 의존성 설치
-        run: |
-          pip install torch==2.3.0.dev20240122+cpu --index-url https://download.pytorch.org/whl/nightly/cpu
-          pip install torch-mlir==20240127.1096 -f https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels --pre
+
       - name: DB 초기화
-        run: python init_registry.py
+        run: ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py
+
       - name: 커버리지 분석
         run: |
           MODEL="${{ matrix.model }}"
           MODEL_NAME=$(basename $MODEL .py)
-          python ci_analyze.py --model "$MODEL" --out-dir "ci_out/$MODEL_NAME"
+          ${{ env.VENV }}/bin/python ci_analyze.py \
+            --model "$MODEL" \
+            --out-dir "ci_out/$MODEL_NAME" \
+            --db rngd_registry.db
+
       - uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ strategy.job-index }}
@@ -99,7 +106,7 @@ jobs:
 
   build-report:
     name: Pages 리포트 빌드
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, k-cloud]
     needs: coverage-analysis
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     permissions:
@@ -108,21 +115,26 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/download-artifact@v4
         with:
           path: all_artifacts
+
       - name: commit SHA 저장
         run: echo "${{ github.sha }}" > COMMIT_SHA
+
       - name: HTML 리포트 빌드
-        run: python build_pages.py all_artifacts
+        run: ${{ env.VENV }}/bin/python build_pages.py all_artifacts
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: pages_out
+
       - uses: actions/deploy-pages@v4
 
   pr-comment:
     name: PR 코멘트
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, k-cloud]
     needs: coverage-analysis
     if: github.event_name == 'pull_request'
     permissions:
@@ -131,6 +143,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           path: all_artifacts
+
       - name: 코멘트 생성
         uses: actions/github-script@v7
         with:
@@ -165,7 +178,8 @@ jobs:
             }
             const marker = '<!-- rngd-ci-coverage -->';
             const { data: comments } = await github.rest.issues.listComments({
-              owner: context.repo.owner, repo: context.repo.repo, issue_number: context.issue.number
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number
             });
             const existing = comments.find(c => c.body.includes(marker));
             const fullBody = marker + '\n' + body;
