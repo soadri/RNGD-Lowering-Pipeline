@@ -28,8 +28,8 @@ jobs:
           python-version: '3.11'
       - name: 의존성 설치
         run: |
-          pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install torch-mlir --find-links https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels
+          pip install torch==2.3.0.dev20240122+cpu --index-url https://download.pytorch.org/whl/nightly/cpu
+          pip install torch-mlir==20240127.1096 -f https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels --pre
           pip install fastapi uvicorn pydantic
       - name: DB 초기화
         run: python init_registry.py
@@ -83,8 +83,8 @@ jobs:
           python-version: '3.11'
       - name: 의존성 설치
         run: |
-          pip install torch --index-url https://download.pytorch.org/whl/cpu
-          pip install torch-mlir --find-links https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels
+          pip install torch==2.3.0.dev20240122+cpu --index-url https://download.pytorch.org/whl/nightly/cpu
+          pip install torch-mlir==20240127.1096 -f https://github.com/llvm/torch-mlir/releases/expanded_assets/dev-wheels --pre
       - name: DB 초기화
         run: python init_registry.py
       - name: 커버리지 분석
