@@ -284,6 +284,20 @@ OPS = [
             "고정 2048 버퍼 + 벡터 전체 reduction 방식."
         ),
     },
+    {
+        "op_name": "gemv",
+        "family": "gemv",
+        "source_op": "linalg.matvec",
+        "target_op": "rngd.gemv",
+        "dtype": "bf16",
+        "tolerance": "max(2%, 0.5)",
+        "experimental": 1,
+        "status": "done",
+        "compares": "PyTorch torch.mv(A, x) — A:[256,2048] bf16, x:[2048] bf16",
+        "meaning_pass": "gemv_kernel.rs 구조(Contraction Engine) 그대로 재사용. PASS",
+        "meaning_fail": "오차 초과. gemv 커널 로직 확인 필요.",
+        "detail": "I=256, J=2048. dot_product와 동일한 Contraction Engine 패턴. linalg.matvec → rngd.gemv.",
+    },
 ]
 
 # evidence_type: 'static'  = 소스 코드 grep으로 확인 (실행 안 함)
@@ -350,20 +364,6 @@ OP_CONSTRAINT_LINKS = [
 ]
 
 ROADMAP = [
-    {
-        "op_name": "gemv",
-        "family": "gemv",
-        "source_op": "linalg.matvec",
-        "target_op": "rngd.gemv",
-        "dtype": "bf16",
-        "tolerance": "max(2%, 0.5)",
-        "experimental": 1,
-        "status": "done",
-        "compares": "PyTorch torch.mv(A, x) — A:[256,2048] bf16, x:[2048] bf16",
-        "meaning_pass": "gemv_kernel.rs 구조(Contraction Engine) 그대로 재사용. PASS",
-        "meaning_fail": "오차 초과. gemv 커널 로직 확인 필요.",
-        "detail": "I=256, J=2048. dot_product와 동일한 Contraction Engine 패턴. linalg.matvec → rngd.gemv.",
-    },
     ("rngd.reduce (mean)",  "설계중",
      "구조적 제약 발견: A가 8의 배수이면 m![A%8]=m![0]이 no-op이 되어 IntraSliceReduce 파이프라인 구성 불가. "
      "InterFirst(VectorInitTensor→vector_inter_slice_reduce) 경로는 Way8 유지로 commit까지 가능하나 Slice 내 원소를 모두 합산하지 못함(각 Packet lane 독립 합산). "
