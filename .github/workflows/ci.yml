@@ -8,6 +8,7 @@ on:
       - 'init_registry.py'
       - 'registry.py'
       - 'ci_analyze.py'
+      - 'build_pages.py'
       - 'models/**'
       - '.github/workflows/ci.yml'
   pull_request:
@@ -26,6 +27,7 @@ env:
   DB_PATH: ${{ github.workspace }}/rngd_registry.db
 
 jobs:
+  # ── Job 1: 레지스트리 검증 ──────────────────────────────────────
   validate-registry:
     name: 변환 규칙 레지스트리 검증
     runs-on: [self-hosted, k-cloud]
@@ -82,58 +84,7 @@ jobs:
           name: registry-snapshot
           path: ci_out/registry_snapshot.json
 
-  kernel-test:
-    name: 커널 빌드 + 정합성 검증
-    runs-on: [self-hosted, k-cloud]
-    needs: validate-registry
-    if: github.event_name == 'workflow_dispatch'
-    strategy:
-      matrix:
-        op: [add, sub, mul, div, rsqrt, pow2, batch_gemm, gemm, dot_product]
-      fail-fast: false
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: DB 초기화
-        run: |
-          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py \
-            --reset --db ${{ env.DB_PATH }}
-
-      - name: 커널 코드 생성 + 배치
-        run: |
-          cd ${{ env.PIPELINE_DIR }}
-          ${{ env.VENV }}/bin/python e2e_pipeline.py ${{ matrix.op }}
-          ${{ env.VENV }}/bin/python deploy_and_test.py ${{ matrix.op }} --no-test
-
-      - name: cargo furiosa-opt test
-        run: |
-          cd ${{ env.KERNEL_DIR }}
-          cargo furiosa-opt test pilot_e2e_${{ matrix.op }} 2>&1 | tee /tmp/test_${{ matrix.op }}.txt
-          cat /tmp/test_${{ matrix.op }}.txt
-          if grep -q "test result: ok" /tmp/test_${{ matrix.op }}.txt; then
-            echo "PASS: ${{ matrix.op }}"
-          else
-            echo "FAIL: ${{ matrix.op }}"
-            exit 1
-          fi
-
-      - name: 테스트 결과 저장
-        if: always()
-        run: |
-          mkdir -p ci_out
-          RESULT="FAIL"
-          if grep -q "test result: ok" /tmp/test_${{ matrix.op }}.txt 2>/dev/null; then
-            RESULT="PASS"
-          fi
-          echo "{\"op\": \"${{ matrix.op }}\", \"result\": \"$RESULT\"}" > ci_out/kernel_${{ matrix.op }}.json
-          cat /tmp/test_${{ matrix.op }}.txt >> ci_out/kernel_${{ matrix.op }}.log 2>/dev/null || true
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: kernel-test-${{ matrix.op }}
-          path: ci_out/
-
+  # ── Job 2: 모델 커버리지 분석 ───────────────────────────────────
   coverage-analysis:
     name: 모델 커버리지 분석
     runs-on: [self-hosted, k-cloud]
@@ -168,6 +119,115 @@ jobs:
           name: coverage-${{ strategy.job-index }}
           path: ci_out/
 
+  # ── Job 3: 커널 빌드 + 정합성 검증 ─────────────────────────────
+  # 모든 모델의 coverage.json을 합쳐 지원 op 합집합만 테스트
+  kernel-test:
+    name: 커널 정합성 검증
+    runs-on: [self-hosted, k-cloud]
+    needs: coverage-analysis
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 커버리지 아티팩트 수집
+        uses: actions/download-artifact@v4
+        with:
+          path: all_artifacts
+
+      - name: 지원 op 합집합 추출
+        run: |
+          ${{ env.VENV }}/bin/python - <<'PYEOF'
+          import json, pathlib, os
+
+          artifacts_dir = pathlib.Path("all_artifacts")
+          supported_ops = {}  # op_name → rngd_op
+
+          for p in artifacts_dir.glob("**/coverage.json"):
+              with open(p) as f:
+                  cov = json.load(f)
+              for op in cov["ops"]:
+                  if op["supported"] and op.get("op_name"):
+                      supported_ops[op["op_name"]] = op["rngd_op"]
+
+          print(f"테스트할 연산: {list(supported_ops.keys())}")
+          with open("supported_ops.json", "w") as f:
+              json.dump(supported_ops, f)
+          PYEOF
+
+      - name: 커널 빌드 + 정합성 검증
+        run: |
+          ${{ env.VENV }}/bin/python - <<'PYEOF'
+          import json, subprocess, sys
+          from pathlib import Path
+
+          with open("supported_ops.json") as f:
+              supported_ops = json.load(f)
+
+          pipeline_dir = Path("/home/ubuntu/rngd-mlir-pipeline")
+          kernel_dir = Path("/home/ubuntu/rngd-tcp-kernel-dev")
+          venv = Path("/home/ubuntu/rngd-mlir-pipeline/.venv/bin/python")
+
+          results = {}
+          for op_name in supported_ops:
+              print(f"\n{'='*50}\n테스트: {op_name}\n{'='*50}")
+
+              # 커널 코드 생성 + 배치
+              r1 = subprocess.run(
+                  [str(venv), "e2e_pipeline.py", op_name],
+                  cwd=str(pipeline_dir), capture_output=True, text=True
+              )
+              print(r1.stdout[-500:] if r1.stdout else "")
+              if r1.returncode != 0:
+                  print(f"[FAIL] {op_name}: 코드 생성 실패")
+                  print(r1.stderr[-300:])
+                  results[op_name] = "FAIL"
+                  continue
+
+              r2 = subprocess.run(
+                  [str(venv), "deploy_and_test.py", op_name, "--no-test"],
+                  cwd=str(pipeline_dir), capture_output=True, text=True
+              )
+              if r2.returncode != 0:
+                  print(f"[FAIL] {op_name}: 배치 실패")
+                  results[op_name] = "FAIL"
+                  continue
+
+              # cargo furiosa-opt test
+              r3 = subprocess.run(
+                  ["cargo", "furiosa-opt", "test", f"pilot_e2e_{op_name}"],
+                  cwd=str(kernel_dir), capture_output=True, text=True
+              )
+              output = r3.stdout + r3.stderr
+              print(output[-500:])
+              if "test result: ok" in output:
+                  print(f"[PASS] {op_name}")
+                  results[op_name] = "PASS"
+              else:
+                  print(f"[FAIL] {op_name}")
+                  results[op_name] = "FAIL"
+
+          # 결과 저장
+          Path("ci_out").mkdir(exist_ok=True)
+          with open("ci_out/kernel_results.json", "w") as f:
+              json.dump(results, f, ensure_ascii=False, indent=2)
+
+          print(f"\n{'='*50}\n=== 커널 테스트 요약 ===")
+          passed = [op for op, r in results.items() if r == "PASS"]
+          failed = [op for op, r in results.items() if r != "PASS"]
+          print(f"PASS: {len(passed)}/{len(results)}")
+          for op in failed:
+              print(f"  FAIL: {op}")
+
+          if failed:
+              sys.exit(1)
+          PYEOF
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kernel-results
+          path: ci_out/kernel_results.json
+
+  # ── Job 4: Pages 리포트 빌드 ────────────────────────────────────
   build-report:
     name: Pages 리포트 빌드
     runs-on: [self-hosted, k-cloud]
@@ -196,6 +256,7 @@ jobs:
 
       - uses: actions/deploy-pages@v4
 
+  # ── Job 5: PR 코멘트 ────────────────────────────────────────────
   pr-comment:
     name: PR 코멘트
     runs-on: [self-hosted, k-cloud]
@@ -216,60 +277,54 @@ jobs:
             const path = require('path');
             const artifactsDir = 'all_artifacts';
 
-            // 커버리지 결과 수집
+            // 커버리지 결과
             const coverages = [];
             for (const dir of fs.readdirSync(artifactsDir)) {
               const covPath = path.join(artifactsDir, dir, 'coverage.json');
-              if (fs.existsSync(covPath)) {
+              if (fs.existsSync(covPath))
                 coverages.push(JSON.parse(fs.readFileSync(covPath, 'utf8')));
-              }
             }
 
-            // 커널 테스트 결과 수집
-            const kernelResults = [];
-            for (const dir of fs.readdirSync(artifactsDir)) {
-              for (const file of fs.readdirSync(path.join(artifactsDir, dir))) {
-                if (file.startsWith('kernel_') && file.endsWith('.json')) {
-                  kernelResults.push(JSON.parse(
-                    fs.readFileSync(path.join(artifactsDir, dir, file), 'utf8')
-                  ));
-                }
-              }
-            }
+            // 커널 테스트 결과
+            let kernelResults = {};
+            const krPath = path.join(artifactsDir, 'kernel-results', 'kernel_results.json');
+            if (fs.existsSync(krPath))
+              kernelResults = JSON.parse(fs.readFileSync(krPath, 'utf8'));
 
             let body = '## 🔍 RNGD Lowering CI 결과\n\n';
 
-            // 커널 테스트 결과
-            if (kernelResults.length > 0) {
-              const passed = kernelResults.filter(r => r.result === 'PASS');
-              const failed = kernelResults.filter(r => r.result === 'FAIL');
-              body += `### 커널 정합성 검증 (${passed.length}/${kernelResults.length} PASS)\n\n`;
+            // 커널 테스트 요약
+            const ops = Object.keys(kernelResults);
+            if (ops.length > 0) {
+              const passed = ops.filter(op => kernelResults[op] === 'PASS');
+              body += `### 커널 정합성 검증 (${passed.length}/${ops.length} PASS)\n\n`;
               body += '| 연산 | 결과 |\n|---|---|\n';
-              for (const r of kernelResults.sort((a,b) => a.op.localeCompare(b.op))) {
-                const icon = r.result === 'PASS' ? '✅' : '❌';
-                body += `| \`${r.op}\` | ${icon} ${r.result} |\n`;
+              for (const op of ops.sort()) {
+                const icon = kernelResults[op] === 'PASS' ? '✅' : '❌';
+                body += `| \`${op}\` | ${icon} ${kernelResults[op]} |\n`;
               }
               body += '\n';
             }
 
-            // 커버리지 결과
+            // 모델별 커버리지 + 연산별 커널 검증 결과
             if (coverages.length > 0) {
-              body += '### 모델 커버리지\n\n';
-              body += '| 모델 | 커버리지 | 지원 | 미지원 |\n|---|---|---|---|\n';
+              body += '### 모델별 커버리지\n\n';
               for (const cov of coverages) {
                 const pct = cov.coverage_pct;
                 const emoji = pct >= 80 ? '🟢' : pct >= 50 ? '🟡' : '🔴';
                 const name = path.basename(cov.model, '.py');
-                body += `| \`${name}\` | ${emoji} **${pct}%** | ${cov.supported_count}개 | ${cov.unsupported_count}개 |\n`;
-              }
-              const allUnsup = new Set();
-              for (const cov of coverages)
-                for (const op of cov.ops)
-                  if (!op.supported) allUnsup.add(op.op);
-              if (allUnsup.size > 0) {
-                body += `\n<details><summary>미지원 op (${allUnsup.size}개)</summary>\n\n`;
-                for (const op of [...allUnsup].sort()) body += `- \`${op}\`\n`;
-                body += '\n</details>\n';
+                body += `**${name}** ${emoji} ${pct}%\n\n`;
+                body += '| linalg op | RNGD op | 커널 검증 |\n|---|---|---|\n';
+                for (const op of cov.ops.filter(o => o.supported)) {
+                  const kr = kernelResults[op.op_name];
+                  const icon = kr === 'PASS' ? '✅' : kr === 'FAIL' ? '❌' : '⏳';
+                  body += `| \`${op.op}\` | \`${op.rngd_op}\` | ${icon} ${kr || '-'} |\n`;
+                }
+                const unsup = cov.ops.filter(o => !o.supported);
+                if (unsup.length > 0) {
+                  body += `\n미지원: ${unsup.map(o => `\`${o.op}\``).join(', ')}\n`;
+                }
+                body += '\n';
               }
             }
 

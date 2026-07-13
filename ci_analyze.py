@@ -127,6 +127,7 @@ def analyze(model_path: str, db_path: Path, out_dir: Path) -> dict:
                 "op": op,
                 "supported": True,
                 "rngd_op": info["target_op"],
+                "op_name": info["op_name"],
                 "family": info["family"],
                 "status": info["status"],
             })
