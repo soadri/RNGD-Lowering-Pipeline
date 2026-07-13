@@ -269,8 +269,12 @@ OP_CONSTRAINT_LINKS = [
 
 ROADMAP = [
     ("rngd.reduce (mean)",  "설계중",
-     "IntraSliceReduce → FpDiv 하드웨어 파이프라인은 확인됐으나(furiosa-opt-std/src/engine/vector/stage/markers.rs) "
-     "실제 커널 코드는 아직 작성 안 함. RMSNorm의 mean(x^2) 계산에 필요."),
+     "IntraSliceReduce → FpDiv 파이프라인 확인됐으나 실제 구현에서 4가지 하드웨어 제약 발견. "
+     "① OutPacket은 반드시 m![4]여야 함(m![1] 불가). "
+     "② IntraSliceReduce 이후 widen_concat/widen_pad 모두 FMapping 런타임 에러. "
+     "③ FpDiv 이후 f32 스칼라 operand 불가(SMapping 공개 API 없음). "
+     "④ IntraSliceReduce 이후 vector_final() 직접 호출 불가(Way4 타입 제약). "
+     "sum(x) 출력 자체가 불가한 상태. FuriosaAI에 IntraSliceReduce 출력 패턴 문의 필요."),
     ("브로드캐스트 곱셈",   "미착수",
      "RMSNorm의 weight*x, rsqrt_val*x처럼 shape이 다른 두 텐서의 곱. 지금 커널은 두 입력이 같은 길이라고 가정."),
     ("gemv (행렬-벡터)",    "미착수",
