@@ -96,6 +96,7 @@ jobs:
           - models/example_rmsnorm.py
           - models/llama_rmsnorm.py
           - models/llama_ffn.py
+          - models/simple_mlp.py
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
