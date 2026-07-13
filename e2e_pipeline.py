@@ -158,6 +158,37 @@ def rewrite_to_rngd(module: Module):
             if n.startswith(("arith.", "math."))
             and n not in ARITH_BINARY_OPS and n not in MATH_UNARY_OPS and n != "math.powf"
         ]
+        # --- 단항(unary) elementwise: sigmoid (negf+exp+addf+divf 복합 패턴) ---
+        SIGMOID_BODY = {"arith.negf", "math.exp", "arith.addf", "arith.divf", "linalg.yield"}
+        body_op_set = set(body_op_names)
+        if num_ins == 1 and body_op_set == SIGMOID_BODY:
+            lhs = op.operands[0]
+            result_type = op.results[0].type
+            shape = list(RankedTensorType(result_type).shape)
+            rngd_op_name = "sigmoid"
+
+            result["ann_before"] = [
+                ("arith.negf", "SiLU sigmoid 블록 감지 — negf+exp+addf+divf → rngd.elementwise(sigmoid)"),
+                ("linalg.generic", "이 블록 전체가 rngd.elementwise(sigmoid)로 대체됨"),
+            ]
+
+            with InsertionPoint(op):
+                new_op = Operation.create(
+                    "rngd.elementwise",
+                    results=[result_type],
+                    operands=[lhs],
+                    attributes={"op": StringAttr.get(rngd_op_name)},
+                    loc=op.location,
+                )
+            op.results[0].replace_all_uses_with(new_op.results[0])
+            op.erase()
+
+            result["ann_after"] = [
+                ("rngd.elementwise", 'sigmoid: FpUnaryOp::Sigmoid 단독 구현'),
+            ]
+            result["spec"] = RngdSpec(family="elementwise", rngd_op=rngd_op_name, shape=shape)
+            return True
+
         if other_ops:
             return False
 
@@ -475,6 +506,7 @@ UNARY_OP_CHAIN = {
     "rsqrt": ".vector_fp_unary(FpUnaryOp::Sqrt)\n        .vector_fp_div_with_mode(BinaryArgMode::Mode10, 1.0_f32)",
     "sqrt":  ".vector_fp_unary(FpUnaryOp::Sqrt)",
     "exp":   ".vector_fp_unary(FpUnaryOp::Exp)",
+    "sigmoid": ".vector_fp_unary(FpUnaryOp::Sigmoid)",
 }
 
 
@@ -972,6 +1004,8 @@ if __name__ == "__main__":
                 return torch.sqrt(x)
             if self.op_name == "exp":
                 return torch.exp(x)
+            if self.op_name == "sigmoid":
+                return torch.sigmoid(x)
             if self.op_name == "pow2":
                 return torch.pow(x, 2.0)
 
@@ -1041,7 +1075,7 @@ if __name__ == "__main__":
         print(f"생성 완료: {prefix}_*.rs, {prefix}_ir_before.mlir, {prefix}_ir_after.mlir, {prefix}_ir_diff.txt")
 
     # --- Family A (단항/unary) ---
-    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "pow2") if requested_ops is None or op in requested_ops]
+    unary_elementwise_ops = [op for op in ("rsqrt", "sqrt", "exp", "sigmoid", "pow2") if requested_ops is None or op in requested_ops]
     for op_name in unary_elementwise_ops:
         print(f"\n{'='*70}\n [Family A-unary] op_name = {op_name}\n{'='*70}")
 

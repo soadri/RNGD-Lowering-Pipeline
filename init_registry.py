@@ -169,6 +169,20 @@ OPS = [
         "detail": "생성된 커널 체인: narrow_split → vector_fp_unary(Exp) → widen_concat. sqrt와 동일한 구조.",
     },
     {
+        "op_name": "sigmoid",
+        "family": "elementwise",
+        "source_op": "linalg.generic(arith.negf+math.exp+arith.addf+arith.divf)",
+        "target_op": "rngd.elementwise",
+        "dtype": "f32",
+        "tolerance": "max(2%, 1e-3)",
+        "experimental": 1,
+        "status": "done",
+        "compares": "PyTorch가 계산한 sigmoid(x) = 1/(1+exp(-x))",
+        "meaning_pass": "PyTorch 출력과 RNGD 시뮬레이터 출력이 허용 오차 이내로 일치. FpUnaryOp::Sigmoid 단독으로 구현. negf+exp+addf+divf 복합 패턴을 단일 하드웨어 op으로 대체.",
+        "meaning_fail": "오차가 허용 범위를 초과. Sigmoid 커널 로직 확인 필요.",
+        "detail": "SiLU(x) = x*sigmoid(x)의 sigmoid 부분. 복합 linalg.generic 블록을 FpUnaryOp::Sigmoid 단독으로 교체.",
+    },
+    {
         "op_name": "pow2",
         "family": "elementwise",
         "source_op": "linalg.generic(math.powf, 지수=2.0)",
@@ -244,6 +258,8 @@ EVIDENCE = [
     ("sqrt",         "runtime", "vector_fp_unary(Sqrt) 단독으로 정합성 검증 통과",          "cargo furiosa-opt test: test_log_sqrt.txt — PASS"),
     ("exp",          "static",  "FpUnaryOp::Exp 존재 — op/mod.rs:324 확인",               "furiosa-opt-std-0.3.0/src/engine/vector/op/mod.rs:324"),
     ("exp",          "runtime", "vector_fp_unary(Exp) 단독으로 정합성 검증 통과",           "cargo furiosa-opt test: test_log_exp.txt — PASS"),
+    ("sigmoid",      "static",  "FpUnaryOp::Sigmoid 존재 — op/mod.rs:330 확인",             "furiosa-opt-std-0.3.0/src/engine/vector/op/mod.rs:330"),
+    ("sigmoid",      "runtime", "vector_fp_unary(Sigmoid) 단독으로 정합성 검증 통과",        "cargo furiosa-opt test: test_log_sigmoid.txt — PASS"),
     ("pow2",        "static",  "FpBinaryOp::MulF 존재 (Pow는 없음, MulF(x,x)로 조합)", "furiosa-opt-std-0.3.0/src/engine/vector/op/mod.rs:384"),
     ("pow2",        "runtime", "지수 값(2.0)을 IR의 arith.constant에서 FloatAttr로 직접 읽어 검증", "본 채팅 기록 — RMSNorm IR 조사"),
     ("batch_gemm",  "runtime", "linalg.batch_matmul ← torch.bmm 실측 확인",   "inspect 스크립트 실행 결과 (본 채팅 기록)"),
@@ -296,7 +312,7 @@ ROADMAP = [
     ("rngd.transpose",      "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나."),
     ("rngd.fill",           "미착수", "지금은 DCE로 지워버리는 대상 — 별도 op으로 다룰 필요가 있는지 재검토 필요."),
     ("rngd.conv2d",         "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나. 아직 손도 안 댐."),
-    ("rngd.elementwise (silu)", "설계중",
+    ("rngd.elementwise (silu)", "구현가능",
      "SiLU(x) = x * sigmoid(x). linalg.generic 안에 negf+exp+addf+divf+mulf 5개 op이 묶인 복합 패턴. "
      "FpUnaryOp::Sigmoid(하드웨어 직접 지원 확인)와 FpBinaryOp::MulF 조합으로 구현 가능성 높음. "
      "arith.negf는 SiLU 내부 op이므로 ci_analyze exclude 처리. llama_ffn 100% 커버리지의 블로커."),
