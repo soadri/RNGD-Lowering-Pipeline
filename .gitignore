@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.idea/
+.vscode/
+
+# DB (CI에서 init_registry.py로 재생성)
+rngd_registry.db
+
+# 자동 생성 산출물
+generated/
+
+# 로컬 전용
+run_history.json
+*.log
+test_log_*.txt
+backup_*/

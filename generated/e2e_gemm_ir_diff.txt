@@ -1,3 +1,0 @@
-op 개수: 11개 → 4개
-제거된 op: arith.constant, tensor.empty, linalg.fill, linalg.yield×2, linalg.matmul, arith.mulf, arith.addf
-추가된 op: rngd.gemm
