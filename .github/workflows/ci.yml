@@ -111,6 +111,7 @@ jobs:
         run: |
           cd ${{ env.KERNEL_DIR }}
           cargo furiosa-opt test --test pilot_e2e_${{ matrix.op }} 2>&1 | tee /tmp/test_${{ matrix.op }}.txt
+          cat /tmp/test_${{ matrix.op }}.txt
           if grep -q "test result: ok" /tmp/test_${{ matrix.op }}.txt; then
             echo "PASS: ${{ matrix.op }}"
           else
