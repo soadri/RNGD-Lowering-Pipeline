@@ -7856,12 +7856,25 @@
     "combo_id": "gemm-pow2-gemv-div",
     "ops": "[\"gemm\", \"pow2\", \"gemv\", \"div\"]",
     "model_file": "models/agent_gemm-pow2-gemv-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a02eee1c5c46866ca4e0bb82ba17c1b14e74cee1",
+    "ci_run_id": 29375410384,
+    "error_msg": "",
+    "created_at": "2026-07-15 08:12:11",
+    "finished_at": "2026-07-15 08:13:14"
+  },
+  {
+    "id": 606,
+    "combo_id": "gemm-pow2-gemv-rsqrt",
+    "ops": "[\"gemm\", \"pow2\", \"gemv\", \"rsqrt\"]",
+    "model_file": "models/agent_gemm-pow2-gemv-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 08:12:11",
+    "created_at": "2026-07-15 08:14:14",
     "finished_at": ""
   }
 ]
