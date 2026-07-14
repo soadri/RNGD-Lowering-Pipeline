@@ -1980,12 +1980,25 @@
     "combo_id": "gemv-cos-gemv",
     "ops": "[\"gemv\", \"cos\", \"gemv\"]",
     "model_file": "models/agent_gemv-cos-gemv.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "b3d1cfcd944207556e25aa3058e7e4bb98f5d529",
+    "ci_run_id": 29314612743,
+    "error_msg": "",
+    "created_at": "2026-07-14 16:27:18",
+    "finished_at": "2026-07-14 16:30:52"
+  },
+  {
+    "id": 154,
+    "combo_id": "gemv-cos-dot_product",
+    "ops": "[\"gemv\", \"cos\", \"dot_product\"]",
+    "model_file": "models/agent_gemv-cos-dot_product.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 16:27:18",
+    "created_at": "2026-07-14 16:31:52",
     "finished_at": ""
   }
 ]
