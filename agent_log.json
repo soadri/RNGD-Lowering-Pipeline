@@ -4788,12 +4788,25 @@
     "combo_id": "gemm-rsqrt-dot_product-sigmoid",
     "ops": "[\"gemm\", \"rsqrt\", \"dot_product\", \"sigmoid\"]",
     "model_file": "models/agent_gemm-rsqrt-dot_product-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "cb23ec5ae8e54d9d3e38c0693a6e44735486715d",
+    "ci_run_id": 29343614997,
+    "error_msg": "",
+    "created_at": "2026-07-15 00:03:12",
+    "finished_at": "2026-07-15 00:05:16"
+  },
+  {
+    "id": 370,
+    "combo_id": "gemm-rsqrt-dot_product-tanh",
+    "ops": "[\"gemm\", \"rsqrt\", \"dot_product\", \"tanh\"]",
+    "model_file": "models/agent_gemm-rsqrt-dot_product-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 00:03:12",
+    "created_at": "2026-07-15 00:06:16",
     "finished_at": ""
   }
 ]
