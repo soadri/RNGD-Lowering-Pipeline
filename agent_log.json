@@ -6712,12 +6712,25 @@
     "combo_id": "gemm-tanh-dot_product-pow2",
     "ops": "[\"gemm\", \"tanh\", \"dot_product\", \"pow2\"]",
     "model_file": "models/agent_gemm-tanh-dot_product-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d55c38b9b71aff007d827dff9b2019f8abf453f1",
+    "ci_run_id": 29364751582,
+    "error_msg": "",
+    "created_at": "2026-07-15 05:11:33",
+    "finished_at": "2026-07-15 05:12:36"
+  },
+  {
+    "id": 518,
+    "combo_id": "gemm-sin-gemm-add",
+    "ops": "[\"gemm\", \"sin\", \"gemm\", \"add\"]",
+    "model_file": "models/agent_gemm-sin-gemm-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 05:11:33",
+    "created_at": "2026-07-15 05:13:36",
     "finished_at": ""
   }
 ]
