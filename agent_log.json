@@ -4060,12 +4060,25 @@
     "combo_id": "gemm-div-gemm-pow2",
     "ops": "[\"gemm\", \"div\", \"gemm\", \"pow2\"]",
     "model_file": "models/agent_gemm-div-gemm-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "611a46bb231187f58afdfc53b9296ffe632061a9",
+    "ci_run_id": 29335177881,
+    "error_msg": "",
+    "created_at": "2026-07-14 22:07:11",
+    "finished_at": "2026-07-14 22:08:15"
+  },
+  {
+    "id": 314,
+    "combo_id": "gemm-div-gemv-add",
+    "ops": "[\"gemm\", \"div\", \"gemv\", \"add\"]",
+    "model_file": "models/agent_gemm-div-gemv-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 22:07:11",
+    "created_at": "2026-07-14 22:09:15",
     "finished_at": ""
   }
 ]
