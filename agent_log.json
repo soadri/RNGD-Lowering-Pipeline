@@ -2487,12 +2487,25 @@
     "combo_id": "dot_product-pow2-gemv",
     "ops": "[\"dot_product\", \"pow2\", \"gemv\"]",
     "model_file": "models/agent_dot_product-pow2-gemv.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "549e73c58aa6a7fcd891ed49c30cd7b30d0d4326",
+    "ci_run_id": 29320006184,
+    "error_msg": "",
+    "created_at": "2026-07-14 17:58:59",
+    "finished_at": "2026-07-14 18:00:02"
+  },
+  {
+    "id": 193,
+    "combo_id": "dot_product-pow2-dot_product",
+    "ops": "[\"dot_product\", \"pow2\", \"dot_product\"]",
+    "model_file": "models/agent_dot_product-pow2-dot_product.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 17:58:59",
+    "created_at": "2026-07-14 18:01:02",
     "finished_at": ""
   }
 ]
