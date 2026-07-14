@@ -5997,12 +5997,25 @@
     "combo_id": "gemm-sigmoid-gemv-rsqrt",
     "ops": "[\"gemm\", \"sigmoid\", \"gemv\", \"rsqrt\"]",
     "model_file": "models/agent_gemm-sigmoid-gemv-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "2fc36d6fbb8c0376a676893172015f6732d1134b",
+    "ci_run_id": 29357201729,
+    "error_msg": "",
+    "created_at": "2026-07-15 03:16:39",
+    "finished_at": "2026-07-15 03:18:13"
+  },
+  {
+    "id": 463,
+    "combo_id": "gemm-sigmoid-gemv-sqrt",
+    "ops": "[\"gemm\", \"sigmoid\", \"gemv\", \"sqrt\"]",
+    "model_file": "models/agent_gemm-sigmoid-gemv-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 03:16:39",
+    "created_at": "2026-07-15 03:19:13",
     "finished_at": ""
   }
 ]
