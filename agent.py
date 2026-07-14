@@ -38,9 +38,7 @@ signal.signal(signal.SIGINT,  _handle_signal)
 def log(msg: str):
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     line = f"[{ts}] {msg}"
-    print(line, flush=True)
-    with open(LOG_FILE, "a") as f:
-        f.write(line + "\n")
+    print(line, flush=True)  # systemd가 LOG_FILE에 자동 저장
 
 def should_stop() -> bool:
     """중단 조건 확인"""
