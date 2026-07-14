@@ -6933,12 +6933,25 @@
     "combo_id": "gemm-sin-gemv-rsqrt",
     "ops": "[\"gemm\", \"sin\", \"gemv\", \"rsqrt\"]",
     "model_file": "models/agent_gemm-sin-gemv-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7d89887c65db5c63807addf69756e516366c66bc",
+    "ci_run_id": 29367014558,
+    "error_msg": "",
+    "created_at": "2026-07-15 05:46:30",
+    "finished_at": "2026-07-15 05:47:33"
+  },
+  {
+    "id": 535,
+    "combo_id": "gemm-sin-gemv-sqrt",
+    "ops": "[\"gemm\", \"sin\", \"gemv\", \"sqrt\"]",
+    "model_file": "models/agent_gemm-sin-gemv-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 05:46:30",
+    "created_at": "2026-07-15 05:48:33",
     "finished_at": ""
   }
 ]
