@@ -101,6 +101,7 @@ jobs:
           - models/simple_mlp.py
           - models/llama_ffn_real.py
           - models/transformer_no_softmax.py
+          - models/llama_full.py
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
