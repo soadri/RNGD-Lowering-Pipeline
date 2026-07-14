@@ -303,12 +303,25 @@
     "combo_id": "batch_gemm-pow2",
     "ops": "[\"batch_gemm\", \"pow2\"]",
     "model_file": "models/agent_batch_gemm-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "5b24850e0d059f53570d7d888ccc5e55e4bcb2d9",
+    "ci_run_id": 29303430590,
+    "error_msg": "",
+    "created_at": "2026-07-14 12:24:09",
+    "finished_at": "2026-07-14 12:25:12"
+  },
+  {
+    "id": 25,
+    "combo_id": "gemv-add",
+    "ops": "[\"gemv\", \"add\"]",
+    "model_file": "models/agent_gemv-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 12:24:09",
+    "created_at": "2026-07-14 12:26:12",
     "finished_at": ""
   }
 ]
