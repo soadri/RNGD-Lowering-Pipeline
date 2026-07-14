@@ -28,7 +28,9 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     error   = sum(1 for e in experiments if e["status"] == "error")
     pending = sum(1 for e in experiments if e["status"] in ("running", "pending"))
 
-    TARGET  = 1920
+    from agent_strategy import gen_2layer, gen_3layer, gen_4layer
+    T2, T3, T4 = len(gen_2layer()), len(gen_3layer()), len(gen_4layer())
+    TARGET  = T2 + T3 + T4
     pct     = min(total / TARGET * 100, 100) if TARGET > 0 else 0
     now     = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -212,7 +214,7 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     <h2>📈 레이어별 현황</h2>
     <div class="layer-grid">
       <div class="layer-card">
-        <div class="title">2-layer (목표 48개)</div>
+        <div class="title">2-layer (목표 {T2}개)</div>
         <div class="nums green">{s2}</div>
         <div style="color:#999;font-size:0.85em">성공 / {t2}개 시도</div>
       </div>
