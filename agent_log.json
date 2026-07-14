@@ -5828,12 +5828,25 @@
     "combo_id": "gemm-sigmoid-gemm-div",
     "ops": "[\"gemm\", \"sigmoid\", \"gemm\", \"div\"]",
     "model_file": "models/agent_gemm-sigmoid-gemm-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "b087e30b764915217c2b7b3a63748934035475e5",
+    "ci_run_id": 29355397078,
+    "error_msg": "",
+    "created_at": "2026-07-15 02:49:59",
+    "finished_at": "2026-07-15 02:51:02"
+  },
+  {
+    "id": 450,
+    "combo_id": "gemm-sigmoid-gemm-rsqrt",
+    "ops": "[\"gemm\", \"sigmoid\", \"gemm\", \"rsqrt\"]",
+    "model_file": "models/agent_gemm-sigmoid-gemm-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 02:49:59",
+    "created_at": "2026-07-15 02:52:02",
     "finished_at": ""
   }
 ]
