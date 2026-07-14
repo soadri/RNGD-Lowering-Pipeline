@@ -1343,12 +1343,51 @@
     "combo_id": "batch_gemm-exp-gemm",
     "ops": "[\"batch_gemm\", \"exp\", \"gemm\"]",
     "model_file": "models/agent_batch_gemm-exp-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "b2e17f07f0c8c489d42c50d3c41b86c343af64e8",
+    "ci_run_id": 29309983114,
+    "error_msg": "",
+    "created_at": "2026-07-14 14:58:46",
+    "finished_at": "2026-07-14 14:59:49"
+  },
+  {
+    "id": 105,
+    "combo_id": "batch_gemm-exp-gemv",
+    "ops": "[\"batch_gemm\", \"exp\", \"gemv\"]",
+    "model_file": "models/agent_batch_gemm-exp-gemv.py",
+    "status": "error",
+    "coverage_pct": 0.0,
+    "commit_sha": "",
+    "ci_run_id": 0,
+    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_aeyvagm3.",
+    "created_at": "2026-07-14 15:00:49",
+    "finished_at": "2026-07-14 15:00:49"
+  },
+  {
+    "id": 106,
+    "combo_id": "batch_gemm-exp-dot_product",
+    "ops": "[\"batch_gemm\", \"exp\", \"dot_product\"]",
+    "model_file": "models/agent_batch_gemm-exp-dot_product.py",
+    "status": "error",
+    "coverage_pct": 0.0,
+    "commit_sha": "",
+    "ci_run_id": 0,
+    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_noadi",
+    "created_at": "2026-07-14 15:01:49",
+    "finished_at": "2026-07-14 15:01:49"
+  },
+  {
+    "id": 107,
+    "combo_id": "batch_gemm-sigmoid-gemm",
+    "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\"]",
+    "model_file": "models/agent_batch_gemm-sigmoid-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 14:58:46",
+    "created_at": "2026-07-14 15:02:49",
     "finished_at": ""
   }
 ]
