@@ -1005,12 +1005,25 @@
     "combo_id": "gemm-sin-gemv",
     "ops": "[\"gemm\", \"sin\", \"gemv\"]",
     "model_file": "models/agent_gemm-sin-gemv.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "390beef544522c0d05af94a64870e45cf9d69893",
+    "ci_run_id": 29307746161,
+    "error_msg": "",
+    "created_at": "2026-07-14 14:08:27",
+    "finished_at": "2026-07-14 14:09:31"
+  },
+  {
+    "id": 79,
+    "combo_id": "gemm-sin-dot_product",
+    "ops": "[\"gemm\", \"sin\", \"dot_product\"]",
+    "model_file": "models/agent_gemm-sin-dot_product.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 14:08:27",
+    "created_at": "2026-07-14 14:10:31",
     "finished_at": ""
   }
 ]
