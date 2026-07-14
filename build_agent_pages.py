@@ -130,7 +130,7 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
 </div>
 
 <div class="nav">
-  <a href="index.html">← 메인 대시보드</a>
+
   <a href="agent.html">🤖 Agent 실험 현황</a>
 </div>
 
