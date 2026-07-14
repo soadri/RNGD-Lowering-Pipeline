@@ -2435,12 +2435,25 @@
     "combo_id": "dot_product-cos-gemm",
     "ops": "[\"dot_product\", \"cos\", \"gemm\"]",
     "model_file": "models/agent_dot_product-cos-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "c0d162c54615c421df8e91ae4f8db1127e1feb7a",
+    "ci_run_id": 29319500177,
+    "error_msg": "",
+    "created_at": "2026-07-14 17:50:47",
+    "finished_at": "2026-07-14 17:51:50"
+  },
+  {
+    "id": 189,
+    "combo_id": "dot_product-cos-gemv",
+    "ops": "[\"dot_product\", \"cos\", \"gemv\"]",
+    "model_file": "models/agent_dot_product-cos-gemv.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 17:50:47",
+    "created_at": "2026-07-14 17:52:50",
     "finished_at": ""
   }
 ]
