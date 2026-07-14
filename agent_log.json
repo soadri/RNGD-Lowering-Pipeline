@@ -6738,12 +6738,25 @@
     "combo_id": "gemm-sin-gemm-sub",
     "ops": "[\"gemm\", \"sin\", \"gemm\", \"sub\"]",
     "model_file": "models/agent_gemm-sin-gemm-sub.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "9205b3562ec19df689850ade6a4edf7c04c4939f",
+    "ci_run_id": 29365021312,
+    "error_msg": "",
+    "created_at": "2026-07-15 05:15:40",
+    "finished_at": "2026-07-15 05:16:43"
+  },
+  {
+    "id": 520,
+    "combo_id": "gemm-sin-gemm-mul",
+    "ops": "[\"gemm\", \"sin\", \"gemm\", \"mul\"]",
+    "model_file": "models/agent_gemm-sin-gemm-mul.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 05:15:40",
+    "created_at": "2026-07-15 05:17:43",
     "finished_at": ""
   }
 ]
