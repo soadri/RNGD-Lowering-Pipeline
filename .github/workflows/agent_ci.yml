@@ -6,6 +6,10 @@ on:
     paths:
       - 'models/agent/agent_*.py'
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 env:
   VENV: /home/ubuntu/rngd-mlir-pipeline/.venv
   PIPELINE_DIR: /home/ubuntu/rngd-mlir-pipeline
