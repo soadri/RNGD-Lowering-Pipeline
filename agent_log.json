@@ -6244,12 +6244,25 @@
     "combo_id": "gemm-sigmoid-dot_product-pow2",
     "ops": "[\"gemm\", \"sigmoid\", \"dot_product\", \"pow2\"]",
     "model_file": "models/agent_gemm-sigmoid-dot_product-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "05fa84f603ed1103dc3144f8fa90e008e6d7399f",
+    "ci_run_id": 29359933115,
+    "error_msg": "",
+    "created_at": "2026-07-15 03:57:11",
+    "finished_at": "2026-07-15 03:58:14"
+  },
+  {
+    "id": 482,
+    "combo_id": "gemm-tanh-gemm-add",
+    "ops": "[\"gemm\", \"tanh\", \"gemm\", \"add\"]",
+    "model_file": "models/agent_gemm-tanh-gemm-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 03:57:11",
+    "created_at": "2026-07-15 03:59:14",
     "finished_at": ""
   }
 ]
