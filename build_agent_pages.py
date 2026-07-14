@@ -231,6 +231,15 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     </div>
   </div>
 
+  <!-- 2-layer 히트맵 -->
+  <div class="card">
+    <h2>🗺️ 2-layer 조합 히트맵</h2>
+    <p style="color:#666;font-size:0.9em;margin-bottom:12px">
+      Contraction × Elementwise 조합 결과 (✅ 성공 / ❌ 실패 / ⚠️ 오류 / — 미시도)
+    </p>
+    {heatmap_html}
+  </div>
+
   <!-- 최근 실험 결과 -->
   <div class="card">
     <h2>🔬 최근 실험 결과 (최신 50개)</h2>
