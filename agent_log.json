@@ -4840,12 +4840,25 @@
     "combo_id": "gemm-rsqrt-dot_product-pow2",
     "ops": "[\"gemm\", \"rsqrt\", \"dot_product\", \"pow2\"]",
     "model_file": "models/agent_gemm-rsqrt-dot_product-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "62293495c5bfc2ef97ffbfe8e76d8144d0bcd212",
+    "ci_run_id": 29344314517,
+    "error_msg": "",
+    "created_at": "2026-07-15 00:12:26",
+    "finished_at": "2026-07-15 00:13:59"
+  },
+  {
+    "id": 374,
+    "combo_id": "gemm-sqrt-gemm-add",
+    "ops": "[\"gemm\", \"sqrt\", \"gemm\", \"add\"]",
+    "model_file": "models/agent_gemm-sqrt-gemm-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 00:12:26",
+    "created_at": "2026-07-15 00:14:59",
     "finished_at": ""
   }
 ]
