@@ -3501,12 +3501,25 @@
     "combo_id": "gemm-mul-gemm-rsqrt",
     "ops": "[\"gemm\", \"mul\", \"gemm\", \"rsqrt\"]",
     "model_file": "models/agent_gemm-mul-gemm-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "609cecfb6c26c871791bc118d509fd6a46c50619",
+    "ci_run_id": 29329637964,
+    "error_msg": "",
+    "created_at": "2026-07-14 20:39:00",
+    "finished_at": "2026-07-14 20:40:03"
+  },
+  {
+    "id": 271,
+    "combo_id": "gemm-mul-gemm-sqrt",
+    "ops": "[\"gemm\", \"mul\", \"gemm\", \"sqrt\"]",
+    "model_file": "models/agent_gemm-mul-gemm-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 20:39:00",
+    "created_at": "2026-07-14 20:41:03",
     "finished_at": ""
   }
 ]
