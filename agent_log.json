@@ -2279,12 +2279,25 @@
     "combo_id": "dot_product-exp-gemm",
     "ops": "[\"dot_product\", \"exp\", \"gemm\"]",
     "model_file": "models/agent_dot_product-exp-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "16b99f55b7e3cd30408aa625fd03a0a8d8aa1ba2",
+    "ci_run_id": 29318009781,
+    "error_msg": "",
+    "created_at": "2026-07-14 17:26:10",
+    "finished_at": "2026-07-14 17:27:13"
+  },
+  {
+    "id": 177,
+    "combo_id": "dot_product-exp-gemv",
+    "ops": "[\"dot_product\", \"exp\", \"gemv\"]",
+    "model_file": "models/agent_dot_product-exp-gemv.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 17:26:10",
+    "created_at": "2026-07-14 17:28:13",
     "finished_at": ""
   }
 ]
