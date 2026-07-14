@@ -6608,12 +6608,25 @@
     "combo_id": "gemm-tanh-dot_product-div",
     "ops": "[\"gemm\", \"tanh\", \"dot_product\", \"div\"]",
     "model_file": "models/agent_gemm-tanh-dot_product-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "9a9bbdbad1360a09a95aafcf378624f72be4153b",
+    "ci_run_id": 29363665007,
+    "error_msg": "",
+    "created_at": "2026-07-15 04:55:08",
+    "finished_at": "2026-07-15 04:56:11"
+  },
+  {
+    "id": 510,
+    "combo_id": "gemm-tanh-dot_product-rsqrt",
+    "ops": "[\"gemm\", \"tanh\", \"dot_product\", \"rsqrt\"]",
+    "model_file": "models/agent_gemm-tanh-dot_product-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 04:55:08",
+    "created_at": "2026-07-15 04:57:11",
     "finished_at": ""
   }
 ]
