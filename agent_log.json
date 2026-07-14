@@ -2513,12 +2513,25 @@
     "combo_id": "gemm-add-gemm-add",
     "ops": "[\"gemm\", \"add\", \"gemm\", \"add\"]",
     "model_file": "models/agent_gemm-add-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "0c546a27310ab5475256249b3ea784aea4f58ea6",
+    "ci_run_id": 29320269586,
+    "error_msg": "",
+    "created_at": "2026-07-14 18:03:05",
+    "finished_at": "2026-07-14 18:04:08"
+  },
+  {
+    "id": 195,
+    "combo_id": "gemm-add-gemm-sub",
+    "ops": "[\"gemm\", \"add\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_gemm-add-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 18:03:05",
+    "created_at": "2026-07-14 18:05:08",
     "finished_at": ""
   }
 ]
