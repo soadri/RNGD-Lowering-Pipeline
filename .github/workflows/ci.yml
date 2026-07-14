@@ -10,6 +10,7 @@ on:
       - 'ci_analyze.py'
       - 'build_pages.py'
       - 'models/**'
+      - '!models/agent/**'
       - '.github/workflows/ci.yml'
   pull_request:
     paths:
@@ -18,6 +19,7 @@ on:
       - 'registry.py'
       - 'ci_analyze.py'
       - 'models/**'
+      - '!models/agent/**'
   workflow_dispatch:
 
 env:

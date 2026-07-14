@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - 'models/agent/agent_*.py'
-      - 'agent_log.json'
 
 env:
   VENV: /home/ubuntu/rngd-mlir-pipeline/.venv
@@ -32,17 +31,18 @@ jobs:
       - name: 이번 push에서 추가된 agent 모델 감지
         id: detect
         run: |
-          # 가장 최근 커밋에서 추가된 agent_*.py 파일 찾기
-          MODEL_PATH=$(git diff --name-only HEAD~1 HEAD -- 'models/agent/agent_*.py' | head -1)
+          MODEL_PATH=$(git diff-tree --no-commit-id -r --name-only HEAD \
+            | grep 'models/agent/agent_.*\.py' | head -1)
           if [ -z "$MODEL_PATH" ]; then
-            MODEL_PATH=$(git show --name-only HEAD -- 'models/agent/agent_*.py' | grep 'models/agent_' | head -1)
+            echo "❌ agent 모델 파일을 찾을 수 없음"
+            exit 1
           fi
           MODEL_NAME=$(basename "$MODEL_PATH" .py)
           COMBO_ID=${MODEL_NAME#agent_}
           echo "model_path=$MODEL_PATH" >> $GITHUB_OUTPUT
           echo "model_name=$MODEL_NAME" >> $GITHUB_OUTPUT
           echo "combo_id=$COMBO_ID"     >> $GITHUB_OUTPUT
-          echo "감지된 모델: $MODEL_PATH (combo: $COMBO_ID)"
+          echo "✅ 감지된 모델: $MODEL_PATH (combo: $COMBO_ID)"
 
       - name: 커버리지 분석
         run: |
