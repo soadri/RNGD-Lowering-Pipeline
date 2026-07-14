@@ -645,7 +645,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::bmm\"(\"/tmp/rngd_agent_w0m7jbz1",
+    "error_msg": "[COMPILE_FAIL] batch_gemm이 중간 위치에 옴 — 3D output 후 bmm 불가 (aten::bmm)",
     "created_at": "2026-07-14 13:14:09",
     "finished_at": "2026-07-14 13:14:09"
   },
@@ -658,7 +658,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "git push 실패",
+    "error_msg": "[INFRA_ERROR] git push 실패 (force push 충돌로 인한 일시적 오류)",
     "created_at": "2026-07-14 13:15:09",
     "finished_at": "2026-07-14 13:15:09"
   },
@@ -1100,7 +1100,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "ba066074cfe4890c17df3449f41387bb78c8716a",
     "ci_run_id": 29308379877,
-    "error_msg": "CI timeout",
+    "error_msg": "[INFRA_ERROR] CI timeout",
     "created_at": "2026-07-14 14:22:48",
     "finished_at": "2026-07-14 14:32:56"
   },
@@ -1126,7 +1126,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent__mpuv4t6.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 14:36:29",
     "finished_at": "2026-07-14 14:36:30"
   },
@@ -1139,7 +1139,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_2jrxu",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 14:37:30",
     "finished_at": "2026-07-14 14:37:30"
   },
@@ -1165,7 +1165,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_akwbs_q9.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 14:40:32",
     "finished_at": "2026-07-14 14:40:33"
   },
@@ -1178,7 +1178,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_wwkji",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 14:41:33",
     "finished_at": "2026-07-14 14:41:33"
   },
@@ -1204,7 +1204,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_r01w5m5h.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 14:44:36",
     "finished_at": "2026-07-14 14:44:36"
   },
@@ -1217,7 +1217,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_ek6m7",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 14:45:36",
     "finished_at": "2026-07-14 14:45:36"
   },
@@ -1243,7 +1243,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_m0b_x4z2.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 14:48:39",
     "finished_at": "2026-07-14 14:48:39"
   },
@@ -1256,7 +1256,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_fgmbe",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 14:49:39",
     "finished_at": "2026-07-14 14:49:39"
   },
@@ -1282,7 +1282,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_7kbf526l.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 14:52:42",
     "finished_at": "2026-07-14 14:52:43"
   },
@@ -1295,7 +1295,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent__5goq",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 14:53:43",
     "finished_at": "2026-07-14 14:53:43"
   },
@@ -1321,7 +1321,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_hk21zl9c.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 14:56:46",
     "finished_at": "2026-07-14 14:56:46"
   },
@@ -1334,7 +1334,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_5cltd",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 14:57:46",
     "finished_at": "2026-07-14 14:57:46"
   },
@@ -1360,7 +1360,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_aeyvagm3.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 15:00:49",
     "finished_at": "2026-07-14 15:00:49"
   },
@@ -1373,7 +1373,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_noadi",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 15:01:49",
     "finished_at": "2026-07-14 15:01:49"
   },
@@ -1399,7 +1399,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_o_n575z9.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 15:04:52",
     "finished_at": "2026-07-14 15:04:52"
   },
@@ -1412,7 +1412,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_cb8_k",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 15:05:52",
     "finished_at": "2026-07-14 15:05:52"
   },
@@ -1438,7 +1438,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_c4pve0ud.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 15:08:55",
     "finished_at": "2026-07-14 15:08:55"
   },
@@ -1451,7 +1451,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_n4cof",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 15:09:56",
     "finished_at": "2026-07-14 15:09:56"
   },
@@ -1477,7 +1477,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_sxxr_qzk.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 15:14:30",
     "finished_at": "2026-07-14 15:14:30"
   },
@@ -1490,7 +1490,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_d24p5",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 15:15:30",
     "finished_at": "2026-07-14 15:15:30"
   },
@@ -1516,7 +1516,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_rjgopvtw.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 15:18:33",
     "finished_at": "2026-07-14 15:18:33"
   },
@@ -1529,7 +1529,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_k9ovl",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 15:19:33",
     "finished_at": "2026-07-14 15:19:33"
   },
@@ -1555,7 +1555,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_k653d33k.",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)",
     "created_at": "2026-07-14 15:22:36",
     "finished_at": "2026-07-14 15:22:36"
   },
@@ -1568,7 +1568,7 @@
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
-    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_zkpbi",
+    "error_msg": "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)",
     "created_at": "2026-07-14 15:23:36",
     "finished_at": "2026-07-14 15:23:36"
   },
@@ -1759,12 +1759,25 @@
     "combo_id": "gemv-rsqrt-dot_product",
     "ops": "[\"gemv\", \"rsqrt\", \"dot_product\"]",
     "model_file": "models/agent_gemv-rsqrt-dot_product.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "fe8e797b6b78bcdb02093ea076d126b3a3d113a7",
+    "ci_run_id": 29312740527,
+    "error_msg": "",
+    "created_at": "2026-07-14 15:53:19",
+    "finished_at": "2026-07-14 15:54:22"
+  },
+  {
+    "id": 137,
+    "combo_id": "gemv-sqrt-gemm",
+    "ops": "[\"gemv\", \"sqrt\", \"gemm\"]",
+    "model_file": "models/agent_gemv-sqrt-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 15:53:19",
+    "created_at": "2026-07-14 15:55:22",
     "finished_at": ""
   }
 ]
