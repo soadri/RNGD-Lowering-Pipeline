@@ -1603,12 +1603,25 @@
     "combo_id": "gemv-add-dot_product",
     "ops": "[\"gemv\", \"add\", \"dot_product\"]",
     "model_file": "models/agent_gemv-add-dot_product.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7626d44fd587182f415be14e4b66996a54b986fd",
+    "ci_run_id": 29311473780,
+    "error_msg": "",
+    "created_at": "2026-07-14 15:28:43",
+    "finished_at": "2026-07-14 15:29:45"
+  },
+  {
+    "id": 125,
+    "combo_id": "gemv-sub-gemm",
+    "ops": "[\"gemv\", \"sub\", \"gemm\"]",
+    "model_file": "models/agent_gemv-sub-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 15:28:43",
+    "created_at": "2026-07-14 15:30:45",
     "finished_at": ""
   }
 ]
