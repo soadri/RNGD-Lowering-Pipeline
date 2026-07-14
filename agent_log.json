@@ -8012,12 +8012,25 @@
     "combo_id": "gemm-pow2-dot_product-div",
     "ops": "[\"gemm\", \"pow2\", \"dot_product\", \"div\"]",
     "model_file": "models/agent_gemm-pow2-dot_product-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "33e18810435fcdd923be7fbb175d00cca81cb4e9",
+    "ci_run_id": 29376649719,
+    "error_msg": "",
+    "created_at": "2026-07-15 08:36:47",
+    "finished_at": "2026-07-15 08:37:50"
+  },
+  {
+    "id": 618,
+    "combo_id": "gemm-pow2-dot_product-rsqrt",
+    "ops": "[\"gemm\", \"pow2\", \"dot_product\", \"rsqrt\"]",
+    "model_file": "models/agent_gemm-pow2-dot_product-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 08:36:47",
+    "created_at": "2026-07-15 08:38:50",
     "finished_at": ""
   }
 ]
