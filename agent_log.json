@@ -4151,12 +4151,25 @@
     "combo_id": "gemm-div-gemv-exp",
     "ops": "[\"gemm\", \"div\", \"gemv\", \"exp\"]",
     "model_file": "models/agent_gemm-div-gemv-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "0e29f38a8cf12eccbe89df79614ce4a9ae9c1813",
+    "ci_run_id": 29336155039,
+    "error_msg": "",
+    "created_at": "2026-07-14 22:21:34",
+    "finished_at": "2026-07-14 22:22:37"
+  },
+  {
+    "id": 321,
+    "combo_id": "gemm-div-gemv-sigmoid",
+    "ops": "[\"gemm\", \"div\", \"gemv\", \"sigmoid\"]",
+    "model_file": "models/agent_gemm-div-gemv-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 22:21:34",
+    "created_at": "2026-07-14 22:23:37",
     "finished_at": ""
   }
 ]
