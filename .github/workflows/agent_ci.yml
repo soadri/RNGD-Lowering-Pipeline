@@ -22,6 +22,8 @@ jobs:
       combo_id:   ${{ steps.detect.outputs.combo_id }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: DB 초기화
         run: |
@@ -31,14 +33,19 @@ jobs:
       - name: 이번 push에서 추가된 agent 모델 감지
         id: detect
         run: |
-          # 추가(A)된 파일만 찾기
+          echo "=== git diff-tree 결과 ==="
+          git diff-tree --no-commit-id -r --name-status HEAD
+          echo "=========================="
+
           MODEL_PATH=$(git diff-tree --no-commit-id -r --name-status HEAD \
             | awk '$1=="A" {print $2}' \
             | grep 'models/agent/agent_.*\.py' | head -1)
+
           if [ -z "$MODEL_PATH" ]; then
-            echo "❌ 추가된 agent 모델 파일을 찾을 수 없음 (삭제/수정 커밋은 무시)"
+            echo "❌ 추가된 agent 모델 파일을 찾을 수 없음"
             exit 1
           fi
+
           MODEL_NAME=$(basename "$MODEL_PATH" .py)
           COMBO_ID=${MODEL_NAME#agent_}
           echo "model_path=$MODEL_PATH" >> $GITHUB_OUTPUT
