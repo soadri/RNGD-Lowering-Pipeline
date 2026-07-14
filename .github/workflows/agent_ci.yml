@@ -1,0 +1,92 @@
+name: RNGD Agent CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'models/agent_*.py'
+      - 'agent_log.json'
+
+env:
+  VENV: /home/ubuntu/rngd-mlir-pipeline/.venv
+  PIPELINE_DIR: /home/ubuntu/rngd-mlir-pipeline
+  DB_PATH: ${{ github.workspace }}/rngd_registry.db
+
+jobs:
+  # ── Job 1: agent 모델 커버리지 분석 ─────────────────────────────
+  agent-coverage:
+    name: Agent 모델 커버리지
+    runs-on: [self-hosted, k-cloud]
+    outputs:
+      model_name: ${{ steps.detect.outputs.model_name }}
+      model_path: ${{ steps.detect.outputs.model_path }}
+      combo_id:   ${{ steps.detect.outputs.combo_id }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: DB 초기화
+        run: |
+          ${{ env.VENV }}/bin/python ${{ env.PIPELINE_DIR }}/init_registry.py \
+            --reset --db ${{ env.DB_PATH }}
+
+      - name: 이번 push에서 추가된 agent 모델 감지
+        id: detect
+        run: |
+          # 가장 최근 커밋에서 추가된 agent_*.py 파일 찾기
+          MODEL_PATH=$(git diff --name-only HEAD~1 HEAD -- 'models/agent_*.py' | head -1)
+          if [ -z "$MODEL_PATH" ]; then
+            MODEL_PATH=$(git show --name-only HEAD -- 'models/agent_*.py' | grep 'models/agent_' | head -1)
+          fi
+          MODEL_NAME=$(basename "$MODEL_PATH" .py)
+          COMBO_ID=${MODEL_NAME#agent_}
+          echo "model_path=$MODEL_PATH" >> $GITHUB_OUTPUT
+          echo "model_name=$MODEL_NAME" >> $GITHUB_OUTPUT
+          echo "combo_id=$COMBO_ID"     >> $GITHUB_OUTPUT
+          echo "감지된 모델: $MODEL_PATH (combo: $COMBO_ID)"
+
+      - name: 커버리지 분석
+        run: |
+          MODEL="${{ steps.detect.outputs.model_path }}"
+          MODEL_NAME="${{ steps.detect.outputs.model_name }}"
+          ${{ env.VENV }}/bin/python ci_analyze.py \
+            --model "$MODEL" \
+            --out-dir "ci_out/$MODEL_NAME" \
+            --db ${{ env.DB_PATH }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: agent-coverage-${{ steps.detect.outputs.model_name }}
+          path: ci_out/
+
+  # ── Job 2: agent 결과 Pages 업데이트 ────────────────────────────
+  agent-report:
+    name: Agent 결과 Pages 업데이트
+    runs-on: [self-hosted, k-cloud]
+    needs: agent-coverage
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: all_artifacts
+
+      - name: commit SHA 저장
+        run: echo "${{ github.sha }}" > COMMIT_SHA
+
+      - name: Agent HTML 리포트 빌드
+        run: |
+          ${{ env.VENV }}/bin/python build_agent_pages.py \
+            all_artifacts \
+            "${{ needs.agent-coverage.outputs.combo_id }}" \
+            "${{ github.sha }}"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: pages_out
+
+      - uses: actions/deploy-pages@v4
