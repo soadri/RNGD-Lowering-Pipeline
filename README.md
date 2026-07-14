@@ -187,3 +187,53 @@ rngd-tcp-kernel-dev/       (별도 레포)
 - **Python:** 3.11 + `.venv` (torch-mlir 기반)
 - **Rust:** furiosa-opt-std v0.3.0 (FuriosaAI 기능 시뮬레이터)
 - **CI:** GitHub Actions (self-hosted runner)
+---
+
+## 🤖 자동 연산 조합 실험 (RNGD Agent)
+
+**Agent 결과 페이지:** https://soadri.github.io/RNGD-Lowering-Pipeline/agent.html
+
+현재 RNGD Agent가 지원 연산 17종을 자동으로 조합하여 2~4 레이어 모델을 생성하고
+CI 파이프라인을 통해 커버리지를 검증하고 있습니다.
+
+### 실험 규모
+
+| 레이어 | 패턴 | 조합 수 |
+|---|---|---|
+| 2-layer | Contraction → Elementwise | 48가지 |
+| 3-layer | Contraction → Elementwise → Contraction | 192가지 |
+| 4-layer | Contraction → Elementwise → Contraction → Elementwise | 2,304가지 |
+| **전체** | | **2,544가지** |
+
+예상 소요 시간: CI 3분 + 쿨다운 60초 = 약 148시간 (약 6일)
+
+### ⚠️ 주의사항
+
+- **실험 진행 중** `models/agent/` 디렉토리에 자동 생성된 모델 파일이 지속적으로 push됩니다.
+- **`agent_ci.yml` 워크플로우**가 자동으로 트리거됩니다 (기존 `ci.yml`과 별개).
+- 실험 결과는 `experiment_log.db`에 누적 저장됩니다.
+
+### Agent 실행 / 중단
+
+```bash
+# 시작
+sudo systemctl start rngd-agent
+
+# 상태 확인
+sudo systemctl status rngd-agent
+
+# 로그 실시간 확인
+tail -f ~/rngd-mlir-pipeline/agent_run.log
+
+# 즉시 중단 (방법 1 — systemd)
+sudo systemctl stop rngd-agent
+
+# 즉시 중단 (방법 2 — STOP 파일)
+touch ~/rngd-mlir-pipeline/AGENT_STOP
+```
+
+### 실험 결과 확인
+
+- **GitHub Pages:** https://soadri.github.io/RNGD-Lowering-Pipeline/agent.html
+- **로컬 DB:** `experiment_log.db` (SQLite)
+- **로그:** `agent_run.log`
