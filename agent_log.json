@@ -1733,12 +1733,25 @@
     "combo_id": "gemv-rsqrt-gemm",
     "ops": "[\"gemv\", \"rsqrt\", \"gemm\"]",
     "model_file": "models/agent_gemv-rsqrt-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7f79f5770e9b187ffb5b4f90daa6920d2b040ffb",
+    "ci_run_id": 29312522404,
+    "error_msg": "",
+    "created_at": "2026-07-14 15:49:13",
+    "finished_at": "2026-07-14 15:50:16"
+  },
+  {
+    "id": 135,
+    "combo_id": "gemv-rsqrt-gemv",
+    "ops": "[\"gemv\", \"rsqrt\", \"gemv\"]",
+    "model_file": "models/agent_gemv-rsqrt-gemv.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 15:49:13",
+    "created_at": "2026-07-14 15:51:16",
     "finished_at": ""
   }
 ]
