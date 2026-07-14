@@ -472,12 +472,25 @@
     "combo_id": "dot_product-add",
     "ops": "[\"dot_product\", \"add\"]",
     "model_file": "models/agent_dot_product-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "93ce7e2bbcfc5cb1ef0a82d6fd35785dc6af99f6",
+    "ci_run_id": 29304490204,
+    "error_msg": "",
+    "created_at": "2026-07-14 12:50:46",
+    "finished_at": "2026-07-14 12:51:49"
+  },
+  {
+    "id": 38,
+    "combo_id": "dot_product-sub",
+    "ops": "[\"dot_product\", \"sub\"]",
+    "model_file": "models/agent_dot_product-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 12:50:46",
+    "created_at": "2026-07-14 12:52:49",
     "finished_at": ""
   }
 ]
