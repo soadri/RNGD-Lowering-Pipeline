@@ -3514,12 +3514,25 @@
     "combo_id": "gemm-mul-gemm-sqrt",
     "ops": "[\"gemm\", \"mul\", \"gemm\", \"sqrt\"]",
     "model_file": "models/agent_gemm-mul-gemm-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "3a77dd2c3d007cb936111d21653acd9df49cc7a9",
+    "ci_run_id": 29329757068,
+    "error_msg": "",
+    "created_at": "2026-07-14 20:41:03",
+    "finished_at": "2026-07-14 20:42:06"
+  },
+  {
+    "id": 272,
+    "combo_id": "gemm-mul-gemm-exp",
+    "ops": "[\"gemm\", \"mul\", \"gemm\", \"exp\"]",
+    "model_file": "models/agent_gemm-mul-gemm-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 20:41:03",
+    "created_at": "2026-07-14 20:43:06",
     "finished_at": ""
   }
 ]
