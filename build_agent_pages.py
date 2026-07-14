@@ -35,6 +35,64 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     now     = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # 최근 50개
+    from agent_strategy import CONTRACTION, ELEMENTWISE
+
+    # 2-layer 히트맵 데이터
+    heatmap2 = {}
+    for e in experiments:
+        ops = json.loads(e["ops"]) if isinstance(e["ops"], str) else e["ops"]
+        if len(ops) == 2 and ops[0] in CONTRACTION and ops[1] in ELEMENTWISE:
+            heatmap2[(ops[0], ops[1])] = e["status"]
+
+    def cell(status):
+        icon = {"success":"✅","fail":"❌","error":"⚠️"}.get(status,"—")
+        css  = {"success":"cell-s","fail":"cell-f","error":"cell-e"}.get(status,"cell-p")
+        return f'<td class="{css}">{icon}</td>'
+
+    # 2-layer 히트맵 HTML
+    heatmap_html  = '<div class="hm-wrap"><table class="hm"><thead><tr>'
+    heatmap_html += '<th>↓Contraction / Elementwise→</th>'
+    for e_op in ELEMENTWISE:
+        heatmap_html += f'<th>{e_op}</th>'
+    heatmap_html += '</tr></thead><tbody>'
+    for c_op in CONTRACTION:
+        heatmap_html += f'<tr><td class="hm-hd">{c_op}</td>'
+        for e_op in ELEMENTWISE:
+            heatmap_html += cell(heatmap2.get((c_op, e_op), "pending"))
+        heatmap_html += '</tr>'
+    heatmap_html += '</tbody></table></div>'
+
+    # 3-layer 히트맵 데이터
+    heatmap3 = {}
+    for e in experiments:
+        ops = json.loads(e["ops"]) if isinstance(e["ops"], str) else e["ops"]
+        if len(ops) == 3 and ops[0] in CONTRACTION and ops[1] in ELEMENTWISE and ops[2] in CONTRACTION:
+            heatmap3[(ops[0], ops[1], ops[2])] = e["status"]
+
+    # 3-layer 히트맵 HTML (탭)
+    tab_btns = ""
+    tab_divs = ""
+    for i, c1 in enumerate(CONTRACTION):
+        active_btn = "background:#1a1a2e;color:white" if i == 0 else "background:#f8f9fa"
+        tab_btns += f'<button onclick="showTab3(\'{c1}\')" id="tb3-{c1}" style="margin:2px;padding:5px 12px;border:1px solid #ccc;border-radius:4px;cursor:pointer;{active_btn}">{c1}</button>'
+        disp = "block" if i == 0 else "none"
+        tbl  = f'<p style="color:#666;font-size:0.85em;margin-bottom:8px"><strong>{c1}</strong> → [Elementwise] → [Contraction]</p>'
+        tbl += '<div class="hm-wrap"><table class="hm"><thead><tr><th>Elementwise \ 마지막</th>'
+        for c2 in CONTRACTION:
+            tbl += f'<th>{c2}</th>'
+        tbl += '</tr></thead><tbody>'
+        for e_op in ELEMENTWISE:
+            tbl += f'<tr><td class="hm-hd">{e_op}</td>'
+            for c2 in CONTRACTION:
+                tbl += cell(heatmap3.get((c1, e_op, c2), "pending"))
+            tbl += '</tr>'
+        tbl += '</tbody></table></div>'
+        tab_divs += f'<div id="tab3-{c1}" style="display:{disp}">{tbl}</div>'
+
+    js = "function showTab3(c1){" +          "".join([f"document.getElementById('tab3-{c}').style.display='none';" for c in CONTRACTION]) +          "".join([f"document.getElementById('tb3-{c}').style.cssText='margin:2px;padding:5px 12px;border:1px solid #ccc;border-radius:4px;cursor:pointer;background:#f8f9fa';" for c in CONTRACTION]) +          "document.getElementById('tab3-'+c1).style.display='block';" +          "document.getElementById('tb3-'+c1).style.cssText='margin:2px;padding:5px 12px;border:1px solid #ccc;border-radius:4px;cursor:pointer;background:#1a1a2e;color:white';}"
+
+    heatmap3_html = f'{tab_btns}<div style="margin-top:10px">{tab_divs}</div><script>{js}</script>'
+
     recent = sorted(experiments, key=lambda e: e.get("id", 0), reverse=True)[:50]
     rows   = ""
     for e in recent:
@@ -238,6 +296,15 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
       Contraction × Elementwise 조합 결과 (✅ 성공 / ❌ 실패 / ⚠️ 오류 / — 미시도)
     </p>
     {heatmap_html}
+  </div>
+
+  <!-- 3-layer 히트맵 -->
+  <div class="card">
+    <h2>🗺️ 3-layer 조합 히트맵</h2>
+    <p style="color:#666;font-size:0.9em;margin-bottom:12px">
+      첫 번째 Contraction 탭 선택 → Elementwise × 마지막 Contraction 결과
+    </p>
+    {heatmap3_html}
   </div>
 
   <!-- 최근 실험 결과 -->
