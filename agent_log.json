@@ -3228,12 +3228,25 @@
     "combo_id": "gemm-sub-gemv-sigmoid",
     "ops": "[\"gemm\", \"sub\", \"gemv\", \"sigmoid\"]",
     "model_file": "models/agent_gemm-sub-gemv-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d86a034ac28217aed2f757405ed7733c6805d08a",
+    "ci_run_id": 29327103260,
+    "error_msg": "",
+    "created_at": "2026-07-14 19:55:55",
+    "finished_at": "2026-07-14 19:56:58"
+  },
+  {
+    "id": 250,
+    "combo_id": "gemm-sub-gemv-tanh",
+    "ops": "[\"gemm\", \"sub\", \"gemv\", \"tanh\"]",
+    "model_file": "models/agent_gemm-sub-gemv-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 19:55:55",
+    "created_at": "2026-07-14 19:57:58",
     "finished_at": ""
   }
 ]
