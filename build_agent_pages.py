@@ -28,7 +28,7 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     error   = sum(1 for e in experiments if e["status"] == "error")
     pending = sum(1 for e in experiments if e["status"] in ("running", "pending"))
 
-    TARGET  = 2544
+    TARGET  = 1920
     pct     = min(total / TARGET * 100, 100) if TARGET > 0 else 0
     now     = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
