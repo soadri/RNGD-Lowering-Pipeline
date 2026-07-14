@@ -7024,12 +7024,25 @@
     "combo_id": "gemm-sin-gemv-pow2",
     "ops": "[\"gemm\", \"sin\", \"gemv\", \"pow2\"]",
     "model_file": "models/agent_gemm-sin-gemv-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "5ecb87d827647ccec1ffd2a98e9482396bd340de",
+    "ci_run_id": 29367939125,
+    "error_msg": "",
+    "created_at": "2026-07-15 06:00:51",
+    "finished_at": "2026-07-15 06:01:54"
+  },
+  {
+    "id": 542,
+    "combo_id": "gemm-sin-dot_product-add",
+    "ops": "[\"gemm\", \"sin\", \"dot_product\", \"add\"]",
+    "model_file": "models/agent_gemm-sin-dot_product-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 06:00:51",
+    "created_at": "2026-07-15 06:02:54",
     "finished_at": ""
   }
 ]
