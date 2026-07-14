@@ -219,12 +219,12 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
         <div style="color:#999;font-size:0.85em">성공 / {t2}개 시도</div>
       </div>
       <div class="layer-card">
-        <div class="title">3-layer (목표 192개)</div>
+        <div class="title">3-layer (목표 {T3}개)</div>
         <div class="nums green">{s3}</div>
         <div style="color:#999;font-size:0.85em">성공 / {t3}개 시도</div>
       </div>
       <div class="layer-card">
-        <div class="title">4-layer (목표 2,304개)</div>
+        <div class="title">4-layer (목표 {T4}개)</div>
         <div class="nums green">{s4}</div>
         <div style="color:#999;font-size:0.85em">성공 / {t4}개 시도</div>
       </div>
