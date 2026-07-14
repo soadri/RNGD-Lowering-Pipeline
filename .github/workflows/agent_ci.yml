@@ -31,10 +31,12 @@ jobs:
       - name: 이번 push에서 추가된 agent 모델 감지
         id: detect
         run: |
-          MODEL_PATH=$(git diff-tree --no-commit-id -r --name-only HEAD \
+          # 추가(A)된 파일만 찾기
+          MODEL_PATH=$(git diff-tree --no-commit-id -r --name-status HEAD \
+            | awk '$1=="A" {print $2}' \
             | grep 'models/agent/agent_.*\.py' | head -1)
           if [ -z "$MODEL_PATH" ]; then
-            echo "❌ agent 모델 파일을 찾을 수 없음"
+            echo "❌ 추가된 agent 모델 파일을 찾을 수 없음 (삭제/수정 커밋은 무시)"
             exit 1
           fi
           MODEL_NAME=$(basename "$MODEL_PATH" .py)
