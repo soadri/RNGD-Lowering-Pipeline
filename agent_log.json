@@ -1629,12 +1629,25 @@
     "combo_id": "gemv-sub-gemv",
     "ops": "[\"gemv\", \"sub\", \"gemv\"]",
     "model_file": "models/agent_gemv-sub-gemv.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "8fd9a2f2c939019acef1d4e8050e0f90b3971aeb",
+    "ci_run_id": 29311687265,
+    "error_msg": "",
+    "created_at": "2026-07-14 15:32:49",
+    "finished_at": "2026-07-14 15:33:51"
+  },
+  {
+    "id": 127,
+    "combo_id": "gemv-sub-dot_product",
+    "ops": "[\"gemv\", \"sub\", \"dot_product\"]",
+    "model_file": "models/agent_gemv-sub-dot_product.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 15:32:49",
+    "created_at": "2026-07-14 15:34:51",
     "finished_at": ""
   }
 ]
