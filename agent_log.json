@@ -1070,12 +1070,25 @@
     "combo_id": "gemm-pow2-gemm",
     "ops": "[\"gemm\", \"pow2\", \"gemm\"]",
     "model_file": "models/agent_gemm-pow2-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d15eb46c7f95fc8b5f539028b109f3ab3bed36e5",
+    "ci_run_id": 29308196780,
+    "error_msg": "",
+    "created_at": "2026-07-14 14:18:42",
+    "finished_at": "2026-07-14 14:19:45"
+  },
+  {
+    "id": 84,
+    "combo_id": "gemm-pow2-gemv",
+    "ops": "[\"gemm\", \"pow2\", \"gemv\"]",
+    "model_file": "models/agent_gemm-pow2-gemv.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 14:18:42",
+    "created_at": "2026-07-14 14:20:45",
     "finished_at": ""
   }
 ]
