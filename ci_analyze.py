@@ -68,6 +68,52 @@ def extract_ops_from_ir(ir_text: str) -> list[str]:
     return sorted(set(found) - exclude)
 
 
+def extract_reduce_ops(ir_text: str) -> list[str]:
+    """
+    linalg.generic + iterator_types="reduction" 패턴 감지
+    → reduce_sum, reduce_max, reduce_mean 등으로 분류
+    """
+    import re
+    reduce_ops = []
+
+    # linalg.generic 블록 전체 추출
+    blocks = re.findall(
+        r'linalg\.generic\s*\{.*?\}\s*ins\([^)]*\)\s*outs\([^)]*\)\s*\{[^{}]*\}',
+        ir_text, re.DOTALL
+    )
+
+    for block in blocks:
+        # iterator_types에 "reduction" 포함 여부 확인
+        iter_match = re.search(r'iterator_types\s*=\s*\[([^\]]*)\]', block)
+        if not iter_match or "reduction" not in iter_match.group(1):
+            continue
+
+        # body 내부 op 추출
+        body_match = re.search(r'\{([^{}]*)\}\s*$', block, re.DOTALL)
+        if not body_match:
+            continue
+
+        inner_ops = set(re.findall(r'(\w+\.\w+)', body_match.group(1)))
+        inner_ops.discard("linalg.yield")
+
+        # 패턴 분류
+        if "arith.maximumf" in inner_ops or "arith.maxf" in inner_ops:
+            reduce_ops.append("linalg.generic(reduce_max)")
+        elif "arith.minimumf" in inner_ops or "arith.minf" in inner_ops:
+            reduce_ops.append("linalg.generic(reduce_min)")
+        elif "arith.addf" in inner_ops:
+            reduce_ops.append("linalg.generic(reduce_sum)")
+        elif "arith.mulf" in inner_ops:
+            reduce_ops.append("linalg.generic(reduce_prod)")
+        elif not inner_ops:
+            # body가 비어있는 reduce (단순 복사 reduce)
+            reduce_ops.append("linalg.generic(reduce_sum)")
+        else:
+            reduce_ops.append(f"linalg.generic(reduce_unknown:{'+'.join(sorted(inner_ops))})")
+
+    return reduce_ops
+
+
 def load_supported_ops(db_path: Path) -> dict[str, dict]:
     """
     DB에서 지원 연산 정보를 읽어 반환.
@@ -121,6 +167,9 @@ def analyze(model_path: str, db_path: Path, out_dir: Path) -> dict:
     # op 분석
     print("[2/3] op 분석 중")
     found_ops = extract_ops_from_ir(ir_text)
+    # reduce 패턴 추가 감지
+    reduce_ops = extract_reduce_ops(ir_text)
+    found_ops = found_ops + reduce_ops
     supported_map = load_supported_ops(db_path)
 
     # 각 op에 대해 지원 여부 판단
