@@ -4476,12 +4476,25 @@
     "combo_id": "gemm-rsqrt-gemm-sigmoid",
     "ops": "[\"gemm\", \"rsqrt\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_gemm-rsqrt-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a8fe0879f9f09b42de8416fdd1b5ca865cfadf1a",
+    "ci_run_id": 29339924897,
+    "error_msg": "",
+    "created_at": "2026-07-14 23:13:55",
+    "finished_at": "2026-07-14 23:14:58"
+  },
+  {
+    "id": 346,
+    "combo_id": "gemm-rsqrt-gemm-tanh",
+    "ops": "[\"gemm\", \"rsqrt\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_gemm-rsqrt-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 23:13:55",
+    "created_at": "2026-07-14 23:15:58",
     "finished_at": ""
   }
 ]
