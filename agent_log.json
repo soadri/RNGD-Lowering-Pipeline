@@ -4749,12 +4749,25 @@
     "combo_id": "gemm-rsqrt-dot_product-rsqrt",
     "ops": "[\"gemm\", \"rsqrt\", \"dot_product\", \"rsqrt\"]",
     "model_file": "models/agent_gemm-rsqrt-dot_product-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "ffe4ac894cb64596762f0c4aac1df3b6bed97fc6",
+    "ci_run_id": 29343144501,
+    "error_msg": "",
+    "created_at": "2026-07-14 23:57:03",
+    "finished_at": "2026-07-14 23:58:06"
+  },
+  {
+    "id": 367,
+    "combo_id": "gemm-rsqrt-dot_product-sqrt",
+    "ops": "[\"gemm\", \"rsqrt\", \"dot_product\", \"sqrt\"]",
+    "model_file": "models/agent_gemm-rsqrt-dot_product-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 23:57:03",
+    "created_at": "2026-07-14 23:59:06",
     "finished_at": ""
   }
 ]
