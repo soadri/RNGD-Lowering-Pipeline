@@ -7206,12 +7206,25 @@
     "combo_id": "gemm-cos-gemm-sub",
     "ops": "[\"gemm\", \"cos\", \"gemm\", \"sub\"]",
     "model_file": "models/agent_gemm-cos-gemm-sub.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "2baa866f9a03f3f03ba4998cf30660fd47b74a46",
+    "ci_run_id": 29369726821,
+    "error_msg": "",
+    "created_at": "2026-07-15 06:29:38",
+    "finished_at": "2026-07-15 06:30:41"
+  },
+  {
+    "id": 556,
+    "combo_id": "gemm-cos-gemm-mul",
+    "ops": "[\"gemm\", \"cos\", \"gemm\", \"mul\"]",
+    "model_file": "models/agent_gemm-cos-gemm-mul.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 06:29:38",
+    "created_at": "2026-07-15 06:31:41",
     "finished_at": ""
   }
 ]
