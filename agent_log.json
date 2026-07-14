@@ -7063,12 +7063,25 @@
     "combo_id": "gemm-sin-dot_product-mul",
     "ops": "[\"gemm\", \"sin\", \"dot_product\", \"mul\"]",
     "model_file": "models/agent_gemm-sin-dot_product-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "eebfdb5a815badf3c7cd02b629e011253ded24ea",
+    "ci_run_id": 29368335671,
+    "error_msg": "",
+    "created_at": "2026-07-15 06:07:00",
+    "finished_at": "2026-07-15 06:08:04"
+  },
+  {
+    "id": 545,
+    "combo_id": "gemm-sin-dot_product-div",
+    "ops": "[\"gemm\", \"sin\", \"dot_product\", \"div\"]",
+    "model_file": "models/agent_gemm-sin-dot_product-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 06:07:00",
+    "created_at": "2026-07-15 06:09:04",
     "finished_at": ""
   }
 ]
