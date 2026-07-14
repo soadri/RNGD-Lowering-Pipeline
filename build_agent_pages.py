@@ -258,10 +258,7 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     (out_dir / "agent.html").write_text(html, encoding="utf-8")
     print(f"agent.html 빌드 완료 → pages_out/agent.html")
 
-    # index.html이 없으면 redirect
-    index = out_dir / "index.html"
-    if not index.exists():
-        index.write_text('<meta http-equiv="refresh" content="0;url=index.html">')
+    # index.html은 build_pages.py가 관리 — 건드리지 않음
 
 
 if __name__ == "__main__":
