@@ -1,0 +1,72 @@
+{
+  "pytorch_version": "2.3.0.dev20240122+cpu",
+  "created_at": "2026-07-14T13:09:03.666840",
+  "models": {
+    "example_linear": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 1,
+        "linalg.matmul": 1
+      }
+    },
+    "example_rmsnorm": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 2,
+        "arith.divf": 2,
+        "arith.mulf": 1,
+        "math.powf": 1,
+        "math.sqrt": 1
+      }
+    },
+    "llama_rmsnorm": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 2,
+        "arith.divf": 1,
+        "arith.mulf": 2,
+        "math.powf": 1,
+        "math.rsqrt": 1
+      }
+    },
+    "llama_ffn": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 1,
+        "arith.divf": 1,
+        "arith.mulf": 2,
+        "linalg.matmul": 3,
+        "math.exp": 1
+      }
+    },
+    "simple_mlp": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 1,
+        "arith.divf": 1,
+        "linalg.matmul": 2,
+        "math.exp": 1
+      }
+    },
+    "llama_ffn_real": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 1,
+        "arith.divf": 1,
+        "arith.mulf": 2,
+        "linalg.matmul": 3,
+        "math.exp": 1
+      }
+    },
+    "transformer_no_softmax": {
+      "status": "ok",
+      "ops": {
+        "arith.addf": 1,
+        "arith.divf": 1,
+        "arith.mulf": 3,
+        "linalg.batch_matmul": 9,
+        "math.exp": 1
+      }
+    }
+  }
+}
