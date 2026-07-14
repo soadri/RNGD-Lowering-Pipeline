@@ -96,7 +96,7 @@ def get_sample_inputs():
 '''
 
 
-def save_model(ops: list, out_dir: Path = Path("models"), dim: int = 64) -> Path:
+def save_model(ops: list, out_dir: Path = Path("models/agent"), dim: int = 64) -> Path:
     cid = combo_id(ops)
     path = out_dir / f"agent_{cid}.py"
     path.write_text(generate_model_code(ops, dim), encoding="utf-8")

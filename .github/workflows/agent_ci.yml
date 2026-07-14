@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'models/agent_*.py'
+      - 'models/agent/agent_*.py'
       - 'agent_log.json'
 
 env:
@@ -33,9 +33,9 @@ jobs:
         id: detect
         run: |
           # 가장 최근 커밋에서 추가된 agent_*.py 파일 찾기
-          MODEL_PATH=$(git diff --name-only HEAD~1 HEAD -- 'models/agent_*.py' | head -1)
+          MODEL_PATH=$(git diff --name-only HEAD~1 HEAD -- 'models/agent/agent_*.py' | head -1)
           if [ -z "$MODEL_PATH" ]; then
-            MODEL_PATH=$(git show --name-only HEAD -- 'models/agent_*.py' | grep 'models/agent_' | head -1)
+            MODEL_PATH=$(git show --name-only HEAD -- 'models/agent/agent_*.py' | grep 'models/agent_' | head -1)
           fi
           MODEL_NAME=$(basename "$MODEL_PATH" .py)
           COMBO_ID=${MODEL_NAME#agent_}
