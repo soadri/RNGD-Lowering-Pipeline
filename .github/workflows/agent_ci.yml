@@ -89,10 +89,14 @@ jobs:
 
       - name: Agent HTML 리포트 빌드
         run: |
+          # agent.html 빌드
           ${{ env.VENV }}/bin/python build_agent_pages.py \
             all_artifacts \
             "${{ needs.agent-coverage.outputs.combo_id }}" \
             "${{ github.sha }}"
+          # 기존 index.html 가져와서 함께 배포
+          curl -sf https://soadri.github.io/RNGD-Lowering-Pipeline/index.html \
+            -o pages_out/index.html || echo "index.html 없음 — agent.html만 배포"
 
       - uses: actions/upload-pages-artifact@v3
         with:
