@@ -1590,12 +1590,25 @@
     "combo_id": "gemv-add-gemv",
     "ops": "[\"gemv\", \"add\", \"gemv\"]",
     "model_file": "models/agent_gemv-add-gemv.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "ad0562818f9a357196a570b1fbcc0bcb46a2b415",
+    "ci_run_id": 29311372089,
+    "error_msg": "",
+    "created_at": "2026-07-14 15:26:40",
+    "finished_at": "2026-07-14 15:27:42"
+  },
+  {
+    "id": 124,
+    "combo_id": "gemv-add-dot_product",
+    "ops": "[\"gemv\", \"add\", \"dot_product\"]",
+    "model_file": "models/agent_gemv-add-dot_product.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 15:26:40",
+    "created_at": "2026-07-14 15:28:43",
     "finished_at": ""
   }
 ]
