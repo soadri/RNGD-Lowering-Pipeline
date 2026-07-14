@@ -6530,12 +6530,25 @@
     "combo_id": "gemm-tanh-gemv-sin",
     "ops": "[\"gemm\", \"tanh\", \"gemv\", \"sin\"]",
     "model_file": "models/agent_gemm-tanh-gemv-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "5df7a30bfd5f1890341983e6220590ab1891e603",
+    "ci_run_id": 29362870281,
+    "error_msg": "",
+    "created_at": "2026-07-15 04:42:50",
+    "finished_at": "2026-07-15 04:43:53"
+  },
+  {
+    "id": 504,
+    "combo_id": "gemm-tanh-gemv-cos",
+    "ops": "[\"gemm\", \"tanh\", \"gemv\", \"cos\"]",
+    "model_file": "models/agent_gemm-tanh-gemv-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 04:42:50",
+    "created_at": "2026-07-15 04:44:53",
     "finished_at": ""
   }
 ]
