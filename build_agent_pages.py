@@ -176,6 +176,15 @@ def build(artifacts_dir: str, combo_id: str = "", commit_sha: str = ""):
     tr:hover {{ background: #f8f9fa; }}
     code {{ background: #f1f3f5; padding: 2px 5px; border-radius: 3px; font-size: 0.85em; }}
     .updated {{ color: #999; font-size: 0.8em; text-align: right; margin-top: 10px; }}
+    .hm-wrap {{ overflow-x: auto; margin-top: 8px; }}
+    .hm {{ border-collapse: collapse; font-size: 0.8em; }}
+    .hm th {{ background: #1a1a2e; color: white; padding: 5px 8px; text-align: center; white-space: nowrap; }}
+    .hm td {{ padding: 4px 8px; text-align: center; border: 1px solid #eee; }}
+    .hm-hd {{ background: #f0f2f5; font-weight: bold; text-align: left !important; white-space: nowrap; }}
+    .cell-s {{ background: #d4edda; }}
+    .cell-f {{ background: #f8d7da; }}
+    .cell-e {{ background: #fff3cd; }}
+    .cell-p {{ background: #f8f9fa; color: #ccc; }}
     .desc {{ line-height: 1.7; color: #444; }}
     .desc li {{ margin: 5px 0 5px 20px; }}
     .combo-example {{ background: #f8f9fa; border-radius: 6px; padding: 10px 15px;
