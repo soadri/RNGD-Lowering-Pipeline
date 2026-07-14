@@ -2981,12 +2981,25 @@
     "combo_id": "gemm-sub-gemm-add",
     "ops": "[\"gemm\", \"sub\", \"gemm\", \"add\"]",
     "model_file": "models/agent_gemm-sub-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6d4e0464c479981d2cfd43d018f78d1ba06813f9",
+    "ci_run_id": 29324785908,
+    "error_msg": "",
+    "created_at": "2026-07-14 19:16:56",
+    "finished_at": "2026-07-14 19:17:59"
+  },
+  {
+    "id": 231,
+    "combo_id": "gemm-sub-gemm-sub",
+    "ops": "[\"gemm\", \"sub\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_gemm-sub-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 19:16:56",
+    "created_at": "2026-07-14 19:18:59",
     "finished_at": ""
   }
 ]
