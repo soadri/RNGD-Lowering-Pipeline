@@ -1031,12 +1031,25 @@
     "combo_id": "gemm-cos-gemm",
     "ops": "[\"gemm\", \"cos\", \"gemm\"]",
     "model_file": "models/agent_gemm-cos-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6c83b0152f770f37d8be5d846e77d05b9df9b0d8",
+    "ci_run_id": 29307928440,
+    "error_msg": "",
+    "created_at": "2026-07-14 14:12:33",
+    "finished_at": "2026-07-14 14:13:36"
+  },
+  {
+    "id": 81,
+    "combo_id": "gemm-cos-gemv",
+    "ops": "[\"gemm\", \"cos\", \"gemv\"]",
+    "model_file": "models/agent_gemm-cos-gemv.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 14:12:33",
+    "created_at": "2026-07-14 14:14:36",
     "finished_at": ""
   }
 ]
