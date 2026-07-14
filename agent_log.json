@@ -745,12 +745,25 @@
     "combo_id": "gemm-mul-dot_product",
     "ops": "[\"gemm\", \"mul\", \"dot_product\"]",
     "model_file": "models/agent_gemm-mul-dot_product.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "38738ba9cd9f0877e11b84c853dca3401eae568c",
+    "ci_run_id": 29306017631,
+    "error_msg": "",
+    "created_at": "2026-07-14 13:27:28",
+    "finished_at": "2026-07-14 13:28:31"
+  },
+  {
+    "id": 59,
+    "combo_id": "gemm-div-gemm",
+    "ops": "[\"gemm\", \"div\", \"gemm\"]",
+    "model_file": "models/agent_gemm-div-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 13:27:28",
+    "created_at": "2026-07-14 13:29:31",
     "finished_at": ""
   }
 ]
