@@ -7310,12 +7310,25 @@
     "combo_id": "gemm-cos-gemm-sin",
     "ops": "[\"gemm\", \"cos\", \"gemm\", \"sin\"]",
     "model_file": "models/agent_gemm-cos-gemm-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "80773f7cf74e47510a67a2c6343a22e0fd352008",
+    "ci_run_id": 29370704823,
+    "error_msg": "",
+    "created_at": "2026-07-15 06:46:02",
+    "finished_at": "2026-07-15 06:47:05"
+  },
+  {
+    "id": 564,
+    "combo_id": "gemm-cos-gemm-cos",
+    "ops": "[\"gemm\", \"cos\", \"gemm\", \"cos\"]",
+    "model_file": "models/agent_gemm-cos-gemm-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 06:46:02",
+    "created_at": "2026-07-15 06:48:05",
     "finished_at": ""
   }
 ]
