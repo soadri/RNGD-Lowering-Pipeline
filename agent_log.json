@@ -3839,12 +3839,25 @@
     "combo_id": "gemm-mul-dot_product-exp",
     "ops": "[\"gemm\", \"mul\", \"dot_product\", \"exp\"]",
     "model_file": "models/agent_gemm-mul-dot_product-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f5146a0fbce131d1e7a30faa870e4162e42f413e",
+    "ci_run_id": 29332864668,
+    "error_msg": "",
+    "created_at": "2026-07-14 21:32:19",
+    "finished_at": "2026-07-14 21:33:22"
+  },
+  {
+    "id": 297,
+    "combo_id": "gemm-mul-dot_product-sigmoid",
+    "ops": "[\"gemm\", \"mul\", \"dot_product\", \"sigmoid\"]",
+    "model_file": "models/agent_gemm-mul-dot_product-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 21:32:19",
+    "created_at": "2026-07-14 21:34:22",
     "finished_at": ""
   }
 ]
