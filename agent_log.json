@@ -6946,12 +6946,25 @@
     "combo_id": "gemm-sin-gemv-sqrt",
     "ops": "[\"gemm\", \"sin\", \"gemv\", \"sqrt\"]",
     "model_file": "models/agent_gemm-sin-gemv-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "79cedd444d8df221edc77dcb0d237f4f24a5d8e8",
+    "ci_run_id": 29367151920,
+    "error_msg": "",
+    "created_at": "2026-07-15 05:48:33",
+    "finished_at": "2026-07-15 05:49:36"
+  },
+  {
+    "id": 536,
+    "combo_id": "gemm-sin-gemv-exp",
+    "ops": "[\"gemm\", \"sin\", \"gemv\", \"exp\"]",
+    "model_file": "models/agent_gemm-sin-gemv-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 05:48:33",
+    "created_at": "2026-07-15 05:50:36",
     "finished_at": ""
   }
 ]
