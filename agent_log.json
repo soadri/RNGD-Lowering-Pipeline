@@ -7739,12 +7739,25 @@
     "combo_id": "gemm-pow2-gemm-exp",
     "ops": "[\"gemm\", \"pow2\", \"gemm\", \"exp\"]",
     "model_file": "models/agent_gemm-pow2-gemm-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a1cd2e2df60e3ecee2953653fb2880a67d16c466",
+    "ci_run_id": 29374456552,
+    "error_msg": "",
+    "created_at": "2026-07-15 07:53:44",
+    "finished_at": "2026-07-15 07:54:47"
+  },
+  {
+    "id": 597,
+    "combo_id": "gemm-pow2-gemm-sigmoid",
+    "ops": "[\"gemm\", \"pow2\", \"gemm\", \"sigmoid\"]",
+    "model_file": "models/agent_gemm-pow2-gemm-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 07:53:44",
+    "created_at": "2026-07-15 07:55:47",
     "finished_at": ""
   }
 ]
