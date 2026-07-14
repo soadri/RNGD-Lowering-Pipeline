@@ -212,12 +212,25 @@
     "combo_id": "batch_gemm-rsqrt",
     "ops": "[\"batch_gemm\", \"rsqrt\"]",
     "model_file": "models/agent_batch_gemm-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f44f95f7a8aae02ac67139bd14f475ec89f0c409",
+    "ci_run_id": 29302845225,
+    "error_msg": "",
+    "created_at": "2026-07-14 12:09:49",
+    "finished_at": "2026-07-14 12:10:52"
+  },
+  {
+    "id": 18,
+    "combo_id": "batch_gemm-sqrt",
+    "ops": "[\"batch_gemm\", \"sqrt\"]",
+    "model_file": "models/agent_batch_gemm-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 12:09:49",
+    "created_at": "2026-07-14 12:11:52",
     "finished_at": ""
   }
 ]
