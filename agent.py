@@ -125,8 +125,9 @@ def run_single_experiment(ops: list, dry_run: bool) -> str:
         log("  🔍 모델 유효성 검증 중...")
         valid, err = validate_model(ops)
         if not valid:
-            log(f"  ❌ 컴파일 불가: {err[:100]}")
-            update_experiment(cid, status="error", error_msg=err[:200],
+            classified = classify_compile_error(err)
+            log(f"  ❌ 컴파일 불가: {classified}")
+            update_experiment(cid, status="error", error_msg=classified,
                 finished_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
             return "error"
 
