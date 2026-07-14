@@ -84,6 +84,28 @@ def git_commit_push(model_path: Path, combo: str) -> str | None:
         log(f"  ❌ git 오류: {e.stderr.decode() if e.stderr else ''}")
         return None
 
+def classify_compile_error(err: str) -> str:
+    """torch_mlir 컴파일 에러를 상세 분류"""
+    if "aten::bmm" in err:
+        return "[COMPILE_FAIL] batch_gemm이 중간 위치에 옴 — 3D output 후 bmm 불가 (aten::bmm)"
+    elif "aten::mv" in err:
+        return "[COMPILE_FAIL] batch_gemm(3D 출력) 후 gemv(2D 입력) shape 불일치 (aten::mv)"
+    elif "aten::expand" in err:
+        return "[COMPILE_FAIL] batch_gemm(3D 출력) 후 dot_product shape 불일치 (aten::expand)"
+    elif "aten::dot" in err:
+        return "[COMPILE_FAIL] dot_product shape 불일치 (aten::dot)"
+    elif "aten::matmul" in err or "aten::mm" in err:
+        return "[COMPILE_FAIL] matmul shape 불일치 (aten::matmul)"
+    elif "Lowering Torch Backend IR" in err:
+        return "[COMPILE_FAIL] torch_mlir linalg lowering 실패"
+    elif "not yet implemented" in err:
+        return "[COMPILE_FAIL] torch_mlir 미구현 연산"
+    elif "does not support" in err:
+        return "[COMPILE_FAIL] 미지원 연산 패턴"
+    else:
+        return f"[COMPILE_FAIL] {err[:150]}"
+
+
 def run_single_experiment(ops: list, dry_run: bool) -> str:
     """
     단일 실험 실행. 반환값: "success" | "fail" | "error" | "skip"
