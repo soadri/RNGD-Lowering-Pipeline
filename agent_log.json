@@ -2422,12 +2422,25 @@
     "combo_id": "dot_product-sin-dot_product",
     "ops": "[\"dot_product\", \"sin\", \"dot_product\"]",
     "model_file": "models/agent_dot_product-sin-dot_product.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "3fe9247d1fe5e51968b6ae69f02d0a951f210e21",
+    "ci_run_id": 29319376078,
+    "error_msg": "",
+    "created_at": "2026-07-14 17:48:44",
+    "finished_at": "2026-07-14 17:49:47"
+  },
+  {
+    "id": 188,
+    "combo_id": "dot_product-cos-gemm",
+    "ops": "[\"dot_product\", \"cos\", \"gemm\"]",
+    "model_file": "models/agent_dot_product-cos-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 17:48:44",
+    "created_at": "2026-07-14 17:50:47",
     "finished_at": ""
   }
 ]
