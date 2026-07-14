@@ -121,12 +121,25 @@
     "combo_id": "gemm-sin",
     "ops": "[\"gemm\", \"sin\"]",
     "model_file": "models/agent_gemm-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "c34ed45bb26ff1fb34cb625d876aff0635246df7",
+    "ci_run_id": 29302245467,
+    "error_msg": "",
+    "created_at": "2026-07-14 11:55:29",
+    "finished_at": "2026-07-14 11:56:32"
+  },
+  {
+    "id": 11,
+    "combo_id": "gemm-cos",
+    "ops": "[\"gemm\", \"cos\"]",
+    "model_file": "models/agent_gemm-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 11:55:29",
+    "created_at": "2026-07-14 11:57:32",
     "finished_at": ""
   }
 ]
