@@ -5360,12 +5360,25 @@
     "combo_id": "gemm-exp-gemm-div",
     "ops": "[\"gemm\", \"exp\", \"gemm\", \"div\"]",
     "model_file": "models/agent_gemm-exp-gemm-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "2111055c1ae862fb015005e52be4b9245e77c029",
+    "ci_run_id": 29350324370,
+    "error_msg": "",
+    "created_at": "2026-07-15 01:36:04",
+    "finished_at": "2026-07-15 01:37:07"
+  },
+  {
+    "id": 414,
+    "combo_id": "gemm-exp-gemm-rsqrt",
+    "ops": "[\"gemm\", \"exp\", \"gemm\", \"rsqrt\"]",
+    "model_file": "models/agent_gemm-exp-gemm-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 01:36:04",
+    "created_at": "2026-07-15 01:38:08",
     "finished_at": ""
   }
 ]
