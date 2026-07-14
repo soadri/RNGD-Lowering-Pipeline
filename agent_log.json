@@ -5100,12 +5100,25 @@
     "combo_id": "gemm-sqrt-gemv-sigmoid",
     "ops": "[\"gemm\", \"sqrt\", \"gemv\", \"sigmoid\"]",
     "model_file": "models/agent_gemm-sqrt-gemv-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "adc3d3a6fab4bd8dcb521543b2ea9ab28525a278",
+    "ci_run_id": 29347432429,
+    "error_msg": "",
+    "created_at": "2026-07-15 00:55:00",
+    "finished_at": "2026-07-15 00:56:03"
+  },
+  {
+    "id": 394,
+    "combo_id": "gemm-sqrt-gemv-tanh",
+    "ops": "[\"gemm\", \"sqrt\", \"gemv\", \"tanh\"]",
+    "model_file": "models/agent_gemm-sqrt-gemv-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 00:55:00",
+    "created_at": "2026-07-15 00:57:03",
     "finished_at": ""
   }
 ]
