@@ -14,13 +14,17 @@ def gen_2layer():
     return [[c, e] for c, e in product(CONTRACTION, ELEMENTWISE)]
 
 def gen_3layer():
-    """contraction → elementwise → contraction (192가지)"""
-    return [[c1, e, c2] for c1, e, c2 in product(CONTRACTION, ELEMENTWISE, CONTRACTION)]
+    """contraction → elementwise → contraction (192가지)
+    batch_gemm은 첫 번째 위치에만 허용 (중간에 오면 shape 불일치)"""
+    return [[c1, e, c2] for c1, e, c2 in product(CONTRACTION, ELEMENTWISE, CONTRACTION)
+            if c2 != "batch_gemm"]
 
 def gen_4layer():
-    """contraction → elementwise → contraction → elementwise (2,304가지)"""
+    """contraction → elementwise → contraction → elementwise (2,304가지)
+    batch_gemm은 첫 번째 위치에만 허용"""
     return [[c1, e1, c2, e2]
-            for c1, e1, c2, e2 in product(CONTRACTION, ELEMENTWISE, CONTRACTION, ELEMENTWISE)]
+            for c1, e1, c2, e2 in product(CONTRACTION, ELEMENTWISE, CONTRACTION, ELEMENTWISE)
+            if c2 != "batch_gemm"]
 
 def all_combos():
     """2~4 layer 전체 조합, 짧은 것부터 반환"""
