@@ -3059,12 +3059,25 @@
     "combo_id": "gemm-sub-gemm-exp",
     "ops": "[\"gemm\", \"sub\", \"gemm\", \"exp\"]",
     "model_file": "models/agent_gemm-sub-gemm-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "c25dd35f9825faed2669aecbf1cf5f0295639add",
+    "ci_run_id": 29325521786,
+    "error_msg": "",
+    "created_at": "2026-07-14 19:29:15",
+    "finished_at": "2026-07-14 19:30:18"
+  },
+  {
+    "id": 237,
+    "combo_id": "gemm-sub-gemm-sigmoid",
+    "ops": "[\"gemm\", \"sub\", \"gemm\", \"sigmoid\"]",
+    "model_file": "models/agent_gemm-sub-gemm-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 19:29:15",
+    "created_at": "2026-07-14 19:31:18",
     "finished_at": ""
   }
 ]
