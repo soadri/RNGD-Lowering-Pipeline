@@ -1382,12 +1382,51 @@
     "combo_id": "batch_gemm-sigmoid-gemm",
     "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\"]",
     "model_file": "models/agent_batch_gemm-sigmoid-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "556d71b2ccd112bd43f5dd5aa557b3a0f6bc058d",
+    "ci_run_id": 29310191031,
+    "error_msg": "",
+    "created_at": "2026-07-14 15:02:49",
+    "finished_at": "2026-07-14 15:03:52"
+  },
+  {
+    "id": 108,
+    "combo_id": "batch_gemm-sigmoid-gemv",
+    "ops": "[\"batch_gemm\", \"sigmoid\", \"gemv\"]",
+    "model_file": "models/agent_batch_gemm-sigmoid-gemv.py",
+    "status": "error",
+    "coverage_pct": 0.0,
+    "commit_sha": "",
+    "ci_run_id": 0,
+    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_o_n575z9.",
+    "created_at": "2026-07-14 15:04:52",
+    "finished_at": "2026-07-14 15:04:52"
+  },
+  {
+    "id": 109,
+    "combo_id": "batch_gemm-sigmoid-dot_product",
+    "ops": "[\"batch_gemm\", \"sigmoid\", \"dot_product\"]",
+    "model_file": "models/agent_batch_gemm-sigmoid-dot_product.py",
+    "status": "error",
+    "coverage_pct": 0.0,
+    "commit_sha": "",
+    "ci_run_id": 0,
+    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent_cb8_k",
+    "created_at": "2026-07-14 15:05:52",
+    "finished_at": "2026-07-14 15:05:52"
+  },
+  {
+    "id": 110,
+    "combo_id": "batch_gemm-tanh-gemm",
+    "ops": "[\"batch_gemm\", \"tanh\", \"gemm\"]",
+    "model_file": "models/agent_batch_gemm-tanh-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 15:02:49",
+    "created_at": "2026-07-14 15:06:52",
     "finished_at": ""
   }
 ]
