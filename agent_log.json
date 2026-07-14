@@ -5282,12 +5282,25 @@
     "combo_id": "gemm-sqrt-dot_product-sin",
     "ops": "[\"gemm\", \"sqrt\", \"dot_product\", \"sin\"]",
     "model_file": "models/agent_gemm-sqrt-dot_product-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "5e4a33feffd92c38b6d0e5361d16879318fe29ee",
+    "ci_run_id": 29349462103,
+    "error_msg": "",
+    "created_at": "2026-07-15 01:23:45",
+    "finished_at": "2026-07-15 01:24:49"
+  },
+  {
+    "id": 408,
+    "combo_id": "gemm-sqrt-dot_product-cos",
+    "ops": "[\"gemm\", \"sqrt\", \"dot_product\", \"cos\"]",
+    "model_file": "models/agent_gemm-sqrt-dot_product-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 01:23:45",
+    "created_at": "2026-07-15 01:25:49",
     "finished_at": ""
   }
 ]
