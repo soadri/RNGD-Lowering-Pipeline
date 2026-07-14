@@ -52,10 +52,25 @@ def should_stop() -> bool:
         return True
     return False
 
+def update_agent_log():
+    """experiment_log.db → agent_log.json 동기화"""
+    import json
+    from agent_db import get_all_experiments
+    experiments = get_all_experiments()
+    log_path = PIPELINE_DIR / "agent_log.json"
+    log_path.write_text(
+        json.dumps(experiments, ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+    return log_path
+
 def git_commit_push(model_path: Path, combo: str) -> str | None:
-    """모델 파일을 git add/commit/push하고 commit SHA 반환"""
+    """모델 파일 + agent_log.json을 git add/commit/push하고 commit SHA 반환"""
     try:
-        subprocess.run(["git", "add", str(model_path)],
+        # agent_log.json 업데이트
+        log_path = update_agent_log()
+
+        subprocess.run(["git", "add", str(model_path), str(log_path)],
                        cwd=PIPELINE_DIR, check=True, capture_output=True)
         msg = f"agent: add model {model_path.name} [{combo}]"
         subprocess.run(["git", "commit", "-m", msg],
