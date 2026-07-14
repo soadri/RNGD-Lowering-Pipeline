@@ -1265,12 +1265,51 @@
     "combo_id": "batch_gemm-rsqrt-gemm",
     "ops": "[\"batch_gemm\", \"rsqrt\", \"gemm\"]",
     "model_file": "models/agent_batch_gemm-rsqrt-gemm.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6100d7b37c6e6ba91a23638da795cb203c64be4d",
+    "ci_run_id": 29309606612,
+    "error_msg": "",
+    "created_at": "2026-07-14 14:50:39",
+    "finished_at": "2026-07-14 14:51:42"
+  },
+  {
+    "id": 99,
+    "combo_id": "batch_gemm-rsqrt-gemv",
+    "ops": "[\"batch_gemm\", \"rsqrt\", \"gemv\"]",
+    "model_file": "models/agent_batch_gemm-rsqrt-gemv.py",
+    "status": "error",
+    "coverage_pct": 0.0,
+    "commit_sha": "",
+    "ci_run_id": 0,
+    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::mv\"(\"/tmp/rngd_agent_7kbf526l.",
+    "created_at": "2026-07-14 14:52:42",
+    "finished_at": "2026-07-14 14:52:43"
+  },
+  {
+    "id": 100,
+    "combo_id": "batch_gemm-rsqrt-dot_product",
+    "ops": "[\"batch_gemm\", \"rsqrt\", \"dot_product\"]",
+    "model_file": "models/agent_batch_gemm-rsqrt-dot_product.py",
+    "status": "error",
+    "coverage_pct": 0.0,
+    "commit_sha": "",
+    "ci_run_id": 0,
+    "error_msg": "Lowering Torch Backend IR -> Linalg-on-Tensors Backend IR failed with the following diagnostics:\n\n\npython exception: Failure while executing pass pipeline:\nerror: \"aten::expand\"(\"/tmp/rngd_agent__5goq",
+    "created_at": "2026-07-14 14:53:43",
+    "finished_at": "2026-07-14 14:53:43"
+  },
+  {
+    "id": 101,
+    "combo_id": "batch_gemm-sqrt-gemm",
+    "ops": "[\"batch_gemm\", \"sqrt\", \"gemm\"]",
+    "model_file": "models/agent_batch_gemm-sqrt-gemm.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-14 14:50:39",
+    "created_at": "2026-07-14 14:54:43",
     "finished_at": ""
   }
 ]
