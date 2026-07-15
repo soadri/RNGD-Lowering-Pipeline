@@ -17905,12 +17905,25 @@
     "combo_id": "gemv-tanh-dot_product-tanh",
     "ops": "[\"gemv\", \"tanh\", \"dot_product\", \"tanh\"]",
     "model_file": "models/agent_gemv-tanh-dot_product-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "e0163aa43566c2c9cef290c5968c56ace0f4f716",
+    "ci_run_id": 29449554516,
+    "error_msg": "",
+    "created_at": "2026-07-16 05:46:12",
+    "finished_at": "2026-07-16 05:47:16"
+  },
+  {
+    "id": 1379,
+    "combo_id": "gemv-tanh-dot_product-sin",
+    "ops": "[\"gemv\", \"tanh\", \"dot_product\", \"sin\"]",
+    "model_file": "models/agent_gemv-tanh-dot_product-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 05:46:12",
+    "created_at": "2026-07-16 05:48:16",
     "finished_at": ""
   }
 ]
