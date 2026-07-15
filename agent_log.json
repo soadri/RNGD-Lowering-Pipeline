@@ -11405,12 +11405,25 @@
     "combo_id": "batch_gemm-sigmoid-gemm-add",
     "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\", \"add\"]",
     "model_file": "models/agent_batch_gemm-sigmoid-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "e606d33fe81d8a2c72e6d15881556833fa7c7adf",
+    "ci_run_id": 29391981862,
+    "error_msg": "",
+    "created_at": "2026-07-15 14:38:37",
+    "finished_at": "2026-07-15 14:39:40"
+  },
+  {
+    "id": 879,
+    "combo_id": "batch_gemm-sigmoid-gemm-sub",
+    "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_batch_gemm-sigmoid-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 14:38:37",
+    "created_at": "2026-07-15 14:40:40",
     "finished_at": ""
   }
 ]
