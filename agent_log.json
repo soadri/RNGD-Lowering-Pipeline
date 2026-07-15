@@ -15604,12 +15604,25 @@
     "combo_id": "gemv-div-dot_product-pow2",
     "ops": "[\"gemv\", \"div\", \"dot_product\", \"pow2\"]",
     "model_file": "models/agent_gemv-div-dot_product-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "82b16bbfa7292dbcf4fa00cdee7e22adbc9e2eaa",
+    "ci_run_id": 29424637445,
+    "error_msg": "",
+    "created_at": "2026-07-15 23:40:46",
+    "finished_at": "2026-07-15 23:41:50"
+  },
+  {
+    "id": 1202,
+    "combo_id": "gemv-rsqrt-gemm-add",
+    "ops": "[\"gemv\", \"rsqrt\", \"gemm\", \"add\"]",
+    "model_file": "models/agent_gemv-rsqrt-gemm-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 23:40:46",
+    "created_at": "2026-07-15 23:42:50",
     "finished_at": ""
   }
 ]
