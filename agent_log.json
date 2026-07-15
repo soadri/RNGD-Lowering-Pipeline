@@ -15149,12 +15149,25 @@
     "combo_id": "gemv-div-gemm-add",
     "ops": "[\"gemv\", \"div\", \"gemm\", \"add\"]",
     "model_file": "models/agent_gemv-div-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6b5caae84252fb747837dc4ff6e670975ef21310",
+    "ci_run_id": 29419246166,
+    "error_msg": "",
+    "created_at": "2026-07-15 22:27:17",
+    "finished_at": "2026-07-15 22:28:21"
+  },
+  {
+    "id": 1167,
+    "combo_id": "gemv-div-gemm-sub",
+    "ops": "[\"gemv\", \"div\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_gemv-div-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 22:27:17",
+    "created_at": "2026-07-15 22:29:21",
     "finished_at": ""
   }
 ]
