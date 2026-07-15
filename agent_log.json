@@ -12822,12 +12822,25 @@
     "combo_id": "batch_gemm-cos-gemm-sub",
     "ops": "[\"batch_gemm\", \"cos\", \"gemm\", \"sub\"]",
     "model_file": "models/agent_batch_gemm-cos-gemm-sub.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "e76faa330eefcc9bce2b112e155ea922f4213435",
+    "ci_run_id": 29399638551,
+    "error_msg": "",
+    "created_at": "2026-07-15 17:06:52",
+    "finished_at": "2026-07-15 17:07:55"
+  },
+  {
+    "id": 988,
+    "combo_id": "batch_gemm-cos-gemm-mul",
+    "ops": "[\"batch_gemm\", \"cos\", \"gemm\", \"mul\"]",
+    "model_file": "models/agent_batch_gemm-cos-gemm-mul.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 17:06:52",
+    "created_at": "2026-07-15 17:08:55",
     "finished_at": ""
   }
 ]
