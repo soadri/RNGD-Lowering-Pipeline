@@ -17658,12 +17658,25 @@
     "combo_id": "gemv-tanh-gemv-sub",
     "ops": "[\"gemv\", \"tanh\", \"gemv\", \"sub\"]",
     "model_file": "models/agent_gemv-tanh-gemv-sub.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "c5e3b38c7b315d3840443e19139b9c435e79d18a",
+    "ci_run_id": 29447091467,
+    "error_msg": "",
+    "created_at": "2026-07-16 05:07:10",
+    "finished_at": "2026-07-16 05:08:14"
+  },
+  {
+    "id": 1360,
+    "combo_id": "gemv-tanh-gemv-mul",
+    "ops": "[\"gemv\", \"tanh\", \"gemv\", \"mul\"]",
+    "model_file": "models/agent_gemv-tanh-gemv-mul.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 05:07:10",
+    "created_at": "2026-07-16 05:09:14",
     "finished_at": ""
   }
 ]
