@@ -18113,12 +18113,25 @@
     "combo_id": "gemv-sin-gemv-add",
     "ops": "[\"gemv\", \"sin\", \"gemv\", \"add\"]",
     "model_file": "models/agent_gemv-sin-gemv-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "bce3d3769f3485598d99c2f848eac96f8ef2f91f",
+    "ci_run_id": 29451492922,
+    "error_msg": "",
+    "created_at": "2026-07-16 06:19:05",
+    "finished_at": "2026-07-16 06:20:08"
+  },
+  {
+    "id": 1395,
+    "combo_id": "gemv-sin-gemv-sub",
+    "ops": "[\"gemv\", \"sin\", \"gemv\", \"sub\"]",
+    "model_file": "models/agent_gemv-sin-gemv-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 06:19:05",
+    "created_at": "2026-07-16 06:21:08",
     "finished_at": ""
   }
 ]
