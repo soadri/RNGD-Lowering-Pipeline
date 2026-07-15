@@ -18360,12 +18360,25 @@
     "combo_id": "gemv-sin-dot_product-sigmoid",
     "ops": "[\"gemv\", \"sin\", \"dot_product\", \"sigmoid\"]",
     "model_file": "models/agent_gemv-sin-dot_product-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "902df37a16580b6e7ce3946af22eeaf804c76cfe",
+    "ci_run_id": 29453784006,
+    "error_msg": "",
+    "created_at": "2026-07-16 06:58:06",
+    "finished_at": "2026-07-16 06:59:09"
+  },
+  {
+    "id": 1414,
+    "combo_id": "gemv-sin-dot_product-tanh",
+    "ops": "[\"gemv\", \"sin\", \"dot_product\", \"tanh\"]",
+    "model_file": "models/agent_gemv-sin-dot_product-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 06:58:06",
+    "created_at": "2026-07-16 07:00:09",
     "finished_at": ""
   }
 ]
