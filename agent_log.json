@@ -11470,12 +11470,25 @@
     "combo_id": "batch_gemm-sigmoid-gemm-sqrt",
     "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\", \"sqrt\"]",
     "model_file": "models/agent_batch_gemm-sigmoid-gemm-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "17ce08d81d12023267dbfc70e51c75a13e70cfdc",
+    "ci_run_id": 29392434996,
+    "error_msg": "",
+    "created_at": "2026-07-15 14:48:53",
+    "finished_at": "2026-07-15 14:49:56"
+  },
+  {
+    "id": 884,
+    "combo_id": "batch_gemm-sigmoid-gemm-exp",
+    "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\", \"exp\"]",
+    "model_file": "models/agent_batch_gemm-sigmoid-gemm-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 14:48:53",
+    "created_at": "2026-07-15 14:50:56",
     "finished_at": ""
   }
 ]
