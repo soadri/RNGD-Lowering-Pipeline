@@ -14278,12 +14278,25 @@
     "combo_id": "gemv-sub-gemm-sqrt",
     "ops": "[\"gemv\", \"sub\", \"gemm\", \"sqrt\"]",
     "model_file": "models/agent_gemv-sub-gemm-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "816a32bcc4fe707357fee991807a363c521500f0",
+    "ci_run_id": 29410482538,
+    "error_msg": "",
+    "created_at": "2026-07-15 20:06:33",
+    "finished_at": "2026-07-15 20:07:36"
+  },
+  {
+    "id": 1100,
+    "combo_id": "gemv-sub-gemm-exp",
+    "ops": "[\"gemv\", \"sub\", \"gemm\", \"exp\"]",
+    "model_file": "models/agent_gemv-sub-gemm-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 20:06:33",
+    "created_at": "2026-07-15 20:08:36",
     "finished_at": ""
   }
 ]
