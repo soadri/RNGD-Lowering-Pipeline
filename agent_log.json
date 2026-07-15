@@ -13303,12 +13303,25 @@
     "combo_id": "batch_gemm-pow2-gemm-mul",
     "ops": "[\"batch_gemm\", \"pow2\", \"gemm\", \"mul\"]",
     "model_file": "models/agent_batch_gemm-pow2-gemm-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "64603909d2107b39eaad03f8e0847d6333079b14",
+    "ci_run_id": 29402694150,
+    "error_msg": "",
+    "created_at": "2026-07-15 17:57:40",
+    "finished_at": "2026-07-15 17:58:43"
+  },
+  {
+    "id": 1025,
+    "combo_id": "batch_gemm-pow2-gemm-div",
+    "ops": "[\"batch_gemm\", \"pow2\", \"gemm\", \"div\"]",
+    "model_file": "models/agent_batch_gemm-pow2-gemm-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 17:57:40",
+    "created_at": "2026-07-15 17:59:43",
     "finished_at": ""
   }
 ]
