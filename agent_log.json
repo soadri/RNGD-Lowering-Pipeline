@@ -18087,12 +18087,25 @@
     "combo_id": "gemv-sin-gemm-cos",
     "ops": "[\"gemv\", \"sin\", \"gemm\", \"cos\"]",
     "model_file": "models/agent_gemv-sin-gemm-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "bd994028065b488309a8a80560be8850bef1ad09",
+    "ci_run_id": 29451254442,
+    "error_msg": "",
+    "created_at": "2026-07-16 06:14:59",
+    "finished_at": "2026-07-16 06:16:02"
+  },
+  {
+    "id": 1393,
+    "combo_id": "gemv-sin-gemm-pow2",
+    "ops": "[\"gemv\", \"sin\", \"gemm\", \"pow2\"]",
+    "model_file": "models/agent_gemv-sin-gemm-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 06:14:59",
+    "created_at": "2026-07-16 06:17:02",
     "finished_at": ""
   }
 ]
