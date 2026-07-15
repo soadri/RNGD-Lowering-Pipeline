@@ -17684,12 +17684,25 @@
     "combo_id": "gemv-tanh-gemv-div",
     "ops": "[\"gemv\", \"tanh\", \"gemv\", \"div\"]",
     "model_file": "models/agent_gemv-tanh-gemv-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "e0dfc11d7d0961c7950fdf10910d2bce0a744614",
+    "ci_run_id": 29447347327,
+    "error_msg": "",
+    "created_at": "2026-07-16 05:11:17",
+    "finished_at": "2026-07-16 05:12:20"
+  },
+  {
+    "id": 1362,
+    "combo_id": "gemv-tanh-gemv-rsqrt",
+    "ops": "[\"gemv\", \"tanh\", \"gemv\", \"rsqrt\"]",
+    "model_file": "models/agent_gemv-tanh-gemv-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 05:11:17",
+    "created_at": "2026-07-16 05:13:20",
     "finished_at": ""
   }
 ]
