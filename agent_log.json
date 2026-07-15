@@ -12003,12 +12003,25 @@
     "combo_id": "batch_gemm-tanh-gemm-cos",
     "ops": "[\"batch_gemm\", \"tanh\", \"gemm\", \"cos\"]",
     "model_file": "models/agent_batch_gemm-tanh-gemm-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "47b649465884fff28a10219e394ebd3760665e2a",
+    "ci_run_id": 29395267382,
+    "error_msg": "",
+    "created_at": "2026-07-15 15:47:52",
+    "finished_at": "2026-07-15 15:48:55"
+  },
+  {
+    "id": 925,
+    "combo_id": "batch_gemm-tanh-gemm-pow2",
+    "ops": "[\"batch_gemm\", \"tanh\", \"gemm\", \"pow2\"]",
+    "model_file": "models/agent_batch_gemm-tanh-gemm-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 15:47:52",
+    "created_at": "2026-07-15 15:49:55",
     "finished_at": ""
   }
 ]
