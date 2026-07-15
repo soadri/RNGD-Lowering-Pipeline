@@ -11496,12 +11496,25 @@
     "combo_id": "batch_gemm-sigmoid-gemm-sigmoid",
     "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_batch_gemm-sigmoid-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a6b4a33404ac9e029e91de20d6dcb466160e8ebe",
+    "ci_run_id": 29392623723,
+    "error_msg": "",
+    "created_at": "2026-07-15 14:52:59",
+    "finished_at": "2026-07-15 14:54:02"
+  },
+  {
+    "id": 886,
+    "combo_id": "batch_gemm-sigmoid-gemm-tanh",
+    "ops": "[\"batch_gemm\", \"sigmoid\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_batch_gemm-sigmoid-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 14:52:59",
+    "created_at": "2026-07-15 14:55:02",
     "finished_at": ""
   }
 ]
