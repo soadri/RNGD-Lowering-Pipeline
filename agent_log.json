@@ -16475,12 +16475,25 @@
     "combo_id": "gemv-sqrt-dot_product-exp",
     "ops": "[\"gemv\", \"sqrt\", \"dot_product\", \"exp\"]",
     "model_file": "models/agent_gemv-sqrt-dot_product-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "b036d6ffa207284fa5b1a5dc844d1684e59856ec",
+    "ci_run_id": 29434685060,
+    "error_msg": "",
+    "created_at": "2026-07-16 01:59:34",
+    "finished_at": "2026-07-16 02:00:37"
+  },
+  {
+    "id": 1269,
+    "combo_id": "gemv-sqrt-dot_product-sigmoid",
+    "ops": "[\"gemv\", \"sqrt\", \"dot_product\", \"sigmoid\"]",
+    "model_file": "models/agent_gemv-sqrt-dot_product-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 01:59:34",
+    "created_at": "2026-07-16 02:01:37",
     "finished_at": ""
   }
 ]
