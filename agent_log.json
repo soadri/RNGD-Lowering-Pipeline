@@ -13966,12 +13966,25 @@
     "combo_id": "gemv-add-gemv-sqrt",
     "ops": "[\"gemv\", \"add\", \"gemv\", \"sqrt\"]",
     "model_file": "models/agent_gemv-add-gemv-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "ff47bec4fbacdf2f3e1b20e0206b598d146a76e9",
+    "ci_run_id": 29407594338,
+    "error_msg": "",
+    "created_at": "2026-07-15 19:17:14",
+    "finished_at": "2026-07-15 19:18:17"
+  },
+  {
+    "id": 1076,
+    "combo_id": "gemv-add-gemv-exp",
+    "ops": "[\"gemv\", \"add\", \"gemv\", \"exp\"]",
+    "model_file": "models/agent_gemv-add-gemv-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 19:17:14",
+    "created_at": "2026-07-15 19:19:17",
     "finished_at": ""
   }
 ]
