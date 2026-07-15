@@ -10508,12 +10508,25 @@
     "combo_id": "batch_gemm-sqrt-gemm-div",
     "ops": "[\"batch_gemm\", \"sqrt\", \"gemm\", \"div\"]",
     "model_file": "models/agent_batch_gemm-sqrt-gemm-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "acb5082f5865dcd18214d9963b3d09801a789fba",
+    "ci_run_id": 29388197083,
+    "error_msg": "",
+    "created_at": "2026-07-15 13:07:22",
+    "finished_at": "2026-07-15 13:08:25"
+  },
+  {
+    "id": 810,
+    "combo_id": "batch_gemm-sqrt-gemm-rsqrt",
+    "ops": "[\"batch_gemm\", \"sqrt\", \"gemm\", \"rsqrt\"]",
+    "model_file": "models/agent_batch_gemm-sqrt-gemm-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 13:07:22",
+    "created_at": "2026-07-15 13:09:25",
     "finished_at": ""
   }
 ]
