@@ -12445,12 +12445,25 @@
     "combo_id": "batch_gemm-sin-gemm-tanh",
     "ops": "[\"batch_gemm\", \"sin\", \"gemm\", \"tanh\"]",
     "model_file": "models/agent_batch_gemm-sin-gemm-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7962e01106f86eaf0611a50ee40a80c049f771e5",
+    "ci_run_id": 29397692327,
+    "error_msg": "",
+    "created_at": "2026-07-15 16:32:30",
+    "finished_at": "2026-07-15 16:33:33"
+  },
+  {
+    "id": 959,
+    "combo_id": "batch_gemm-sin-gemm-sin",
+    "ops": "[\"batch_gemm\", \"sin\", \"gemm\", \"sin\"]",
+    "model_file": "models/agent_batch_gemm-sin-gemm-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 16:32:30",
+    "created_at": "2026-07-15 16:34:33",
     "finished_at": ""
   }
 ]
