@@ -16735,12 +16735,25 @@
     "combo_id": "gemv-exp-gemv-mul",
     "ops": "[\"gemv\", \"exp\", \"gemv\", \"mul\"]",
     "model_file": "models/agent_gemv-exp-gemv-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "234833a091dd72405cecaecdfc570498a1026ccd",
+    "ci_run_id": 29437481409,
+    "error_msg": "",
+    "created_at": "2026-07-16 02:40:42",
+    "finished_at": "2026-07-16 02:41:45"
+  },
+  {
+    "id": 1289,
+    "combo_id": "gemv-exp-gemv-div",
+    "ops": "[\"gemv\", \"exp\", \"gemv\", \"div\"]",
+    "model_file": "models/agent_gemv-exp-gemv-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 02:40:42",
+    "created_at": "2026-07-16 02:42:45",
     "finished_at": ""
   }
 ]
