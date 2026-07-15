@@ -15903,12 +15903,25 @@
     "combo_id": "gemv-rsqrt-gemv-cos",
     "ops": "[\"gemv\", \"rsqrt\", \"gemv\", \"cos\"]",
     "model_file": "models/agent_gemv-rsqrt-gemv-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "b13d5e08a4a88234e2f698b588bb25ead13f59ab",
+    "ci_run_id": 29428284273,
+    "error_msg": "",
+    "created_at": "2026-07-16 00:29:06",
+    "finished_at": "2026-07-16 00:30:09"
+  },
+  {
+    "id": 1225,
+    "combo_id": "gemv-rsqrt-gemv-pow2",
+    "ops": "[\"gemv\", \"rsqrt\", \"gemv\", \"pow2\"]",
+    "model_file": "models/agent_gemv-rsqrt-gemv-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 00:29:06",
+    "created_at": "2026-07-16 00:31:09",
     "finished_at": ""
   }
 ]
