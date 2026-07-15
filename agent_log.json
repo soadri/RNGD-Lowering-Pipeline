@@ -19049,12 +19049,25 @@
     "combo_id": "gemv-pow2-gemv-add",
     "ops": "[\"gemv\", \"pow2\", \"gemv\", \"add\"]",
     "model_file": "models/agent_gemv-pow2-gemv-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f9b03bf74b0a600e382d2f700db481ee478efc0e",
+    "ci_run_id": 29459564566,
+    "error_msg": "",
+    "created_at": "2026-07-16 08:46:56",
+    "finished_at": "2026-07-16 08:47:59"
+  },
+  {
+    "id": 1467,
+    "combo_id": "gemv-pow2-gemv-sub",
+    "ops": "[\"gemv\", \"pow2\", \"gemv\", \"sub\"]",
+    "model_file": "models/agent_gemv-pow2-gemv-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 08:46:56",
+    "created_at": "2026-07-16 08:48:59",
     "finished_at": ""
   }
 ]
