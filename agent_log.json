@@ -17606,12 +17606,25 @@
     "combo_id": "gemv-tanh-gemm-sin",
     "ops": "[\"gemv\", \"tanh\", \"gemm\", \"sin\"]",
     "model_file": "models/agent_gemv-tanh-gemm-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "cf831f7e1e0b17e4610255f88c497ce5ddcf16d6",
+    "ci_run_id": 29446557964,
+    "error_msg": "",
+    "created_at": "2026-07-16 04:58:57",
+    "finished_at": "2026-07-16 05:00:01"
+  },
+  {
+    "id": 1356,
+    "combo_id": "gemv-tanh-gemm-cos",
+    "ops": "[\"gemv\", \"tanh\", \"gemm\", \"cos\"]",
+    "model_file": "models/agent_gemv-tanh-gemm-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 04:58:57",
+    "created_at": "2026-07-16 05:01:01",
     "finished_at": ""
   }
 ]
