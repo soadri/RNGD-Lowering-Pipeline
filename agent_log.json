@@ -17190,12 +17190,25 @@
     "combo_id": "gemv-sigmoid-gemv-sub",
     "ops": "[\"gemv\", \"sigmoid\", \"gemv\", \"sub\"]",
     "model_file": "models/agent_gemv-sigmoid-gemv-sub.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "e9fecf0c8203f5999edb23d67ea9463079b0dfbb",
+    "ci_run_id": 29442327293,
+    "error_msg": "",
+    "created_at": "2026-07-16 03:52:42",
+    "finished_at": "2026-07-16 03:53:45"
+  },
+  {
+    "id": 1324,
+    "combo_id": "gemv-sigmoid-gemv-mul",
+    "ops": "[\"gemv\", \"sigmoid\", \"gemv\", \"mul\"]",
+    "model_file": "models/agent_gemv-sigmoid-gemv-mul.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 03:52:42",
+    "created_at": "2026-07-16 03:54:45",
     "finished_at": ""
   }
 ]
