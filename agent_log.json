@@ -8168,12 +8168,25 @@
     "combo_id": "batch_gemm-add-gemm-div",
     "ops": "[\"batch_gemm\", \"add\", \"gemm\", \"div\"]",
     "model_file": "models/agent_batch_gemm-add-gemm-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d2ea95b2d1263540218aa351cb630a861ff92893",
+    "ci_run_id": 29377836892,
+    "error_msg": "",
+    "created_at": "2026-07-15 09:01:24",
+    "finished_at": "2026-07-15 09:02:27"
+  },
+  {
+    "id": 630,
+    "combo_id": "batch_gemm-add-gemm-rsqrt",
+    "ops": "[\"batch_gemm\", \"add\", \"gemm\", \"rsqrt\"]",
+    "model_file": "models/agent_batch_gemm-add-gemm-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 09:01:24",
+    "created_at": "2026-07-15 09:03:27",
     "finished_at": ""
   }
 ]
