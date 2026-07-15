@@ -17216,12 +17216,25 @@
     "combo_id": "gemv-sigmoid-gemv-div",
     "ops": "[\"gemv\", \"sigmoid\", \"gemv\", \"div\"]",
     "model_file": "models/agent_gemv-sigmoid-gemv-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "9547c03a2f22b046ec6640a81ef5e4fd1f7fed9b",
+    "ci_run_id": 29442603602,
+    "error_msg": "",
+    "created_at": "2026-07-16 03:56:49",
+    "finished_at": "2026-07-16 03:57:52"
+  },
+  {
+    "id": 1326,
+    "combo_id": "gemv-sigmoid-gemv-rsqrt",
+    "ops": "[\"gemv\", \"sigmoid\", \"gemv\", \"rsqrt\"]",
+    "model_file": "models/agent_gemv-sigmoid-gemv-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 03:56:49",
+    "created_at": "2026-07-16 03:58:52",
     "finished_at": ""
   }
 ]
