@@ -14005,12 +14005,25 @@
     "combo_id": "gemv-add-gemv-tanh",
     "ops": "[\"gemv\", \"add\", \"gemv\", \"tanh\"]",
     "model_file": "models/agent_gemv-add-gemv-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "8db645c57fd54e140991b582d13f690976570355",
+    "ci_run_id": 29407950649,
+    "error_msg": "",
+    "created_at": "2026-07-15 19:23:23",
+    "finished_at": "2026-07-15 19:24:27"
+  },
+  {
+    "id": 1079,
+    "combo_id": "gemv-add-gemv-sin",
+    "ops": "[\"gemv\", \"add\", \"gemv\", \"sin\"]",
+    "model_file": "models/agent_gemv-add-gemv-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 19:23:23",
+    "created_at": "2026-07-15 19:25:27",
     "finished_at": ""
   }
 ]
