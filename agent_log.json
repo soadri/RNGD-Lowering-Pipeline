@@ -12900,12 +12900,25 @@
     "combo_id": "batch_gemm-cos-gemm-sigmoid",
     "ops": "[\"batch_gemm\", \"cos\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_batch_gemm-cos-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "fea6596f0ce57ceea9b1c2ae25bab9d944ebf8be",
+    "ci_run_id": 29400368560,
+    "error_msg": "",
+    "created_at": "2026-07-15 17:19:12",
+    "finished_at": "2026-07-15 17:20:15"
+  },
+  {
+    "id": 994,
+    "combo_id": "batch_gemm-cos-gemm-tanh",
+    "ops": "[\"batch_gemm\", \"cos\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_batch_gemm-cos-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 17:19:12",
+    "created_at": "2026-07-15 17:21:15",
     "finished_at": ""
   }
 ]
