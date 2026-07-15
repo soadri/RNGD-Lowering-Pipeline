@@ -12848,12 +12848,25 @@
     "combo_id": "batch_gemm-cos-gemm-div",
     "ops": "[\"batch_gemm\", \"cos\", \"gemm\", \"div\"]",
     "model_file": "models/agent_batch_gemm-cos-gemm-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f97498e0f0af7aaaa49de89a429e79ad4cb5e7e7",
+    "ci_run_id": 29399884829,
+    "error_msg": "",
+    "created_at": "2026-07-15 17:10:58",
+    "finished_at": "2026-07-15 17:12:02"
+  },
+  {
+    "id": 990,
+    "combo_id": "batch_gemm-cos-gemm-rsqrt",
+    "ops": "[\"batch_gemm\", \"cos\", \"gemm\", \"rsqrt\"]",
+    "model_file": "models/agent_batch_gemm-cos-gemm-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 17:10:58",
+    "created_at": "2026-07-15 17:13:02",
     "finished_at": ""
   }
 ]
