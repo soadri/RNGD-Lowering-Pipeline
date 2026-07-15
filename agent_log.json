@@ -15825,12 +15825,25 @@
     "combo_id": "gemv-rsqrt-gemv-rsqrt",
     "ops": "[\"gemv\", \"rsqrt\", \"gemv\", \"rsqrt\"]",
     "model_file": "models/agent_gemv-rsqrt-gemv-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "31e8c3e1c3cd4f6134f323f8aeb4a702cda36d6f",
+    "ci_run_id": 29427383307,
+    "error_msg": "",
+    "created_at": "2026-07-16 00:16:45",
+    "finished_at": "2026-07-16 00:17:49"
+  },
+  {
+    "id": 1219,
+    "combo_id": "gemv-rsqrt-gemv-sqrt",
+    "ops": "[\"gemv\", \"rsqrt\", \"gemv\", \"sqrt\"]",
+    "model_file": "models/agent_gemv-rsqrt-gemv-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 00:16:45",
+    "created_at": "2026-07-16 00:18:49",
     "finished_at": ""
   }
 ]
