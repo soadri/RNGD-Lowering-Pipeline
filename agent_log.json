@@ -15890,12 +15890,25 @@
     "combo_id": "gemv-rsqrt-gemv-sin",
     "ops": "[\"gemv\", \"rsqrt\", \"gemv\", \"sin\"]",
     "model_file": "models/agent_gemv-rsqrt-gemv-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "026a18d1e9260f42f5ac463357c1a93b9915f9da",
+    "ci_run_id": 29428134966,
+    "error_msg": "",
+    "created_at": "2026-07-16 00:27:02",
+    "finished_at": "2026-07-16 00:28:06"
+  },
+  {
+    "id": 1224,
+    "combo_id": "gemv-rsqrt-gemv-cos",
+    "ops": "[\"gemv\", \"rsqrt\", \"gemv\", \"cos\"]",
+    "model_file": "models/agent_gemv-rsqrt-gemv-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 00:27:02",
+    "created_at": "2026-07-16 00:29:06",
     "finished_at": ""
   }
 ]
