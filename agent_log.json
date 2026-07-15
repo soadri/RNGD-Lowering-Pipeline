@@ -17203,12 +17203,25 @@
     "combo_id": "gemv-sigmoid-gemv-mul",
     "ops": "[\"gemv\", \"sigmoid\", \"gemv\", \"mul\"]",
     "model_file": "models/agent_gemv-sigmoid-gemv-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d5d6fcc33cea5eb2816ef683297b1270984b3336",
+    "ci_run_id": 29442465382,
+    "error_msg": "",
+    "created_at": "2026-07-16 03:54:45",
+    "finished_at": "2026-07-16 03:55:49"
+  },
+  {
+    "id": 1325,
+    "combo_id": "gemv-sigmoid-gemv-div",
+    "ops": "[\"gemv\", \"sigmoid\", \"gemv\", \"div\"]",
+    "model_file": "models/agent_gemv-sigmoid-gemv-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 03:54:45",
+    "created_at": "2026-07-16 03:56:49",
     "finished_at": ""
   }
 ]
