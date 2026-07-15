@@ -10586,12 +10586,25 @@
     "combo_id": "batch_gemm-sqrt-gemm-sin",
     "ops": "[\"batch_gemm\", \"sqrt\", \"gemm\", \"sin\"]",
     "model_file": "models/agent_batch_gemm-sqrt-gemm-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "506e5899d6dddc4a2d75b087cd98cd11d5acceb7",
+    "ci_run_id": 29388709549,
+    "error_msg": "",
+    "created_at": "2026-07-15 13:19:41",
+    "finished_at": "2026-07-15 13:20:44"
+  },
+  {
+    "id": 816,
+    "combo_id": "batch_gemm-sqrt-gemm-cos",
+    "ops": "[\"batch_gemm\", \"sqrt\", \"gemm\", \"cos\"]",
+    "model_file": "models/agent_batch_gemm-sqrt-gemm-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 13:19:41",
+    "created_at": "2026-07-15 13:21:44",
     "finished_at": ""
   }
 ]
