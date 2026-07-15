@@ -18516,12 +18516,25 @@
     "combo_id": "gemv-cos-gemm-sigmoid",
     "ops": "[\"gemv\", \"cos\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_gemv-cos-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a106dedce2173b3cb4e8de7afbaf17188e3cbcbb",
+    "ci_run_id": 29455200448,
+    "error_msg": "",
+    "created_at": "2026-07-16 07:22:45",
+    "finished_at": "2026-07-16 07:23:48"
+  },
+  {
+    "id": 1426,
+    "combo_id": "gemv-cos-gemm-tanh",
+    "ops": "[\"gemv\", \"cos\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_gemv-cos-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 07:22:45",
+    "created_at": "2026-07-16 07:24:48",
     "finished_at": ""
   }
 ]
