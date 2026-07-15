@@ -12341,12 +12341,25 @@
     "combo_id": "batch_gemm-sin-gemm-add",
     "ops": "[\"batch_gemm\", \"sin\", \"gemm\", \"add\"]",
     "model_file": "models/agent_batch_gemm-sin-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "1dacf86542c60d0e1793e451121c02e8d982ebe8",
+    "ci_run_id": 29396788041,
+    "error_msg": "",
+    "created_at": "2026-07-15 16:16:03",
+    "finished_at": "2026-07-15 16:17:07"
+  },
+  {
+    "id": 951,
+    "combo_id": "batch_gemm-sin-gemm-sub",
+    "ops": "[\"batch_gemm\", \"sin\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_batch_gemm-sin-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 16:16:03",
+    "created_at": "2026-07-15 16:18:07",
     "finished_at": ""
   }
 ]
