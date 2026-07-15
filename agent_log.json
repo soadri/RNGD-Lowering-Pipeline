@@ -18295,12 +18295,25 @@
     "combo_id": "gemv-sin-dot_product-mul",
     "ops": "[\"gemv\", \"sin\", \"dot_product\", \"mul\"]",
     "model_file": "models/agent_gemv-sin-dot_product-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "556dac8728dde797ca88fd24d344c1d079f2ba44",
+    "ci_run_id": 29453198827,
+    "error_msg": "",
+    "created_at": "2026-07-16 06:47:50",
+    "finished_at": "2026-07-16 06:48:53"
+  },
+  {
+    "id": 1409,
+    "combo_id": "gemv-sin-dot_product-div",
+    "ops": "[\"gemv\", \"sin\", \"dot_product\", \"div\"]",
+    "model_file": "models/agent_gemv-sin-dot_product-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 06:47:50",
+    "created_at": "2026-07-16 06:49:53",
     "finished_at": ""
   }
 ]
