@@ -13875,12 +13875,25 @@
     "combo_id": "gemv-add-gemm-cos",
     "ops": "[\"gemv\", \"add\", \"gemm\", \"cos\"]",
     "model_file": "models/agent_gemv-add-gemm-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "43b53739b5b9d530a2de8f4a2afbc8872d8e46ed",
+    "ci_run_id": 29406731183,
+    "error_msg": "",
+    "created_at": "2026-07-15 19:02:50",
+    "finished_at": "2026-07-15 19:03:54"
+  },
+  {
+    "id": 1069,
+    "combo_id": "gemv-add-gemm-pow2",
+    "ops": "[\"gemv\", \"add\", \"gemm\", \"pow2\"]",
+    "model_file": "models/agent_gemv-add-gemm-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 19:02:50",
+    "created_at": "2026-07-15 19:04:54",
     "finished_at": ""
   }
 ]
