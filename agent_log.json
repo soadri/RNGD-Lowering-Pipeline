@@ -11015,12 +11015,25 @@
     "combo_id": "batch_gemm-exp-gemm-exp",
     "ops": "[\"batch_gemm\", \"exp\", \"gemm\", \"exp\"]",
     "model_file": "models/agent_batch_gemm-exp-gemm-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "74708a847a75a7f2bd857155ceb842de6cf42a5f",
+    "ci_run_id": 29390423790,
+    "error_msg": "",
+    "created_at": "2026-07-15 14:02:14",
+    "finished_at": "2026-07-15 14:03:17"
+  },
+  {
+    "id": 849,
+    "combo_id": "batch_gemm-exp-gemm-sigmoid",
+    "ops": "[\"batch_gemm\", \"exp\", \"gemm\", \"sigmoid\"]",
+    "model_file": "models/agent_batch_gemm-exp-gemm-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 14:02:14",
+    "created_at": "2026-07-15 14:04:17",
     "finished_at": ""
   }
 ]
