@@ -17359,12 +17359,25 @@
     "combo_id": "gemv-sigmoid-dot_product-mul",
     "ops": "[\"gemv\", \"sigmoid\", \"dot_product\", \"mul\"]",
     "model_file": "models/agent_gemv-sigmoid-dot_product-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "e6d19b6a38bd67038366ce56d54eb31973a97891",
+    "ci_run_id": 29444099521,
+    "error_msg": "",
+    "created_at": "2026-07-16 04:19:55",
+    "finished_at": "2026-07-16 04:20:59"
+  },
+  {
+    "id": 1337,
+    "combo_id": "gemv-sigmoid-dot_product-div",
+    "ops": "[\"gemv\", \"sigmoid\", \"dot_product\", \"div\"]",
+    "model_file": "models/agent_gemv-sigmoid-dot_product-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 04:19:55",
+    "created_at": "2026-07-16 04:21:59",
     "finished_at": ""
   }
 ]
