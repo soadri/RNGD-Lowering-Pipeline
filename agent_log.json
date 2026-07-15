@@ -12419,12 +12419,25 @@
     "combo_id": "batch_gemm-sin-gemm-exp",
     "ops": "[\"batch_gemm\", \"sin\", \"gemm\", \"exp\"]",
     "model_file": "models/agent_batch_gemm-sin-gemm-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "cd897477328b6090e0b41728d5b51274aa7757b8",
+    "ci_run_id": 29397464283,
+    "error_msg": "",
+    "created_at": "2026-07-15 16:28:23",
+    "finished_at": "2026-07-15 16:29:27"
+  },
+  {
+    "id": 957,
+    "combo_id": "batch_gemm-sin-gemm-sigmoid",
+    "ops": "[\"batch_gemm\", \"sin\", \"gemm\", \"sigmoid\"]",
+    "model_file": "models/agent_batch_gemm-sin-gemm-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 16:28:23",
+    "created_at": "2026-07-15 16:30:27",
     "finished_at": ""
   }
 ]
