@@ -8233,12 +8233,25 @@
     "combo_id": "batch_gemm-add-gemm-tanh",
     "ops": "[\"batch_gemm\", \"add\", \"gemm\", \"tanh\"]",
     "model_file": "models/agent_batch_gemm-add-gemm-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "8e460be7e0820e04559592aac9ae76009ffcbccf",
+    "ci_run_id": 29378354230,
+    "error_msg": "",
+    "created_at": "2026-07-15 09:11:39",
+    "finished_at": "2026-07-15 09:12:42"
+  },
+  {
+    "id": 635,
+    "combo_id": "batch_gemm-add-gemm-sin",
+    "ops": "[\"batch_gemm\", \"add\", \"gemm\", \"sin\"]",
+    "model_file": "models/agent_batch_gemm-add-gemm-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 09:11:39",
+    "created_at": "2026-07-15 09:13:42",
     "finished_at": ""
   }
 ]
