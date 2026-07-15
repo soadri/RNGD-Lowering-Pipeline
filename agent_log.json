@@ -9182,12 +9182,25 @@
     "combo_id": "batch_gemm-mul-gemm-sin",
     "ops": "[\"batch_gemm\", \"mul\", \"gemm\", \"sin\"]",
     "model_file": "models/agent_batch_gemm-mul-gemm-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "1796494640e17c0050ca62137e9a2d0aa3186300",
+    "ci_run_id": 29382687111,
+    "error_msg": "",
+    "created_at": "2026-07-15 10:52:05",
+    "finished_at": "2026-07-15 10:53:08"
+  },
+  {
+    "id": 708,
+    "combo_id": "batch_gemm-mul-gemm-cos",
+    "ops": "[\"batch_gemm\", \"mul\", \"gemm\", \"cos\"]",
+    "model_file": "models/agent_batch_gemm-mul-gemm-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 10:52:05",
+    "created_at": "2026-07-15 10:54:08",
     "finished_at": ""
   }
 ]
