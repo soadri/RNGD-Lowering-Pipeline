@@ -14109,12 +14109,25 @@
     "combo_id": "gemv-add-dot_product-rsqrt",
     "ops": "[\"gemv\", \"add\", \"dot_product\", \"rsqrt\"]",
     "model_file": "models/agent_gemv-add-dot_product-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "ed2b83ee5b050eb725eb4d96d38e532539c53a2b",
+    "ci_run_id": 29408908745,
+    "error_msg": "",
+    "created_at": "2026-07-15 19:39:50",
+    "finished_at": "2026-07-15 19:40:53"
+  },
+  {
+    "id": 1087,
+    "combo_id": "gemv-add-dot_product-sqrt",
+    "ops": "[\"gemv\", \"add\", \"dot_product\", \"sqrt\"]",
+    "model_file": "models/agent_gemv-add-dot_product-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 19:39:50",
+    "created_at": "2026-07-15 19:41:53",
     "finished_at": ""
   }
 ]
