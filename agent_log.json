@@ -15201,12 +15201,25 @@
     "combo_id": "gemv-div-gemm-rsqrt",
     "ops": "[\"gemv\", \"div\", \"gemm\", \"rsqrt\"]",
     "model_file": "models/agent_gemv-div-gemm-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "ec7a8eb20c22b329d89f1ae7d55696a8f74a4e68",
+    "ci_run_id": 29419837287,
+    "error_msg": "",
+    "created_at": "2026-07-15 22:35:31",
+    "finished_at": "2026-07-15 22:36:34"
+  },
+  {
+    "id": 1171,
+    "combo_id": "gemv-div-gemm-sqrt",
+    "ops": "[\"gemv\", \"div\", \"gemm\", \"sqrt\"]",
+    "model_file": "models/agent_gemv-div-gemm-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-15 22:35:31",
+    "created_at": "2026-07-15 22:37:34",
     "finished_at": ""
   }
 ]
