@@ -20362,12 +20362,25 @@
     "combo_id": "dot_product-mul-gemm-sqrt",
     "ops": "[\"dot_product\", \"mul\", \"gemm\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-mul-gemm-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6908b8b9abf4dbec5e56de97cafa9dbeece65060",
+    "ci_run_id": 29468529948,
+    "error_msg": "",
+    "created_at": "2026-07-16 12:14:55",
+    "finished_at": "2026-07-16 12:15:59"
+  },
+  {
+    "id": 1568,
+    "combo_id": "dot_product-mul-gemm-exp",
+    "ops": "[\"dot_product\", \"mul\", \"gemm\", \"exp\"]",
+    "model_file": "models/agent_dot_product-mul-gemm-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 12:14:55",
+    "created_at": "2026-07-16 12:16:59",
     "finished_at": ""
   }
 ]
