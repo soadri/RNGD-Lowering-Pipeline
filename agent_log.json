@@ -21207,12 +21207,25 @@
     "combo_id": "dot_product-div-dot_product-cos",
     "ops": "[\"dot_product\", \"div\", \"dot_product\", \"cos\"]",
     "model_file": "models/agent_dot_product-div-dot_product-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "76d5accadfa239eac1367bb2d75c8c2c649c3b87",
+    "ci_run_id": 29474003872,
+    "error_msg": "",
+    "created_at": "2026-07-16 14:29:00",
+    "finished_at": "2026-07-16 14:30:03"
+  },
+  {
+    "id": 1633,
+    "combo_id": "dot_product-div-dot_product-pow2",
+    "ops": "[\"dot_product\", \"div\", \"dot_product\", \"pow2\"]",
+    "model_file": "models/agent_dot_product-div-dot_product-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 14:29:00",
+    "created_at": "2026-07-16 14:31:03",
     "finished_at": ""
   }
 ]
