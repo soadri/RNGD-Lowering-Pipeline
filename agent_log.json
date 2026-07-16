@@ -21987,12 +21987,25 @@
     "combo_id": "dot_product-sqrt-gemv-cos",
     "ops": "[\"dot_product\", \"sqrt\", \"gemv\", \"cos\"]",
     "model_file": "models/agent_dot_product-sqrt-gemv-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "2efdc3caff5aad50a5a465903b65b21309ee7b68",
+    "ci_run_id": 29480269148,
+    "error_msg": "",
+    "created_at": "2026-07-16 16:32:28",
+    "finished_at": "2026-07-16 16:33:31"
+  },
+  {
+    "id": 1693,
+    "combo_id": "dot_product-sqrt-gemv-pow2",
+    "ops": "[\"dot_product\", \"sqrt\", \"gemv\", \"pow2\"]",
+    "model_file": "models/agent_dot_product-sqrt-gemv-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 16:32:28",
+    "created_at": "2026-07-16 16:34:31",
     "finished_at": ""
   }
 ]
