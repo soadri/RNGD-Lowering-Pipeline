@@ -19790,12 +19790,25 @@
     "combo_id": "dot_product-add-dot_product-sin",
     "ops": "[\"dot_product\", \"add\", \"dot_product\", \"sin\"]",
     "model_file": "models/agent_dot_product-add-dot_product-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "bf7a244d367354d2007a85079899b28fe76c2ba8",
+    "ci_run_id": 29464878243,
+    "error_msg": "",
+    "created_at": "2026-07-16 10:44:31",
+    "finished_at": "2026-07-16 10:45:34"
+  },
+  {
+    "id": 1524,
+    "combo_id": "dot_product-add-dot_product-cos",
+    "ops": "[\"dot_product\", \"add\", \"dot_product\", \"cos\"]",
+    "model_file": "models/agent_dot_product-add-dot_product-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 10:44:31",
+    "created_at": "2026-07-16 10:46:34",
     "finished_at": ""
   }
 ]
