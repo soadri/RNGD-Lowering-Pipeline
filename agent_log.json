@@ -22312,12 +22312,25 @@
     "combo_id": "dot_product-exp-gemm-pow2",
     "ops": "[\"dot_product\", \"exp\", \"gemm\", \"pow2\"]",
     "model_file": "models/agent_dot_product-exp-gemm-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "0209da72ca93fdf4f622ea700761bc1483a383ab",
+    "ci_run_id": 29483317330,
+    "error_msg": "",
+    "created_at": "2026-07-16 17:23:54",
+    "finished_at": "2026-07-16 17:24:57"
+  },
+  {
+    "id": 1718,
+    "combo_id": "dot_product-exp-gemv-add",
+    "ops": "[\"dot_product\", \"exp\", \"gemv\", \"add\"]",
+    "model_file": "models/agent_dot_product-exp-gemv-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 17:23:54",
+    "created_at": "2026-07-16 17:25:57",
     "finished_at": ""
   }
 ]
