@@ -22910,12 +22910,25 @@
     "combo_id": "dot_product-sigmoid-gemv-sin",
     "ops": "[\"dot_product\", \"sigmoid\", \"gemv\", \"sin\"]",
     "model_file": "models/agent_dot_product-sigmoid-gemv-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f68f523dd88fb760d2db1864761b58096b4f7839",
+    "ci_run_id": 29489347469,
+    "error_msg": "",
+    "created_at": "2026-07-16 19:01:54",
+    "finished_at": "2026-07-16 19:03:58"
+  },
+  {
+    "id": 1764,
+    "combo_id": "dot_product-sigmoid-gemv-cos",
+    "ops": "[\"dot_product\", \"sigmoid\", \"gemv\", \"cos\"]",
+    "model_file": "models/agent_dot_product-sigmoid-gemv-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 19:01:54",
+    "created_at": "2026-07-16 19:04:58",
     "finished_at": ""
   }
 ]
