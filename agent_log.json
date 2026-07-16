@@ -19283,12 +19283,25 @@
     "combo_id": "gemv-pow2-dot_product-exp",
     "ops": "[\"gemv\", \"pow2\", \"dot_product\", \"exp\"]",
     "model_file": "models/agent_gemv-pow2-dot_product-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "1b046947691188bf6eee5b2c3a942a90b7a74116",
+    "ci_run_id": 29461349897,
+    "error_msg": "",
+    "created_at": "2026-07-16 09:24:25",
+    "finished_at": "2026-07-16 09:25:28"
+  },
+  {
+    "id": 1485,
+    "combo_id": "gemv-pow2-dot_product-sigmoid",
+    "ops": "[\"gemv\", \"pow2\", \"dot_product\", \"sigmoid\"]",
+    "model_file": "models/agent_gemv-pow2-dot_product-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 09:24:25",
+    "created_at": "2026-07-16 09:26:28",
     "finished_at": ""
   }
 ]
