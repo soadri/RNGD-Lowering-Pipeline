@@ -21077,12 +21077,25 @@
     "combo_id": "dot_product-div-dot_product-add",
     "ops": "[\"dot_product\", \"div\", \"dot_product\", \"add\"]",
     "model_file": "models/agent_dot_product-div-dot_product-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "c8f6f6979faa3cfa7d6c5bb1a7731fe1a3e44711",
+    "ci_run_id": 29473111695,
+    "error_msg": "",
+    "created_at": "2026-07-16 14:08:27",
+    "finished_at": "2026-07-16 14:09:30"
+  },
+  {
+    "id": 1623,
+    "combo_id": "dot_product-div-dot_product-sub",
+    "ops": "[\"dot_product\", \"div\", \"dot_product\", \"sub\"]",
+    "model_file": "models/agent_dot_product-div-dot_product-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 14:08:27",
+    "created_at": "2026-07-16 14:10:30",
     "finished_at": ""
   }
 ]
