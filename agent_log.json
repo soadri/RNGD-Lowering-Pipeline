@@ -21402,12 +21402,25 @@
     "combo_id": "dot_product-rsqrt-gemv-sub",
     "ops": "[\"dot_product\", \"rsqrt\", \"gemv\", \"sub\"]",
     "model_file": "models/agent_dot_product-rsqrt-gemv-sub.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6a7e05af43e1e12841496af8796d81982ba39204",
+    "ci_run_id": 29475407061,
+    "error_msg": "",
+    "created_at": "2026-07-16 14:59:51",
+    "finished_at": "2026-07-16 15:00:55"
+  },
+  {
+    "id": 1648,
+    "combo_id": "dot_product-rsqrt-gemv-mul",
+    "ops": "[\"dot_product\", \"rsqrt\", \"gemv\", \"mul\"]",
+    "model_file": "models/agent_dot_product-rsqrt-gemv-mul.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 14:59:51",
+    "created_at": "2026-07-16 15:01:55",
     "finished_at": ""
   }
 ]
