@@ -24106,12 +24106,25 @@
     "combo_id": "dot_product-cos-gemm-sqrt",
     "ops": "[\"dot_product\", \"cos\", \"gemm\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-cos-gemm-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d5c8d2d75af1616a6063e96c825ebfa37572433b",
+    "ci_run_id": 29501387562,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:14:41",
+    "finished_at": "2026-07-16 22:15:45"
+  },
+  {
+    "id": 1856,
+    "combo_id": "dot_product-cos-gemm-exp",
+    "ops": "[\"dot_product\", \"cos\", \"gemm\", \"exp\"]",
+    "model_file": "models/agent_dot_product-cos-gemm-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:14:41",
+    "created_at": "2026-07-16 22:16:45",
     "finished_at": ""
   }
 ]
