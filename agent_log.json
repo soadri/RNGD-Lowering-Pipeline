@@ -22585,12 +22585,25 @@
     "combo_id": "dot_product-exp-dot_product-tanh",
     "ops": "[\"dot_product\", \"exp\", \"dot_product\", \"tanh\"]",
     "model_file": "models/agent_dot_product-exp-dot_product-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "dcfde1e9dc2d670117a832bbdddd941c0c045861",
+    "ci_run_id": 29485957542,
+    "error_msg": "",
+    "created_at": "2026-07-16 18:07:16",
+    "finished_at": "2026-07-16 18:08:19"
+  },
+  {
+    "id": 1739,
+    "combo_id": "dot_product-exp-dot_product-sin",
+    "ops": "[\"dot_product\", \"exp\", \"dot_product\", \"sin\"]",
+    "model_file": "models/agent_dot_product-exp-dot_product-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 18:07:16",
+    "created_at": "2026-07-16 18:09:19",
     "finished_at": ""
   }
 ]
