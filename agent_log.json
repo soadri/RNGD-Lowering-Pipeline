@@ -19556,12 +19556,25 @@
     "combo_id": "dot_product-add-gemv-div",
     "ops": "[\"dot_product\", \"add\", \"gemv\", \"div\"]",
     "model_file": "models/agent_dot_product-add-gemv-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "04296e858709f5f93465f5db4eca12e9719022ea",
+    "ci_run_id": 29463324883,
+    "error_msg": "",
+    "created_at": "2026-07-16 10:07:32",
+    "finished_at": "2026-07-16 10:08:35"
+  },
+  {
+    "id": 1506,
+    "combo_id": "dot_product-add-gemv-rsqrt",
+    "ops": "[\"dot_product\", \"add\", \"gemv\", \"rsqrt\"]",
+    "model_file": "models/agent_dot_product-add-gemv-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 10:07:32",
+    "created_at": "2026-07-16 10:09:35",
     "finished_at": ""
   }
 ]
