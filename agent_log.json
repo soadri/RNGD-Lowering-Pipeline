@@ -24444,12 +24444,25 @@
     "combo_id": "dot_product-cos-dot_product-sigmoid",
     "ops": "[\"dot_product\", \"cos\", \"dot_product\", \"sigmoid\"]",
     "model_file": "models/agent_dot_product-cos-dot_product-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "ca8136c0045654187b461141a04b5e6560ebce14",
+    "ci_run_id": 29505241515,
+    "error_msg": "",
+    "created_at": "2026-07-16 23:08:13",
+    "finished_at": "2026-07-16 23:09:17"
+  },
+  {
+    "id": 1882,
+    "combo_id": "dot_product-cos-dot_product-tanh",
+    "ops": "[\"dot_product\", \"cos\", \"dot_product\", \"tanh\"]",
+    "model_file": "models/agent_dot_product-cos-dot_product-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 23:08:13",
+    "created_at": "2026-07-16 23:10:17",
     "finished_at": ""
   }
 ]
