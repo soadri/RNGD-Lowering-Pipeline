@@ -23196,12 +23196,25 @@
     "combo_id": "dot_product-tanh-gemm-sigmoid",
     "ops": "[\"dot_product\", \"tanh\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_dot_product-tanh-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "9fdda5173f2cc1dd8441adb865630852730b8e9e",
+    "ci_run_id": 29492123877,
+    "error_msg": "",
+    "created_at": "2026-07-16 19:48:10",
+    "finished_at": "2026-07-16 19:49:13"
+  },
+  {
+    "id": 1786,
+    "combo_id": "dot_product-tanh-gemm-tanh",
+    "ops": "[\"dot_product\", \"tanh\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_dot_product-tanh-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 19:48:10",
+    "created_at": "2026-07-16 19:50:14",
     "finished_at": ""
   }
 ]
