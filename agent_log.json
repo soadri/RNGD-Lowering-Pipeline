@@ -21350,12 +21350,25 @@
     "combo_id": "dot_product-rsqrt-gemm-sin",
     "ops": "[\"dot_product\", \"rsqrt\", \"gemm\", \"sin\"]",
     "model_file": "models/agent_dot_product-rsqrt-gemm-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "46a5f4ea603fe2e60c7308aebd1ab1ffbfe683ef",
+    "ci_run_id": 29475025165,
+    "error_msg": "",
+    "created_at": "2026-07-16 14:51:38",
+    "finished_at": "2026-07-16 14:52:41"
+  },
+  {
+    "id": 1644,
+    "combo_id": "dot_product-rsqrt-gemm-cos",
+    "ops": "[\"dot_product\", \"rsqrt\", \"gemm\", \"cos\"]",
+    "model_file": "models/agent_dot_product-rsqrt-gemm-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 14:51:38",
+    "created_at": "2026-07-16 14:53:41",
     "finished_at": ""
   }
 ]
