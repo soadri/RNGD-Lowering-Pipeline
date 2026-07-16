@@ -22013,12 +22013,25 @@
     "combo_id": "dot_product-sqrt-dot_product-add",
     "ops": "[\"dot_product\", \"sqrt\", \"dot_product\", \"add\"]",
     "model_file": "models/agent_dot_product-sqrt-dot_product-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "399e41da445a5ccb683259f9e17c6c09ae631a3c",
+    "ci_run_id": 29480504820,
+    "error_msg": "",
+    "created_at": "2026-07-16 16:36:35",
+    "finished_at": "2026-07-16 16:37:38"
+  },
+  {
+    "id": 1695,
+    "combo_id": "dot_product-sqrt-dot_product-sub",
+    "ops": "[\"dot_product\", \"sqrt\", \"dot_product\", \"sub\"]",
+    "model_file": "models/agent_dot_product-sqrt-dot_product-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 16:36:35",
+    "created_at": "2026-07-16 16:38:38",
     "finished_at": ""
   }
 ]
