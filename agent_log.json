@@ -22078,12 +22078,25 @@
     "combo_id": "dot_product-sqrt-dot_product-sqrt",
     "ops": "[\"dot_product\", \"sqrt\", \"dot_product\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-sqrt-dot_product-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d0c92f11ac24148527ebb5af3ee4e56fc80e6bb1",
+    "ci_run_id": 29481096919,
+    "error_msg": "",
+    "created_at": "2026-07-16 16:46:52",
+    "finished_at": "2026-07-16 16:47:55"
+  },
+  {
+    "id": 1700,
+    "combo_id": "dot_product-sqrt-dot_product-exp",
+    "ops": "[\"dot_product\", \"sqrt\", \"dot_product\", \"exp\"]",
+    "model_file": "models/agent_dot_product-sqrt-dot_product-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 16:46:52",
+    "created_at": "2026-07-16 16:48:55",
     "finished_at": ""
   }
 ]
