@@ -21961,12 +21961,25 @@
     "combo_id": "dot_product-sqrt-gemv-tanh",
     "ops": "[\"dot_product\", \"sqrt\", \"gemv\", \"tanh\"]",
     "model_file": "models/agent_dot_product-sqrt-gemv-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "3aa077a1c28985a1365dc4bd5899134b146c280b",
+    "ci_run_id": 29480032066,
+    "error_msg": "",
+    "created_at": "2026-07-16 16:28:21",
+    "finished_at": "2026-07-16 16:29:24"
+  },
+  {
+    "id": 1691,
+    "combo_id": "dot_product-sqrt-gemv-sin",
+    "ops": "[\"dot_product\", \"sqrt\", \"gemv\", \"sin\"]",
+    "model_file": "models/agent_dot_product-sqrt-gemv-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 16:28:21",
+    "created_at": "2026-07-16 16:30:24",
     "finished_at": ""
   }
 ]
