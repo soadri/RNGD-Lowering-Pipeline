@@ -21103,12 +21103,25 @@
     "combo_id": "dot_product-div-dot_product-mul",
     "ops": "[\"dot_product\", \"div\", \"dot_product\", \"mul\"]",
     "model_file": "models/agent_dot_product-div-dot_product-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "3b4008db684e17b153c668e5b4f54c4f106856ab",
+    "ci_run_id": 29473290734,
+    "error_msg": "",
+    "created_at": "2026-07-16 14:12:33",
+    "finished_at": "2026-07-16 14:13:36"
+  },
+  {
+    "id": 1625,
+    "combo_id": "dot_product-div-dot_product-div",
+    "ops": "[\"dot_product\", \"div\", \"dot_product\", \"div\"]",
+    "model_file": "models/agent_dot_product-div-dot_product-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 14:12:33",
+    "created_at": "2026-07-16 14:14:36",
     "finished_at": ""
   }
 ]
