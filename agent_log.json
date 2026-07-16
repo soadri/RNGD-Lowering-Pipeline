@@ -19816,12 +19816,25 @@
     "combo_id": "dot_product-add-dot_product-pow2",
     "ops": "[\"dot_product\", \"add\", \"dot_product\", \"pow2\"]",
     "model_file": "models/agent_dot_product-add-dot_product-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7dee0b242af98f3d7ef2d19216554e9a84de9781",
+    "ci_run_id": 29465045952,
+    "error_msg": "",
+    "created_at": "2026-07-16 10:48:38",
+    "finished_at": "2026-07-16 10:49:41"
+  },
+  {
+    "id": 1526,
+    "combo_id": "dot_product-sub-gemm-add",
+    "ops": "[\"dot_product\", \"sub\", \"gemm\", \"add\"]",
+    "model_file": "models/agent_dot_product-sub-gemm-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 10:48:38",
+    "created_at": "2026-07-16 10:50:41",
     "finished_at": ""
   }
 ]
