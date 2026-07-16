@@ -20401,12 +20401,25 @@
     "combo_id": "dot_product-mul-gemm-tanh",
     "ops": "[\"dot_product\", \"mul\", \"gemm\", \"tanh\"]",
     "model_file": "models/agent_dot_product-mul-gemm-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "cb44a9cd6e94bc2542527a05cf7cf4985ffe7659",
+    "ci_run_id": 29468771501,
+    "error_msg": "",
+    "created_at": "2026-07-16 12:21:05",
+    "finished_at": "2026-07-16 12:22:09"
+  },
+  {
+    "id": 1571,
+    "combo_id": "dot_product-mul-gemm-sin",
+    "ops": "[\"dot_product\", \"mul\", \"gemm\", \"sin\"]",
+    "model_file": "models/agent_dot_product-mul-gemm-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 12:21:05",
+    "created_at": "2026-07-16 12:23:09",
     "finished_at": ""
   }
 ]
