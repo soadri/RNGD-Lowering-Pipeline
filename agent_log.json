@@ -24574,12 +24574,25 @@
     "combo_id": "dot_product-pow2-gemm-sqrt",
     "ops": "[\"dot_product\", \"pow2\", \"gemm\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-pow2-gemm-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "8ebce485e3f1e704ecf0ccb973d3c62ed97bf4d6",
+    "ci_run_id": 29506778322,
+    "error_msg": "",
+    "created_at": "2026-07-16 23:28:49",
+    "finished_at": "2026-07-16 23:29:53"
+  },
+  {
+    "id": 1892,
+    "combo_id": "dot_product-pow2-gemm-exp",
+    "ops": "[\"dot_product\", \"pow2\", \"gemm\", \"exp\"]",
+    "model_file": "models/agent_dot_product-pow2-gemm-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 23:28:49",
+    "created_at": "2026-07-16 23:30:53",
     "finished_at": ""
   }
 ]
