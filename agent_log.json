@@ -22559,12 +22559,25 @@
     "combo_id": "dot_product-exp-dot_product-exp",
     "ops": "[\"dot_product\", \"exp\", \"dot_product\", \"exp\"]",
     "model_file": "models/agent_dot_product-exp-dot_product-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6fafa108e393cf775c83b82edbef0ad1e256f34e",
+    "ci_run_id": 29485698984,
+    "error_msg": "",
+    "created_at": "2026-07-16 18:03:09",
+    "finished_at": "2026-07-16 18:04:12"
+  },
+  {
+    "id": 1737,
+    "combo_id": "dot_product-exp-dot_product-sigmoid",
+    "ops": "[\"dot_product\", \"exp\", \"dot_product\", \"sigmoid\"]",
+    "model_file": "models/agent_dot_product-exp-dot_product-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 18:03:09",
+    "created_at": "2026-07-16 18:05:12",
     "finished_at": ""
   }
 ]
