@@ -23703,12 +23703,25 @@
     "combo_id": "dot_product-sin-gemm-cos",
     "ops": "[\"dot_product\", \"sin\", \"gemm\", \"cos\"]",
     "model_file": "models/agent_dot_product-sin-gemm-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "084d35b7e4170e3fb6817d3970f713e8267b40ea",
+    "ci_run_id": 29497135920,
+    "error_msg": "",
+    "created_at": "2026-07-16 21:10:24",
+    "finished_at": "2026-07-16 21:11:27"
+  },
+  {
+    "id": 1825,
+    "combo_id": "dot_product-sin-gemm-pow2",
+    "ops": "[\"dot_product\", \"sin\", \"gemm\", \"pow2\"]",
+    "model_file": "models/agent_dot_product-sin-gemm-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 21:10:24",
+    "created_at": "2026-07-16 21:12:27",
     "finished_at": ""
   }
 ]
