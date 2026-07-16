@@ -20596,12 +20596,25 @@
     "combo_id": "dot_product-mul-gemv-pow2",
     "ops": "[\"dot_product\", \"mul\", \"gemv\", \"pow2\"]",
     "model_file": "models/agent_dot_product-mul-gemv-pow2.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f38ef6b84f9bab21108557b395e062d6d0658aee",
+    "ci_run_id": 29469988877,
+    "error_msg": "",
+    "created_at": "2026-07-16 12:52:24",
+    "finished_at": "2026-07-16 12:53:28"
+  },
+  {
+    "id": 1586,
+    "combo_id": "dot_product-mul-dot_product-add",
+    "ops": "[\"dot_product\", \"mul\", \"dot_product\", \"add\"]",
+    "model_file": "models/agent_dot_product-mul-dot_product-add.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 12:52:24",
+    "created_at": "2026-07-16 12:54:28",
     "finished_at": ""
   }
 ]
