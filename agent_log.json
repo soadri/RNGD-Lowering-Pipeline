@@ -22884,12 +22884,25 @@
     "combo_id": "dot_product-sigmoid-gemv-sigmoid",
     "ops": "[\"dot_product\", \"sigmoid\", \"gemv\", \"sigmoid\"]",
     "model_file": "models/agent_dot_product-sigmoid-gemv-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7061215799006dff83914b44e3fa10325942799c",
+    "ci_run_id": 29489085431,
+    "error_msg": "",
+    "created_at": "2026-07-16 18:57:37",
+    "finished_at": "2026-07-16 18:58:50"
+  },
+  {
+    "id": 1762,
+    "combo_id": "dot_product-sigmoid-gemv-tanh",
+    "ops": "[\"dot_product\", \"sigmoid\", \"gemv\", \"tanh\"]",
+    "model_file": "models/agent_dot_product-sigmoid-gemv-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 18:57:37",
+    "created_at": "2026-07-16 18:59:50",
     "finished_at": ""
   }
 ]
