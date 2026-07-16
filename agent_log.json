@@ -23950,12 +23950,25 @@
     "combo_id": "dot_product-sin-dot_product-sqrt",
     "ops": "[\"dot_product\", \"sin\", \"dot_product\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-sin-dot_product-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "5fd4ac4fee1d795347edb61282ce73c38c7ee3f6",
+    "ci_run_id": 29499661401,
+    "error_msg": "",
+    "created_at": "2026-07-16 21:49:29",
+    "finished_at": "2026-07-16 21:50:32"
+  },
+  {
+    "id": 1844,
+    "combo_id": "dot_product-sin-dot_product-exp",
+    "ops": "[\"dot_product\", \"sin\", \"dot_product\", \"exp\"]",
+    "model_file": "models/agent_dot_product-sin-dot_product-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 21:49:29",
+    "created_at": "2026-07-16 21:51:33",
     "finished_at": ""
   }
 ]
