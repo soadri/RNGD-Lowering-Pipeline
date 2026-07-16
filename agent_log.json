@@ -21142,12 +21142,25 @@
     "combo_id": "dot_product-div-dot_product-sqrt",
     "ops": "[\"dot_product\", \"div\", \"dot_product\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-div-dot_product-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "4bf11a4d99661c16b822b192136bdcc03b09fd69",
+    "ci_run_id": 29473561327,
+    "error_msg": "",
+    "created_at": "2026-07-16 14:18:43",
+    "finished_at": "2026-07-16 14:19:46"
+  },
+  {
+    "id": 1628,
+    "combo_id": "dot_product-div-dot_product-exp",
+    "ops": "[\"dot_product\", \"div\", \"dot_product\", \"exp\"]",
+    "model_file": "models/agent_dot_product-div-dot_product-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 14:18:43",
+    "created_at": "2026-07-16 14:20:46",
     "finished_at": ""
   }
 ]
