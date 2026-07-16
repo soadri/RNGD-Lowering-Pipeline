@@ -20388,12 +20388,25 @@
     "combo_id": "dot_product-mul-gemm-sigmoid",
     "ops": "[\"dot_product\", \"mul\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_dot_product-mul-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f089428b1e26e3686ac0899974fbe0d8abf540d4",
+    "ci_run_id": 29468689455,
+    "error_msg": "",
+    "created_at": "2026-07-16 12:19:02",
+    "finished_at": "2026-07-16 12:20:05"
+  },
+  {
+    "id": 1570,
+    "combo_id": "dot_product-mul-gemm-tanh",
+    "ops": "[\"dot_product\", \"mul\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_dot_product-mul-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 12:19:02",
+    "created_at": "2026-07-16 12:21:05",
     "finished_at": ""
   }
 ]
