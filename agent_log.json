@@ -23768,12 +23768,25 @@
     "combo_id": "dot_product-sin-gemv-div",
     "ops": "[\"dot_product\", \"sin\", \"gemv\", \"div\"]",
     "model_file": "models/agent_dot_product-sin-gemv-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "d6d36ec201ebf4151c8f36055b2539e855bb4b32",
+    "ci_run_id": 29497777515,
+    "error_msg": "",
+    "created_at": "2026-07-16 21:20:41",
+    "finished_at": "2026-07-16 21:21:44"
+  },
+  {
+    "id": 1830,
+    "combo_id": "dot_product-sin-gemv-rsqrt",
+    "ops": "[\"dot_product\", \"sin\", \"gemv\", \"rsqrt\"]",
+    "model_file": "models/agent_dot_product-sin-gemv-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 21:20:41",
+    "created_at": "2026-07-16 21:22:44",
     "finished_at": ""
   }
 ]
