@@ -24301,12 +24301,25 @@
     "combo_id": "dot_product-cos-gemv-tanh",
     "ops": "[\"dot_product\", \"cos\", \"gemv\", \"tanh\"]",
     "model_file": "models/agent_dot_product-cos-gemv-tanh.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a6a0880481d5e886d0d6981daebac10928ba6497",
+    "ci_run_id": 29503568373,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:45:35",
+    "finished_at": "2026-07-16 22:46:38"
+  },
+  {
+    "id": 1871,
+    "combo_id": "dot_product-cos-gemv-sin",
+    "ops": "[\"dot_product\", \"cos\", \"gemv\", \"sin\"]",
+    "model_file": "models/agent_dot_product-cos-gemv-sin.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:45:35",
+    "created_at": "2026-07-16 22:47:38",
     "finished_at": ""
   }
 ]
