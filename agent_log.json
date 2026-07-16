@@ -24314,12 +24314,25 @@
     "combo_id": "dot_product-cos-gemv-sin",
     "ops": "[\"dot_product\", \"cos\", \"gemv\", \"sin\"]",
     "model_file": "models/agent_dot_product-cos-gemv-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "42ea0d9c2bcbffaa44b3ba53ab04eb12c9050e93",
+    "ci_run_id": 29503719505,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:47:38",
+    "finished_at": "2026-07-16 22:48:42"
+  },
+  {
+    "id": 1872,
+    "combo_id": "dot_product-cos-gemv-cos",
+    "ops": "[\"dot_product\", \"cos\", \"gemv\", \"cos\"]",
+    "model_file": "models/agent_dot_product-cos-gemv-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:47:38",
+    "created_at": "2026-07-16 22:49:42",
     "finished_at": ""
   }
 ]
