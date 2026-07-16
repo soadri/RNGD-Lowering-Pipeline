@@ -24132,12 +24132,25 @@
     "combo_id": "dot_product-cos-gemm-sigmoid",
     "ops": "[\"dot_product\", \"cos\", \"gemm\", \"sigmoid\"]",
     "model_file": "models/agent_dot_product-cos-gemm-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "58e4f213f873c443995e8e7f4a2e7d620caed519",
+    "ci_run_id": 29501676325,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:18:49",
+    "finished_at": "2026-07-16 22:19:52"
+  },
+  {
+    "id": 1858,
+    "combo_id": "dot_product-cos-gemm-tanh",
+    "ops": "[\"dot_product\", \"cos\", \"gemm\", \"tanh\"]",
+    "model_file": "models/agent_dot_product-cos-gemm-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:18:49",
+    "created_at": "2026-07-16 22:20:52",
     "finished_at": ""
   }
 ]
