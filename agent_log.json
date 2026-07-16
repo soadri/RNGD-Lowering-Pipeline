@@ -21545,12 +21545,25 @@
     "combo_id": "dot_product-rsqrt-dot_product-add",
     "ops": "[\"dot_product\", \"rsqrt\", \"dot_product\", \"add\"]",
     "model_file": "models/agent_dot_product-rsqrt-dot_product-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "291060d884e4c8e7c166701ea69c3d9769749931",
+    "ci_run_id": 29476522976,
+    "error_msg": "",
+    "created_at": "2026-07-16 15:22:33",
+    "finished_at": "2026-07-16 15:23:36"
+  },
+  {
+    "id": 1659,
+    "combo_id": "dot_product-rsqrt-dot_product-sub",
+    "ops": "[\"dot_product\", \"rsqrt\", \"dot_product\", \"sub\"]",
+    "model_file": "models/agent_dot_product-rsqrt-dot_product-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 15:22:33",
+    "created_at": "2026-07-16 15:24:36",
     "finished_at": ""
   }
 ]
