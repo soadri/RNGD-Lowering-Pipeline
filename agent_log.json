@@ -23313,12 +23313,25 @@
     "combo_id": "dot_product-tanh-gemv-rsqrt",
     "ops": "[\"dot_product\", \"tanh\", \"gemv\", \"rsqrt\"]",
     "model_file": "models/agent_dot_product-tanh-gemv-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "159d85b88779ba1aa32e1b34039d269a0f35e0d9",
+    "ci_run_id": 29493266446,
+    "error_msg": "",
+    "created_at": "2026-07-16 20:07:11",
+    "finished_at": "2026-07-16 20:08:14"
+  },
+  {
+    "id": 1795,
+    "combo_id": "dot_product-tanh-gemv-sqrt",
+    "ops": "[\"dot_product\", \"tanh\", \"gemv\", \"sqrt\"]",
+    "model_file": "models/agent_dot_product-tanh-gemv-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 20:07:11",
+    "created_at": "2026-07-16 20:09:14",
     "finished_at": ""
   }
 ]
