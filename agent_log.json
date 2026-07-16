@@ -23014,12 +23014,25 @@
     "combo_id": "dot_product-sigmoid-dot_product-sqrt",
     "ops": "[\"dot_product\", \"sigmoid\", \"dot_product\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-sigmoid-dot_product-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "295a32980d575ae0b5aa666e442f4c79541ff69b",
+    "ci_run_id": 29490406809,
+    "error_msg": "",
+    "created_at": "2026-07-16 19:19:21",
+    "finished_at": "2026-07-16 19:20:26"
+  },
+  {
+    "id": 1772,
+    "combo_id": "dot_product-sigmoid-dot_product-exp",
+    "ops": "[\"dot_product\", \"sigmoid\", \"dot_product\", \"exp\"]",
+    "model_file": "models/agent_dot_product-sigmoid-dot_product-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 19:19:21",
+    "created_at": "2026-07-16 19:21:26",
     "finished_at": ""
   }
 ]
