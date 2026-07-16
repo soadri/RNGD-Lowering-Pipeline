@@ -23326,12 +23326,25 @@
     "combo_id": "dot_product-tanh-gemv-sqrt",
     "ops": "[\"dot_product\", \"tanh\", \"gemv\", \"sqrt\"]",
     "model_file": "models/agent_dot_product-tanh-gemv-sqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "5aaf2c57fd7ec1d91c946ee04e87682176ac5003",
+    "ci_run_id": 29493390134,
+    "error_msg": "",
+    "created_at": "2026-07-16 20:09:14",
+    "finished_at": "2026-07-16 20:10:18"
+  },
+  {
+    "id": 1796,
+    "combo_id": "dot_product-tanh-gemv-exp",
+    "ops": "[\"dot_product\", \"tanh\", \"gemv\", \"exp\"]",
+    "model_file": "models/agent_dot_product-tanh-gemv-exp.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 20:09:14",
+    "created_at": "2026-07-16 20:11:18",
     "finished_at": ""
   }
 ]
