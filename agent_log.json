@@ -24288,12 +24288,25 @@
     "combo_id": "dot_product-cos-gemv-sigmoid",
     "ops": "[\"dot_product\", \"cos\", \"gemv\", \"sigmoid\"]",
     "model_file": "models/agent_dot_product-cos-gemv-sigmoid.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "6a156a2e4dea87a114891f64065b3ca36712160d",
+    "ci_run_id": 29503419182,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:43:31",
+    "finished_at": "2026-07-16 22:44:35"
+  },
+  {
+    "id": 1870,
+    "combo_id": "dot_product-cos-gemv-tanh",
+    "ops": "[\"dot_product\", \"cos\", \"gemv\", \"tanh\"]",
+    "model_file": "models/agent_dot_product-cos-gemv-tanh.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:43:31",
+    "created_at": "2026-07-16 22:45:35",
     "finished_at": ""
   }
 ]
