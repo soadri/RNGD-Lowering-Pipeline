@@ -23105,12 +23105,25 @@
     "combo_id": "dot_product-tanh-gemm-add",
     "ops": "[\"dot_product\", \"tanh\", \"gemm\", \"add\"]",
     "model_file": "models/agent_dot_product-tanh-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "0b864c87265bae351482d6aaf0831e43fb94bfa0",
+    "ci_run_id": 29491269086,
+    "error_msg": "",
+    "created_at": "2026-07-16 19:33:46",
+    "finished_at": "2026-07-16 19:34:50"
+  },
+  {
+    "id": 1779,
+    "combo_id": "dot_product-tanh-gemm-sub",
+    "ops": "[\"dot_product\", \"tanh\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_dot_product-tanh-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 19:33:46",
+    "created_at": "2026-07-16 19:35:50",
     "finished_at": ""
   }
 ]
