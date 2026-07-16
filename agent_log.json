@@ -22832,12 +22832,25 @@
     "combo_id": "dot_product-sigmoid-gemv-div",
     "ops": "[\"dot_product\", \"sigmoid\", \"gemv\", \"div\"]",
     "model_file": "models/agent_dot_product-sigmoid-gemv-div.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "30c7f6c96484eb066b146ca88e7db3f6a18736ae",
+    "ci_run_id": 29488567446,
+    "error_msg": "",
+    "created_at": "2026-07-16 18:49:23",
+    "finished_at": "2026-07-16 18:50:26"
+  },
+  {
+    "id": 1758,
+    "combo_id": "dot_product-sigmoid-gemv-rsqrt",
+    "ops": "[\"dot_product\", \"sigmoid\", \"gemv\", \"rsqrt\"]",
+    "model_file": "models/agent_dot_product-sigmoid-gemv-rsqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 18:49:23",
+    "created_at": "2026-07-16 18:51:27",
     "finished_at": ""
   }
 ]
