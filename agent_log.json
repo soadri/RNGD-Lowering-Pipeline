@@ -21974,12 +21974,25 @@
     "combo_id": "dot_product-sqrt-gemv-sin",
     "ops": "[\"dot_product\", \"sqrt\", \"gemv\", \"sin\"]",
     "model_file": "models/agent_dot_product-sqrt-gemv-sin.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "f6a49650182e6dadf9ea2ea6a8a3b46b3ed4cacc",
+    "ci_run_id": 29480147685,
+    "error_msg": "",
+    "created_at": "2026-07-16 16:30:24",
+    "finished_at": "2026-07-16 16:31:28"
+  },
+  {
+    "id": 1692,
+    "combo_id": "dot_product-sqrt-gemv-cos",
+    "ops": "[\"dot_product\", \"sqrt\", \"gemv\", \"cos\"]",
+    "model_file": "models/agent_dot_product-sqrt-gemv-cos.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 16:30:24",
+    "created_at": "2026-07-16 16:32:28",
     "finished_at": ""
   }
 ]
