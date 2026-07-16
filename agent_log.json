@@ -24093,12 +24093,25 @@
     "combo_id": "dot_product-cos-gemm-rsqrt",
     "ops": "[\"dot_product\", \"cos\", \"gemm\", \"rsqrt\"]",
     "model_file": "models/agent_dot_product-cos-gemm-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "22bfa49616e097a8bb9b8d4264daa915c7fbaedc",
+    "ci_run_id": 29501246560,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:12:38",
+    "finished_at": "2026-07-16 22:13:41"
+  },
+  {
+    "id": 1855,
+    "combo_id": "dot_product-cos-gemm-sqrt",
+    "ops": "[\"dot_product\", \"cos\", \"gemm\", \"sqrt\"]",
+    "model_file": "models/agent_dot_product-cos-gemm-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:12:38",
+    "created_at": "2026-07-16 22:14:41",
     "finished_at": ""
   }
 ]
