@@ -24353,12 +24353,25 @@
     "combo_id": "dot_product-cos-dot_product-add",
     "ops": "[\"dot_product\", \"cos\", \"dot_product\", \"add\"]",
     "model_file": "models/agent_dot_product-cos-dot_product-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "9e87665accd4ccd587b5df3f6f641a1a3ec06095",
+    "ci_run_id": 29504166358,
+    "error_msg": "",
+    "created_at": "2026-07-16 22:53:49",
+    "finished_at": "2026-07-16 22:54:52"
+  },
+  {
+    "id": 1875,
+    "combo_id": "dot_product-cos-dot_product-sub",
+    "ops": "[\"dot_product\", \"cos\", \"dot_product\", \"sub\"]",
+    "model_file": "models/agent_dot_product-cos-dot_product-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 22:53:49",
+    "created_at": "2026-07-16 22:55:52",
     "finished_at": ""
   }
 ]
