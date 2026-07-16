@@ -24717,12 +24717,25 @@
     "combo_id": "dot_product-pow2-gemv-rsqrt",
     "ops": "[\"dot_product\", \"pow2\", \"gemv\", \"rsqrt\"]",
     "model_file": "models/agent_dot_product-pow2-gemv-rsqrt.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "9fb6d5d323c11aea6f039377d7ce7be8c0150ff3",
+    "ci_run_id": 29508496622,
+    "error_msg": "",
+    "created_at": "2026-07-16 23:51:28",
+    "finished_at": "2026-07-16 23:52:31"
+  },
+  {
+    "id": 1903,
+    "combo_id": "dot_product-pow2-gemv-sqrt",
+    "ops": "[\"dot_product\", \"pow2\", \"gemv\", \"sqrt\"]",
+    "model_file": "models/agent_dot_product-pow2-gemv-sqrt.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 23:51:28",
+    "created_at": "2026-07-16 23:53:31",
     "finished_at": ""
   }
 ]
