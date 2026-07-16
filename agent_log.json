@@ -23651,12 +23651,25 @@
     "combo_id": "dot_product-sin-gemm-exp",
     "ops": "[\"dot_product\", \"sin\", \"gemm\", \"exp\"]",
     "model_file": "models/agent_dot_product-sin-gemm-exp.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "7c3647f477dfe0033ae9941bb2e6e32b28e4a443",
+    "ci_run_id": 29496558227,
+    "error_msg": "",
+    "created_at": "2026-07-16 21:01:10",
+    "finished_at": "2026-07-16 21:02:13"
+  },
+  {
+    "id": 1821,
+    "combo_id": "dot_product-sin-gemm-sigmoid",
+    "ops": "[\"dot_product\", \"sin\", \"gemm\", \"sigmoid\"]",
+    "model_file": "models/agent_dot_product-sin-gemm-sigmoid.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 21:01:10",
+    "created_at": "2026-07-16 21:03:13",
     "finished_at": ""
   }
 ]
