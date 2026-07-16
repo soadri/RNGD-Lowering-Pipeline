@@ -22975,12 +22975,25 @@
     "combo_id": "dot_product-sigmoid-dot_product-mul",
     "ops": "[\"dot_product\", \"sigmoid\", \"dot_product\", \"mul\"]",
     "model_file": "models/agent_dot_product-sigmoid-dot_product-mul.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "0799af54f61760475c75abb1279f22b82e5b0d7a",
+    "ci_run_id": 29490041048,
+    "error_msg": "",
+    "created_at": "2026-07-16 19:13:11",
+    "finished_at": "2026-07-16 19:14:15"
+  },
+  {
+    "id": 1769,
+    "combo_id": "dot_product-sigmoid-dot_product-div",
+    "ops": "[\"dot_product\", \"sigmoid\", \"dot_product\", \"div\"]",
+    "model_file": "models/agent_dot_product-sigmoid-dot_product-div.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 19:13:11",
+    "created_at": "2026-07-16 19:15:15",
     "finished_at": ""
   }
 ]
