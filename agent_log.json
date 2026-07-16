@@ -19803,12 +19803,25 @@
     "combo_id": "dot_product-add-dot_product-cos",
     "ops": "[\"dot_product\", \"add\", \"dot_product\", \"cos\"]",
     "model_file": "models/agent_dot_product-add-dot_product-cos.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "0efae27fced361f0826abc0c116e3f386d1e1b23",
+    "ci_run_id": 29464964286,
+    "error_msg": "",
+    "created_at": "2026-07-16 10:46:34",
+    "finished_at": "2026-07-16 10:47:38"
+  },
+  {
+    "id": 1525,
+    "combo_id": "dot_product-add-dot_product-pow2",
+    "ops": "[\"dot_product\", \"add\", \"dot_product\", \"pow2\"]",
+    "model_file": "models/agent_dot_product-add-dot_product-pow2.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 10:46:34",
+    "created_at": "2026-07-16 10:48:38",
     "finished_at": ""
   }
 ]
