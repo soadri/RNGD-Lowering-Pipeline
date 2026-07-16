@@ -22637,12 +22637,25 @@
     "combo_id": "dot_product-sigmoid-gemm-add",
     "ops": "[\"dot_product\", \"sigmoid\", \"gemm\", \"add\"]",
     "model_file": "models/agent_dot_product-sigmoid-gemm-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "154a895b9b9bf4cc0b51d3cc8799e4e14293242c",
+    "ci_run_id": 29486476904,
+    "error_msg": "",
+    "created_at": "2026-07-16 18:15:29",
+    "finished_at": "2026-07-16 18:16:33"
+  },
+  {
+    "id": 1743,
+    "combo_id": "dot_product-sigmoid-gemm-sub",
+    "ops": "[\"dot_product\", \"sigmoid\", \"gemm\", \"sub\"]",
+    "model_file": "models/agent_dot_product-sigmoid-gemm-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 18:15:29",
+    "created_at": "2026-07-16 18:17:33",
     "finished_at": ""
   }
 ]
