@@ -20921,12 +20921,25 @@
     "combo_id": "dot_product-div-gemv-add",
     "ops": "[\"dot_product\", \"div\", \"gemv\", \"add\"]",
     "model_file": "models/agent_dot_product-div-gemv-add.py",
+    "status": "success",
+    "coverage_pct": 100.0,
+    "commit_sha": "a5a64ff0b636cfda46431f40fb7058006d9a49fc",
+    "ci_run_id": 29472068335,
+    "error_msg": "",
+    "created_at": "2026-07-16 13:43:46",
+    "finished_at": "2026-07-16 13:44:50"
+  },
+  {
+    "id": 1611,
+    "combo_id": "dot_product-div-gemv-sub",
+    "ops": "[\"dot_product\", \"div\", \"gemv\", \"sub\"]",
+    "model_file": "models/agent_dot_product-div-gemv-sub.py",
     "status": "running",
     "coverage_pct": 0.0,
     "commit_sha": "",
     "ci_run_id": 0,
     "error_msg": "",
-    "created_at": "2026-07-16 13:43:46",
+    "created_at": "2026-07-16 13:45:50",
     "finished_at": ""
   }
 ]
