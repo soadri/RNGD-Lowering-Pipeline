@@ -396,7 +396,7 @@ OP_CONSTRAINT_LINKS = [
 ]
 
 ROADMAP = [
-    ("rngd.reduce (mean)",  "설계중",
+    ("rngd.reduce (mean)",  "API_BLOCKED",
      "구조적 제약 발견: A가 8의 배수이면 m![A%8]=m![0]이 no-op이 되어 IntraSliceReduce 파이프라인 구성 불가. "
      "InterFirst(VectorInitTensor→vector_inter_slice_reduce) 경로는 Way8 유지로 commit까지 가능하나 Slice 내 원소를 모두 합산하지 못함(각 Packet lane 독립 합산). "
      "InterFirst 이후 IntraSliceReduce 추가 불가(Way8에서 vector_intra_slice_reduce 없음). "
@@ -414,8 +414,8 @@ ROADMAP = [
      "SiLU(x) = x * sigmoid(x). sigmoid 블록(negf+exp+addf+divf)을 rngd.elementwise(sigmoid)로, "
      "mulf 블록을 rngd.elementwise(mul)로 각각 재작성. 두 단계 조합으로 완전 지원. "
      "e2e_pipeline.py에서 sigmoid 복합 패턴 감지 로직 추가 완료."),
-    ("rngd.elementwise (erf)", "설계중",
-     "FpUnaryOp::Erf는 존재하나 시뮬레이터에서 미구현(not yet implemented: Erf not implemented). FuriosaAI 확인 필요."),
+    ("rngd.elementwise (erf)", "SIMULATOR_UNIMPLEMENTED",
+     "[API_OK / SIM_MISSING] FpUnaryOp::Erf API 존재 확인. 시뮬레이터 semantics 미구현(not yet implemented). FuriosaAI 시뮬레이터 업데이트 또는 실리콘 직접 검증 필요."),
     ("rngd.elementwise (log)", "설계중",
      "FpUnaryOp::Log는 존재하나 시뮬레이터 검증 실패. PyTorch ln(x)와 출력 불일치 및 NaN 발생. "
      "시뮬레이터의 Log 구현이 자연로그가 아닐 가능성 — FuriosaAI 확인 필요."),
