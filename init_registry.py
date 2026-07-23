@@ -352,6 +352,8 @@ EVIDENCE = [
     ("cos",          "runtime", "vector_fp_unary(Cos) 정합성 검증 통과",                   "cargo furiosa-opt test: test_log_cos.txt — PASS"),
     ("gemv",         "static",  "gemv_kernel.rs 존재 — Contraction Engine 패턴 확인",         "rngd-tcp-kernel-dev/src/kernel/gemv_kernel.rs"),
     ("gemv",         "runtime", "linalg.matvec → rngd.gemv 정합성 검증 통과 (I=256, J=2048)", "cargo furiosa-opt test: test_log_gemv.txt — PASS"),
+    ("log",          "static",  "FpUnaryOp::Log 존재 확인",                            "furiosa-opt-std-0.3.0/src/engine/vector/op/mod.rs"),
+    ("log",          "runtime", "FpUnaryOp::Log 정합성 검증 통과 (양수 입력 필수)",       "cargo furiosa-opt test: pilot_e2e_log — PASS"),
     ("transpose",    "static",  "Transpose Engine API 확인 — transpose.rs",                       "furiosa-opt-std-0.3.0/src/engine/transpose.rs"),
     ("transpose",    "runtime", "verify_transpose f32 패턴(M=2,N=8) 정합성 검증 통과",           "cargo furiosa-opt test: pilot_e2e_transpose — PASS"),
     ("pow2",        "static",  "FpBinaryOp::MulF 존재 (Pow는 없음, MulF(x,x)로 조합)", "furiosa-opt-std-0.3.0/src/engine/vector/op/mod.rs:384"),
