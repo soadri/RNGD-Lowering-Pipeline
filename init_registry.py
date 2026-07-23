@@ -409,7 +409,7 @@ ROADMAP = [
      "rngd-tcp-kernel-dev에 이미 검증된 base 템플릿(gemv_kernel.rs) 존재 — 재사용 가능성 높음."),
     ("rngd.transpose",      "완료",   "Transpose Engine 사용. Slice=1, Time=M, Packet=N 패턴. M=2,N=8 f32 PASS."),
     ("rngd.fill",           "미착수", "지금은 DCE로 지워버리는 대상 — 별도 op으로 다룰 필요가 있는지 재검토 필요."),
-    ("rngd.conv2d",         "미착수", "원래 설계 문서의 7개 확정 RNGD op 중 하나. 아직 손도 안 댐."),
+    ("rngd.conv2d",         "API_MISSING", "[API_MISSING] furiosa-opt-std v0.3.0에 conv2d 전용 API 없음. linalg.conv_2d_nchw_fchw → rngd 매핑 불가. TCP 논문상 im2col+gemm 분해 가능하나 컴파일러 수준 변환 필요. FuriosaAI 공식 지원 계획 확인 필요."),
     ("rngd.elementwise (silu)", "완료",
      "SiLU(x) = x * sigmoid(x). sigmoid 블록(negf+exp+addf+divf)을 rngd.elementwise(sigmoid)로, "
      "mulf 블록을 rngd.elementwise(mul)로 각각 재작성. 두 단계 조합으로 완전 지원. "
