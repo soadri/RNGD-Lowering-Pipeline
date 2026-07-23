@@ -1,0 +1,29 @@
+{
+  "config": {
+    "dim": 4096,
+    "n_heads": 32,
+    "n_layers": 32,
+    "intermediate_dim": 14336
+  },
+  "single_block_ops": {
+    "linalg.generic": 42,
+    "arith.mulf": 9,
+    "arith.addf": 9,
+    "arith.divf": 5,
+    "math.sqrt": 2,
+    "linalg.batch_matmul": 7,
+    "arith.negf": 1,
+    "math.exp": 1
+  },
+  "reduce_count_per_block": 4,
+  "estimated_32layer": {
+    "linalg.generic": 1344,
+    "arith.mulf": 288,
+    "arith.addf": 288,
+    "arith.divf": 160,
+    "math.sqrt": 64,
+    "linalg.batch_matmul": 224,
+    "arith.negf": 32,
+    "math.exp": 32
+  }
+}
